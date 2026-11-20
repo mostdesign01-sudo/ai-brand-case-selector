@@ -1,0 +1,442 @@
+{
+  "title": "AI品牌案例筛选册",
+  "type": "链接可打开的静态筛选册。能打开链接只说明该链接可访问，不是访问控制。",
+  "verified_on": "2026-11-19",
+  "timezone": "Asia/Taipei (UTC+8)",
+  "selected_count": 6,
+  "scope_note": "核验日2026-11-19（Asia/Taipei，UTC+8）。首轮只收6例已核验的公开品牌案例，IP、品牌、形象各2例。先广搜去重，再交叉核验官方、机构、制作方与可查看素材。只保留公开事实、日期、证据、来源与局限。数量不足时不凑数。多邻国等相关线索未升格为已证实案例。公司陈述的效率数字与奖项未独立核验。挑选状态由浏览者在本浏览器标记，不代表案例已被批准。",
+  "time_basis": {
+    "verified_on": "2026-11-19",
+    "six_months_from": "2026-05-19",
+    "twelve_months_from": "2025-11-19",
+    "note": "近6个月为日期不早于2026-05-19；近12个月为日期不早于2025-11-19；更早为早于2025-11-19。与原核验口径一致。"
+  },
+  "cases": [
+    {
+      "id": "ip-coke-holidays-2025",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "叙事广告",
+        "角色性格",
+        "情绪动作",
+        "角色一致性"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "可口可乐《Holidays Are Coming》2025 GenAI节日影片",
+      "brand": "The Coca-Cola Company / Coca-Cola",
+      "date_iso": "2025-11-03",
+      "date_label": "2025-11-03（官方新闻稿）",
+      "window": "classic-edge",
+      "window_note": "距核验日约12个半月，略早于近12个月窗口（2025-11-19起）。按真实日期记为近一年边缘标杆，不伪装成2026新例。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "summary": "官方用生成式AI重拍经典节日影片，并强调角色与叙事连贯。影片可在可口可乐官方YouTube查看。",
+      "ai_where": "用在节日叙事广告的影像制作：镜头控制、物理真实感、叙事连贯和角色一致性。音乐由真人演唱，官方强调创意方向仍由人主导。同系列中的《A Holiday Memory》未被官方写成AI影片，不能混为一谈。",
+      "evidence": [
+        "可口可乐公司新闻稿2025-11-03写明：campaign含两支AI驱动的1995经典广告《The Holidays are Coming》再创作；合作方为Secret Level与Silverside AI。",
+        "全球生成式AI负责人Pratik Thakar原话提到：Leveraging advanced GenAI tools，并强调seamless narrative continuity and character consistency。",
+        "Secret Level项目页写明该片Built entirely with generative AI tools，并有工作室影片缩略图。",
+        "可口可乐官方YouTube可查到《Holidays are Coming, Fantastical :90》《Holidays Are Coming》及幕后片，oEmbed作者为Coca-Cola。"
+      ],
+      "benchmark": "对标价值在于：把已有品牌IP（节日卡车、动物角色、经典旋律）做成可连续讲述的AI影像，而不是单帧概念图。壁垒是角色一致性、物理与镜头控制、全球节日资产治理，以及公众对“AI节日广告是否伤害品牌真实感”的舆论风险。2024年同类尝试曾引发争议，2025稿明确强调人类创意在先。",
+      "audience": "人群：全球节日大众消费者，美国另有Fantastical :90。触点：电视/数字影片、官方视频渠道、巡游与终端。用户价值：熟悉的节日仪式感与角色情感。品牌目标：在保持可口可乐节日符号的同时，证明AI能服务叙事而非替换品牌灵魂。效果与播放量本册未核实。",
+      "media": [
+        {
+          "file": "assets/coke-holidays-fantastical-90-yt.jpg",
+          "original": "https://www.youtube.com/watch?v=eoXX905YK6M",
+          "caption": "官方YouTube《Holidays are Coming, Fantastical :90》封面：两只穿冬装的猫头鹰倚在积雪木栏上，表情兴奋。来源：Coca-Cola官方频道封面，不是新闻稿内嵌帧。"
+        },
+        {
+          "file": "assets/coke-holidays-secretlevel-thumb.jpg",
+          "original": "https://www.secretlevel.co/brand/holidays-are-coming-2025",
+          "caption": "Secret Level项目页影片缩略图：一群穿毛衣的猫鼬在夜色中看灯光可口可乐卡车，一只手持玻璃瓶。来源：制作工作室官方页。"
+        },
+        {
+          "file": "assets/coke-holidays-are-coming-yt.jpg",
+          "original": "https://www.youtube.com/watch?v=Yy6fByUmPuE",
+          "caption": "官方YouTube《Holidays Are Coming》封面：红卡车行驶在星空下雪林道路。来源：Coca-Cola官方频道封面。"
+        },
+        {
+          "file": "assets/coke-holidays-fantastical-bts-yt.jpg",
+          "original": "https://www.youtube.com/watch?v=JK4wmovXiUQ",
+          "caption": "官方YouTube幕后片封面：戴眼镜、围红围巾的熊猫特写，雪中街区背景。用于观察角色表情设计，不能单独证明制作流程。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "可口可乐官方新闻稿（主来源）",
+          "url": "https://www.coca-colacompany.com/media-center/coca-cola-refreshes-givers-of-the-season-embraces-ai-powered-storytelling-in-global-holiday-campaign",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Secret Level项目页",
+          "url": "https://www.secretlevel.co/brand/holidays-are-coming-2025",
+          "status": "200，已通读"
+        },
+        {
+          "label": "官方影片 Fantastical :90",
+          "url": "https://www.youtube.com/watch?v=eoXX905YK6M",
+          "status": "oEmbed 200，作者Coca-Cola"
+        },
+        {
+          "label": "官方影片 Holidays Are Coming",
+          "url": "https://www.youtube.com/watch?v=Yy6fByUmPuE",
+          "status": "oEmbed 200，作者Coca-Cola"
+        },
+        {
+          "label": "官方幕后片",
+          "url": "https://www.youtube.com/watch?v=JK4wmovXiUQ",
+          "status": "oEmbed 200，作者Coca-Cola"
+        }
+      ],
+      "heat": "播放量、完播率、舆论定量未核实。不引用未经核验的传播数字。",
+      "limits": "新闻稿页内未见AI影片官方静帧，仅有非AI影片《A Holiday Memory》缩略图，本册未将其当作AI证据。YouTube封面是官方频道公开缩略图，不是逐帧截取的成片鉴定。工具链具体型号官方未点名。X上from:CocaCola检索无匹配帖，热度不以社交转发补写。"
+    },
+    {
+      "id": "ip-tmall-fuli-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "角色性格",
+        "叙事广告",
+        "情绪动作",
+        "多IP同框"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "天猫双11 AI漫剧《谁偷了双11福梨？》",
+      "brand": "天猫 Tmall",
+      "date_iso": "2026-10-30",
+      "date_label": "2026-10-30开播（行业媒体与主视觉标注）",
+      "window": "6m",
+      "window_note": "落在近6个月窗口。属于2026双11预热内容。",
+      "source_type": "品牌官方项目（制作方案例+行业转述；官方微博原文未全文核验）",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "summary": "天猫把当家角色猫天天人格化，拉15个品牌IP拍15集国风奇幻AI漫剧，用来预热双11价格力与找福梨互动。",
+      "ai_where": "用在多IP群像漫剧制作：角色要保有原有品牌资产规范，同时完成群像互动、动作打斗和剧情衔接。制作方写明“全AI制作”不等于剧本一键生成，天猫、M72与磨物共同打磨剧本与笑点。AI主要承担视觉与动作执行。",
+      "evidence": [
+        "数英项目页以第一人称写“我们做了一部真·AI漫剧”，项目信息品牌/广告主为Tmall 天猫，创意代理商为MOOWU磨物 北京。正文写“天猫、M72和磨物一起反复推敲”。",
+        "文中明确写：15大IP既要保证原有形象和品牌资产规范，又要保持角色一致性，还得完成群像演绎；“AI让这些充满想象力的画面，有了新的实现方式”。",
+        "Brandstar转载SocialBeta 2026-11-04稿，写明10月30日开播，猫天天带15个品牌IP组成福梨护卫队。",
+        "已下载的主视觉（Brandstar/SocialBeta公开图）标题为《谁偷了双11福梨？》，并写“10月30日 猫天天首部国风奇幻AI漫剧 15大IP重磅集结”。"
+      ],
+      "benchmark": "对标价值在于：平台自有IP（猫天天）升级出性格，并带着商家IP一起演戏，而不是只做头像换装。壁垒是多品牌资产授权、形象规范、角色一致性，以及把购物痛点写成反派时的品牌语气控制。15集连续更新比单支TVC更考验中段质量。",
+      "audience": "人群：天猫双11消费者与品牌粉丝。触点：漫剧正片（数英写可在抖音、视频号“猫天天的头好大”、小红书“猫天天”观看）、站内找福梨答题、10月30–31日上海欢乐谷巡游。用户价值：追更娱乐和领福利。品牌目标：把价格力故事化，并积累猫天天好感。播放与互动数据未核实。本册未使用微博/抖音/小红书连接器，未能打开上述平台原帖。",
+      "media": [
+        {
+          "file": "assets/tmall-fuli-brandstar.png",
+          "original": "https://www.brandstar.com.cn/select/9167/",
+          "caption": "行业媒体Brandstar/SocialBeta公开的主视觉：猫天天着蓝衣在前跳跃，身后为改装后的15个品牌IP，右上有一双手抓住发光福梨；标题写“谁偷了双11福梨？”和“10月30日……AI漫剧”。这是媒体转载主视觉，不是天猫官网原文件。数英项目页原图与视频下载返回403，故保留原链接作回退。"
+        }
+      ],
+      "remote_only": [
+        {
+          "label": "数英案例封面GIF（403，无法入库）",
+          "url": "https://file.digitaling.com/eImg/cover/20261112/20261112120037_98128.gif"
+        },
+        {
+          "label": "数英案例视频（403，无法入库）",
+          "url": "https://file.digitaling.com/eImg/uvideos/2026/1111/17943943294901192.mp4"
+        },
+        {
+          "label": "天猫官方微博线索（无微博连接器，未全文核验）",
+          "url": "https://weibo.com/1768198384/Rp1ZczlcF"
+        }
+      ],
+      "sources": [
+        {
+          "label": "数英制作方案例（关键来源）",
+          "url": "https://www.digitaling.com/projects/382234.html",
+          "status": "页面200已通读；配图与视频CDN 403"
+        },
+        {
+          "label": "Brandstar / SocialBeta",
+          "url": "https://www.brandstar.com.cn/select/9167/",
+          "status": "200，已通读并下载主视觉"
+        },
+        {
+          "label": "天猫微博线索",
+          "url": "https://weibo.com/1768198384/Rp1ZczlcF",
+          "status": "检索可见官方账号发帖链接，无连接器未全文核验"
+        }
+      ],
+      "heat": "播放量、讨论量、转化未核实。不写“爆款”或估算曝光。",
+      "limits": "未见天猫官网长篇新闻稿。数英为制作方投递的第一人称案例，可信但仍是代理/制作叙述。M72在正文出现，项目信息栏未列。抖音/视频号/小红书正片因无相应连接器未打开。数英静态资源返回403，需在浏览器另开原链。"
+    },
+    {
+      "id": "brand-coke-fizzion-2025",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "视觉系统",
+        "标志字体",
+        "内容触点一致性"
+      ],
+      "cross_tags": [],
+      "title": "可口可乐 Project Fizzion：把品牌规范做成可执行的设计智能",
+      "brand": "The Coca-Cola Company × Adobe",
+      "date_iso": "2025-05-15",
+      "date_label": "2025-05-15官方发布（当时仍写试点）；Adobe访谈2025-06-12",
+      "window": "classic",
+      "window_note": "早于近12个月窗口，作为经典/近两年品牌系统标杆收录。真实日期不改写。",
+      "source_type": "官方项目（系统发布；消费端成品与2026视觉升级的直接对应未写明）",
+      "confidence": "high",
+      "confidence_label": "高（系统存在与意图）；中（是否已驱动2026新包装视觉）",
+      "summary": "可口可乐与Adobe把品牌指南做成StyleID，让标志、字体、版式规则长在资产里，供全球市场生成一致性变体。",
+      "ai_where": "用在品牌系统设计与执行层，而不是一条广告短片。设计师在Illustrator、Photoshop、InDesign里工作，系统学习版式和字体决策，编码为StyleID，再指导跨市场、跨尺寸的变体生成。官方写明调用Adobe Firefly生成式AI服务，并嵌在Creative Cloud。",
+      "evidence": [
+        "可口可乐新闻稿2025-05-15发布Project Fizzion，称与Adobe合作，把传统品牌指南转化为intelligent, adaptive assets；当时写明仍处于pilot phase。",
+        "全球设计副总裁Rapha Abreu原话：Logos, type, imagery—brand guidelines now live intelligently inside them。",
+        "Adobe商业博客2025-06-12访谈Dominik Heinrich，解释StyleID如何在设计师工作过程中学习，并提供系统演示视频链接。",
+        "官方称可“最多快10倍”产出内容。该数字为公司陈述，本册未独立核验。"
+      ],
+      "benchmark": "对标价值极高：这正是“色、标、字、包装、触点一致性”的操作系统，而不是一次视觉焕新海报。壁垒是要把规范写成机器可执行的约束，并让设计师而不是工程师来训练。风险是把试点新闻当成已经铺到全球货架的事实。",
+      "audience": "人群：内部设计、市场与代理，不是直接C端娱乐。触点：包装、零售、设备、数字体验的一致性执行。用户价值是减少“看起来不像可口可乐”的偏差。品牌目标是全球200+市场既统一又本地化。效率与错误率除官方陈述外未核实。",
+      "media": [],
+      "remote_only": [
+        {
+          "label": "Adobe访谈与演示视频",
+          "url": "https://business.adobe.com/blog/adobe-and-coca-cola-co-innovate-on-project-fizzion"
+        },
+        {
+          "label": "Adobe演示视频文件之一",
+          "url": "https://main--da-bacom-blog--adobecom.aem.page/blog/assets/videos/adobe-and-coca-cola-co-innovate-on-project-fizzion/media_12deebf12f6d5bef6bdd306a6514087d842ae6787.mp4"
+        },
+        {
+          "label": "2026-07-20视觉识别升级（未点名AI/Fizzion，仅作对照）",
+          "url": "https://www.coca-colacompany.com/media-center/coca-cola-sharpens-its-identity-under-one-bold-visual-system"
+        }
+      ],
+      "sources": [
+        {
+          "label": "可口可乐Fizzion新闻稿（主来源）",
+          "url": "https://www.coca-colacompany.com/media-center/the-coca-cola-company-introduces-fizzion",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Adobe官方访谈",
+          "url": "https://business.adobe.com/blog/adobe-and-coca-cola-co-innovate-on-project-fizzion",
+          "status": "200，已通读；配图下载失败，保留链接"
+        },
+        {
+          "label": "2026视觉系统新闻稿（对照，非AI直接证据）",
+          "url": "https://www.coca-colacompany.com/media-center/coca-cola-sharpens-its-identity-under-one-bold-visual-system",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "不适用公开热度。采用率、资产量、节省工时除“最多快10倍”的公司陈述外未核实。",
+      "limits": "2025-05-15稿写明试点。未见消费者可见的“此图由Fizzion生成”样本入库。Adobe博文配图下载失败。第三方若把2026包装升级写成Fizzion落地，超出官方措辞，本册不采用。"
+    },
+    {
+      "id": "brand-unilever-packaging-2026",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "包装",
+        "视觉系统",
+        "触点一致性"
+      ],
+      "cross_tags": [
+        "形象"
+      ],
+      "title": "联合利华 AI for Packaging：包装从概念到货架的全链路",
+      "brand": "联合利华 Unilever",
+      "date_iso": "2026-07-20",
+      "date_label": "2026-07-20官方发布（对应2026-07-19 WAIC展示）",
+      "window": "6m",
+      "window_note": "近6个月内的官方发布。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "summary": "联合利华在2026 WAIC展示AI for Packaging：用生成式AI、数字孪生和货架模拟，把包装设计周期与概念产量作为品牌执行能力来发布。",
+      "ai_where": "用在包装研发全流程：趋势与品牌资产约束下的概念生成、2D到3D、工程仿真与打样、AR对比和MR虚拟货架。官方写的是辅助设计师更快产出符合品牌调性的包装方案，并加快上市，不是单张海报生成。",
+      "evidence": [
+        "联合利华中国官网新闻2026-07-20：在WAIC展示AI for Packaging，称设计周期缩短50%、创意方案产出提升10倍。数字为官方陈述，未独立核验。",
+        "平台由上海研发中心包装共创中心（PCCH）打造，技术包括生成式AI、数字孪生、工程仿真、3D数字化和供应链智能体协同。",
+        "官方点名已在多个品牌实践，并列奥妙、力士、清扬、多芬、凡士林、金纺等。写奥妙五星香氛洗衣液包装获2026红点奖，力士记忆香氛沐浴露在高端感评价中获高分。奖项与评价本册未独立核验奖项官网。",
+        "美通社转载同一稿，并提供官方活动照片，其中一张说明文字为“联合利华展示‘AI for Packaging’创新实践”。"
+      ],
+      "benchmark": "对标价值在于包装是品牌最硬的实物触点，AI被放进共创中心而不是广告部门。壁垒是可制造性、法规标签、品牌色与结构约束，以及“概念图好看”和“能上生产线”之间的断点。不能把展台演示直接当成货架上某款包装的全部由AI生成。",
+      "audience": "人群：设计师、研发、零售与消费者（最终看到包装）。触点：WAIC展示、后续上市包装。用户价值被官方概括为更具美感、更可持续、更符合个性化需求。品牌目标是Desire at Scale与AI for SASSY Innovation。消费者感知数据除力士“高端感高评分”这一官方表述外未核实。",
+      "media": [
+        {
+          "file": "assets/unilever-ai-for-packaging-practice.jpg",
+          "original": "https://mma.prnasia.com/media2/3006665/image2.jpg",
+          "caption": "美通社转载官方照片，原说明：联合利华展示“AI for Packaging”创新实践。舞台两侧大屏写AI FOR PACKAGING，中间是“Shape the future of packaging through AI”流程图，台下有观众。来源：prnasia.com与官网同一稿配图。官网原图CDN返回403。"
+        },
+        {
+          "file": "assets/unilever-shenjun-speech.jpg",
+          "original": "https://mma.prnasia.com/media2/3006667/image1.jpg",
+          "caption": "同一官方通稿配图：联合利华中国研发中心副总裁沈俊在活动现场致辞。用于证明这是公司正式发布场合，不是包装设计成品特写。"
+        }
+      ],
+      "remote_only": [
+        {
+          "label": "联合利华中国官网原稿（页面200，配图CDN 403）",
+          "url": "https://www.unilever.com.cn/news/press-releases/2026/unilever-showcased-ai-for-packaging-at-waic-2026/"
+        }
+      ],
+      "sources": [
+        {
+          "label": "联合利华中国官网新闻（主来源）",
+          "url": "https://www.unilever.com.cn/news/press-releases/2026/unilever-showcased-ai-for-packaging-at-waic-2026/",
+          "status": "200，已通读；配图403"
+        },
+        {
+          "label": "美通社转载及官方照片",
+          "url": "https://www.prnasia.com/story/541148-1.shtml",
+          "status": "200，已通读并下载三张官方图"
+        }
+      ],
+      "heat": "展会现场热度与后续销售影响未核实。红点奖为官方自述，未核验奖项页。",
+      "limits": "照片是发布会舞台，不是货架上的包装特写，不能用来证明某款上市包装的视觉100%由AI生成。官网与美通社是同一稿件体系。50%、10倍为公司陈述。"
+    },
+    {
+      "id": "image-loreal-cisce-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "供应链",
+        "专业",
+        "包装能力外化"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "欧莱雅链博会：把AI供应链做成可被看见的品牌能力",
+      "brand": "欧莱雅中国 L'Oréal China",
+      "date_iso": "2026-06-23",
+      "date_label": "2026-06-23展会开幕/官方通讯电头；官网CMS另标datePublished 2026-09-07",
+      "window": "6m",
+      "window_note": "事件落在近6个月。官网结构化数据发布日较晚，已原文注明，不改事件日期。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "summary": "欧莱雅在第四届链博会用“链链相系，智AI未来”对外展示制造、包装、物流的AI能力，并首播美妆供应链主题AI漫剧，把供应链做成消费者可感知的信任与专业形象。",
+      "ai_where": "用在三条可对外讲述的能力上：智能包装创意中心（AI包装模型、CMF库、3D打印与包装数据库，把洞察变成概念）；苏州工厂UPX二期的AI视觉质检与数字孪生；智慧履约中的智能分拣、AI订单模拟等。另在开幕式首播供应链主题AI漫剧，把“看不见的链”讲给消费者。注意：形象在这里是能力与信任，不是代言人头像。",
+      "evidence": [
+        "欧莱雅中国官网稿电头为北京，2026年6月23日，主题“链链相系，智AI未来”，首发中国“智能包装创意中心”。",
+        "北亚总裁及中国首席执行官博万尚（Vincent Boinay）原话：AI正在成为赋能消费者、赋能欧莱雅、赋能员工、赋能社会发展的重要力量，并强调提升供应链运营能力。",
+        "官网写明展区按“智链安心、智链贴心、智链信心”展示智能制造、包装设计、智慧物流；并写“开幕式上，欧莱雅首播了美妆供应链主题AI漫剧”。",
+        "运营高层Marc-Antoine Poullé在中国网/链博会英文稿中称，AI已部署于苏州工厂、智能包装创意中心和智慧履约中心，形成端到端智能供应链。该引述来自中国网/CISCE对官方活动的报道，需与官网对照，不替代官网。"
+      ],
+      "benchmark": "对标价值在于：品牌没有把AI写成未来口号，而是做成展台、短片和可参观的包装创意中心，让“专业、供应链、可靠”被看见。壁垒是真实产线与履约数据、安全与质量话术、以及短片不能夸大成已覆盖每一件商品。若只做形象片而不连接真实的产线、履约或专业流程，会先失去信任。",
+      "audience": "人群：链博会观众、媒体、产业链伙伴，以及被短片触达的消费者。触点：E3-B06展台、开幕活动、官方通讯、AI漫剧。用户价值：理解美妆产品背后的链，增强对品质与创新的信任。品牌目标：证明中国供应链与创新枢纽地位。展会效果与漫剧播放量未核实。本册未找到可公开播放的AI漫剧独立链接。",
+      "media": [
+        {
+          "file": "assets/loreal-cisce-banner.jpg",
+          "original": "https://www.lorealchina.com/-/media/project/loreal/brand-sites/corp/master/lcorp/7-local-country-folder/china/2026-cisce/banner1.jpg?rev=-1",
+          "caption": "欧莱雅中国官网稿配图：链博会展台E3-B06，顶棚与两侧屏幕写“链链相系 智AI未来 / Beauty Empowered by AI”，品牌为L'ORÉAL CHINA。这是展台现场，不是AI漫剧截帧。"
+        },
+        {
+          "file": "assets/loreal-cisce-1.jpg",
+          "original": "https://www.lorealchina.com/-/media/project/loreal/brand-sites/corp/master/lcorp/7-local-country-folder/china/2026-cisce/1.jpeg",
+          "caption": "官网稿中位于“欧莱雅展台开幕”段落后的照片：嘉宾在“链链相系 智AI未来”背板前合影。官网前文列出任鸿斌、兰珍珍等出席名单，本册不在未逐一标注的情况下指认每个人。"
+        },
+        {
+          "file": "assets/loreal-cisce-2.jpg",
+          "original": "https://www.lorealchina.com/-/media/project/loreal/brand-sites/corp/master/lcorp/7-local-country-folder/china/2026-cisce/2.jpeg",
+          "caption": "官网说明为“欧莱雅北亚总裁及中国首席执行官博万尚视频致辞”：展台观众看大屏幕发言，字幕涉及运营和供应链。不能把此图当成AI漫剧正片。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "欧莱雅中国官网（主来源）",
+          "url": "https://www.lorealchina.com/zh-cn/china/news/group/2026-cisce/",
+          "status": "200，已通读并下载三张官方图"
+        },
+        {
+          "label": "中国网报道（对照）",
+          "url": "http://www.china.org.cn/2026-06-25/content_118567361.shtml",
+          "status": "首次抓取成功，复查时出现500，访问不稳定"
+        },
+        {
+          "label": "链博会英文转载",
+          "url": "https://en.cisce.org.cn/content/details1051_7797.html",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "展会与短片传播数据未核实。",
+      "limits": "AI漫剧本身未找到独立可播链接，只能依据官网文字确认“已首播”。官网CMS datePublished为2026-09-07，与电头2026-06-23不一致，已并列写出。中国网复查500，不把该站当作稳定主源。"
+    },
+    {
+      "id": "image-therealreal-auth-2025",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "鉴别",
+        "专业",
+        "信任"
+      ],
+      "cross_tags": [],
+      "title": "The RealReal：用Vision与Shield把鉴别写成可感知的信任",
+      "brand": "The RealReal",
+      "date_iso": "2025-01-16",
+      "date_label": "2025-01-16官方技术说明；鉴别页为现行公开能力（核验日仍在线）",
+      "window": "classic",
+      "window_note": "说明文早于近12个月窗口，但官方鉴别页在2026-11-19仍把Shield与Vision作为现行对外能力。按真实日期收录为现行能力标杆，不写成2026新战役。",
+      "source_type": "官方项目 / 现行产品能力",
+      "confidence": "high",
+      "confidence_label": "高",
+      "summary": "二手奢侈品平台把人工智能写成鉴别流程的前段工具，并强调最终仍由专家手检。对外形象是“可被检查的真”，不是虚拟形象。",
+      "ai_where": "用在鉴别与信任：Shield是机器学习风险模型，看50多个属性，把高风险商品优先交给最有经验的鉴定师；Vision用显微照片看皮革纹理、缝线等，估计假货可能性。官方明确它们是决策支持，最终仍由受训专家做物理鉴定。2018年起AI还曾用于属性识别和商品描述，需与鉴真模型区分。",
+      "evidence": [
+        "The RealReal Resources稿2025-01-16专文解释Shield与Vision，并写Invent an all-new AI-powered luxury authentication solution、2018年已把AI引入流程。",
+        "官方鉴别页现行仍列出TRR Shield®与TRR Vision®：前者追踪高风险品牌与款式并标记；后者拍摄显微照片并与数据库比对。该页对工具的表述略少于博客对“AI/machine-learning”一词的使用，但产品名称一致。",
+        "官方强调Every item由专家手检；AI不能替代手感与气味等判断。该边界写得很清楚。",
+        "公司陈述：自2011年已使约25万件假货退出流通。此为官方数字，未独立审计。"
+      ],
+      "benchmark": "对标价值在于：AI提高规模与优先级，人给出最终信任。壁垒是参考样本库、显微采集、专家训练，以及对外不把“AI已鉴”说成无误。与StockX官方“用机器学习给订单打风险分并分派给资深人员”可对照，但StockX未把最终鉴真写成视觉大模型完成，故StockX只作附录对照，不凑成第六例的替代。",
+      "audience": "人群：寄售者与买家，尤其是需要奢侈品真伪信心的人。触点：网站鉴别页、证书与客服话术、内容博客。用户价值：买得放心、卖得更值钱。品牌目标：用可解释的流程建立行业信任。转化与误判率除官方陈述外未核实。",
+      "media": [],
+      "remote_only": [
+        {
+          "label": "官方鉴别页（现行）",
+          "url": "https://www.therealreal.com/authentication"
+        },
+        {
+          "label": "官方技术说明（2025-01-16）",
+          "url": "https://resources.therealreal.com/technology-behind-luxury-authentication/"
+        }
+      ],
+      "sources": [
+        {
+          "label": "The RealReal官方技术说明（主来源之一）",
+          "url": "https://resources.therealreal.com/technology-behind-luxury-authentication/",
+          "status": "200，已通读；页头图疑似库存照片，未当作物证下载"
+        },
+        {
+          "label": "官方鉴别页",
+          "url": "https://www.therealreal.com/authentication",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "不适用单次campaign热度。会员数、鉴定量以官方页面当时表述为准，未另核。",
+      "limits": "这是持续产品能力，不是2026新广告。博客头图不像流程实拍，本册不入库以免误导。鉴别页较少使用“artificial intelligence”一词，需与博客合读。没有可下载的Vision界面截图。"
+    }
+  ],
+  "appendix": [
+    {
+      "heading": "未升格的重要线索",
+      "body": "多邻国：有角色广告平台与前员工关于Modular Ads、语音和脚本生成的个人叙述，但官方广告产品页与行业报道并未清楚写明角色广告由AI生成。保持线索，不计入6例。"
+    },
+    {
+      "heading": "已核实但未计入6例的对照",
+      "body": "可口可乐中国2026-06-17官网确认“看球搭子AI范志毅”（与百度合作的数字角色）。因已收可口可乐两例，且涉及真人肖像分身，不重复占IP席位。\n美图×麦当劳“飞天小女警”AI Agent：美图官方合作页与行业报道写明约2025-11-29至12-10的互动玩法，但未见麦当劳品牌官网长篇原文，故不计入。\nStockX 2025-06-05官方品牌保护报告写明：2024年起用机器学习为每笔进入鉴定中心的订单打风险分，并派给更有经验的人员。这是鉴别相关官方能力，但证据停在风险分派，不是终检视觉鉴定模型，故作对照而不占形象席位。\nCadbury My Cadbury Era（2024-07-23，VCCP/品牌市场总监引用）是品牌档案海报的个性化生成，时间较早，本轮不占品牌席位。"
+    },
+    {
+      "heading": "检索到但证据不足、本轮放弃",
+      "body": "Discovery Parks角色Bruce、Banpu FLAMO（AI活动仍为筹备表述）、安踏“灵龙”设计大模型（见媒体转述，本轮未完成安踏官网全文核验）、转转AI质检（见报端，未见官方原文）、闲鱼较早的AI鉴定报道。均不凑进6例。"
+    },
+    {
+      "heading": "访问限制",
+      "body": "联合利华官网配图CDN、数英案例图片与视频返回403，已改用美通社官方配图或媒体转载主视觉，并保留原链。Adobe博文配图下载失败。中国网页面复查出现500。天猫官方微博未能全文打开。公共检索未找到可口可乐官方账号对应帖，热度不以社交转发补写。"
+    }
+  ]
+}
