@@ -10,88 +10,93 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <a class="skip" href="#cases">跳到案例</a>
-  <header class="mast">
-    <p class="kicker">核验日 2026-11-19 · Asia/Taipei</p>
-    <h1>AI品牌案例筛选册</h1>
-    <p class="lead">六例已核验的公开案例，IP、品牌、形象各两例。点选未处理、入选、候补或暂不考虑。事实、日期与来源保持原记录。</p>
-  </header>
+  <a class="skip" href="#list">跳到案例</a>
+  <div id="library-view">
+    <header class="mast">
+      <p class="kicker" id="kicker">核验日</p>
+      <h1 id="book-title">AI品牌案例筛选册</h1>
+      <p class="lead" id="book-lead"></p>
+    </header>
 
-  <div class="tools" id="tools">
-    <div class="tool-row">
-      <label class="search" for="q">搜索案例
-        <input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="标题、品牌或关键词">
-      </label>
-    </div>
-    <div class="tool-block" role="group" aria-label="类别">
-      <span class="tool-label" id="cat-label">类别</span>
-      <div class="chip-row" data-filter-group="category" aria-labelledby="cat-label">
-        <button type="button" data-value="all" aria-pressed="true">全部</button>
-        <button type="button" data-value="ip" aria-pressed="false">IP</button>
-        <button type="button" data-value="brand" aria-pressed="false">品牌</button>
-        <button type="button" data-value="image" aria-pressed="false">形象</button>
+    <div class="sticky" id="sticky">
+      <div class="sticky-row">
+        <p class="count" id="count" aria-live="polite">显示 —</p>
+        <button type="button" id="filter-toggle" aria-expanded="false" aria-controls="filters">筛选</button>
       </div>
-    </div>
-    <div class="tool-block" role="group" aria-label="时间">
-      <span class="tool-label" id="time-label">时间</span>
-      <div class="chip-row" data-filter-group="window" aria-labelledby="time-label">
-        <button type="button" data-value="all" aria-pressed="true">全部时间</button>
-        <button type="button" data-value="6m" aria-pressed="false">近6个月</button>
-        <button type="button" data-value="12m" aria-pressed="false">近12个月</button>
-        <button type="button" data-value="earlier" aria-pressed="false">更早</button>
-      </div>
-      <p class="hint" id="time-hint">近6个月：不早于 2026-05-19。近12个月：不早于 2025-11-19。更早：早于 2025-11-19。以核验日 2026-11-19 倒推。</p>
-    </div>
-  </div>
-
-  <div class="sticky" id="sticky">
-    <p class="persist" id="persist">本浏览器保存，不跨设备同步。挑选状态不代表案例已被批准。</p>
-    <div class="sticky-row">
-      <p class="count" id="count" aria-live="polite">显示 —</p>
-      <div class="chip-row nowrap" role="group" aria-label="挑选状态" data-filter-group="status">
+      <div class="chip-row" role="group" aria-label="挑选状态" data-filter-group="status">
         <button type="button" data-value="all" aria-pressed="true">全部状态</button>
         <button type="button" data-value="未处理" aria-pressed="false">未处理 <span data-count-for="未处理">0</span></button>
         <button type="button" data-value="入选" aria-pressed="false">入选 <span data-count-for="入选">0</span></button>
         <button type="button" data-value="候补" aria-pressed="false">候补 <span data-count-for="候补">0</span></button>
         <button type="button" data-value="暂不考虑" aria-pressed="false">暂不考虑 <span data-count-for="暂不考虑">0</span></button>
       </div>
+      <div id="filters" hidden>
+        <div class="tool-block" role="group" aria-label="类别">
+          <span class="tool-label" id="cat-label">类别</span>
+          <div class="chip-row" data-filter-group="category" aria-labelledby="cat-label">
+            <button type="button" data-value="all" aria-pressed="true">全部</button>
+            <button type="button" data-value="ip" aria-pressed="false">IP</button>
+            <button type="button" data-value="brand" aria-pressed="false">品牌</button>
+            <button type="button" data-value="image" aria-pressed="false">形象</button>
+          </div>
+        </div>
+        <div class="tool-block" role="group" aria-label="时间">
+          <span class="tool-label" id="time-label">时间</span>
+          <div class="chip-row" data-filter-group="window" aria-labelledby="time-label">
+            <button type="button" data-value="all" aria-pressed="true">全部时间</button>
+            <button type="button" data-value="6m" aria-pressed="false">近6个月</button>
+            <button type="button" data-value="12m" aria-pressed="false">近12个月</button>
+            <button type="button" data-value="earlier" aria-pressed="false">更早</button>
+          </div>
+          <p class="hint" id="time-hint"></p>
+        </div>
+        <div id="round-slot"></div>
+        <label class="search" for="q">搜索案例
+          <input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="标题、品牌或关键词">
+        </label>
+        <div class="actions">
+          <button type="button" id="reset-filters" class="quiet">重置筛选</button>
+        </div>
+      </div>
+      <p class="warn" id="save-warn" hidden>无法写入本浏览器存储，刷新后挑选会丢失。</p>
     </div>
-    <p class="warn" id="save-warn" hidden>无法写入本浏览器存储，刷新后挑选会丢失。</p>
+
+    <main id="cases">
+      <p class="loading" id="loading">正在读取案例…</p>
+      <p class="error" id="error" hidden></p>
+      <div id="list"></div>
+      <div class="empty" id="empty" hidden>没有符合当前筛选的案例。</div>
+    </main>
+
+    <section class="panel" id="carry" aria-labelledby="carry-title">
+      <h2 id="carry-title">带走挑选</h2>
+      <p>导出当前案例的标题、类别、状态和原始来源。JSON 可在另一台浏览器导入。导入只按案例编号写入状态，不采用文件里的其他文字。挑选不会上传。</p>
+      <div class="actions">
+        <button type="button" id="export-csv">导出 CSV</button>
+        <button type="button" id="export-json">导出 JSON</button>
+        <label class="file-btn" for="import-file">导入 JSON
+          <input id="import-file" type="file" accept="application/json,.json">
+        </label>
+        <button type="button" id="clear-btn" class="quiet">清空挑选</button>
+      </div>
+      <p class="hint" id="io-msg" role="status"></p>
+    </section>
+
+    <section class="panel" id="limits" hidden>
+      <h2 id="lim-title">核验说明</h2>
+      <div id="lim-list"></div>
+    </section>
+    <div id="extra"></div>
+    <footer>
+      <p id="foot"></p>
+    </footer>
   </div>
 
-  <main id="cases">
-    <p class="loading" id="loading">正在读取六例案例…</p>
-    <p class="error" id="error" hidden></p>
-    <div id="list"></div>
-    <p class="empty" id="empty" hidden>没有符合当前筛选的案例。可改回全部，或清空搜索。</p>
-  </main>
-
-  <section class="panel" id="carry" aria-labelledby="carry-title">
-    <h2 id="carry-title">带走挑选</h2>
-    <p>导出当前六例的标题、类别、状态和原始来源。JSON 可在另一台设备导入。导入只按案例编号写入状态，不采用文件里的其他文字。</p>
-    <div class="actions">
-      <button type="button" id="export-csv">导出 CSV</button>
-      <button type="button" id="export-json">导出 JSON</button>
-      <label class="file-btn" for="import-file">导入 JSON
-        <input id="import-file" type="file" accept="application/json,.json">
-      </label>
-      <button type="button" id="clear-btn" class="quiet">清空挑选</button>
-    </div>
-    <p class="hint" id="io-msg" role="status"></p>
-  </section>
-
-  <section class="panel" id="limits" aria-labelledby="lim-title" hidden>
-    <h2 id="lim-title">局限与未计入的线索</h2>
-    <div id="lim-list"></div>
-  </section>
-
-  <footer>
-    <p>资料核验日 2026-11-19。打开本链接即可阅读，这不是访问控制。</p>
-  </footer>
+  <article id="reader" hidden aria-labelledby="reader-title"></article>
 
   <dialog id="clear-dialog" aria-labelledby="clear-title">
     <h2 id="clear-title">清空挑选</h2>
-    <p>清空本浏览器里的挑选？六个案例都会回到「未处理」。此操作不能撤销。</p>
+    <p>清空本浏览器里的挑选？案例都会回到「未处理」。此操作不能撤销。</p>
     <div class="actions">
       <button type="button" id="clear-cancel" class="quiet">取消</button>
       <button type="button" id="clear-confirm">清空</button>
