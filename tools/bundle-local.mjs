@@ -32,6 +32,14 @@ for (const name of fs.readdirSync(assetsDir)) {
   if (!imageExt.has(path.extname(name).toLowerCase())) continue;
   fs.copyFileSync(path.join(assetsDir, name), path.join(outDir, "assets", name));
 }
+const fontDir = path.join(assetsDir, "fonts");
+if (fs.existsSync(fontDir)) {
+  const dest = path.join(outDir, "assets", "fonts");
+  fs.mkdirSync(dest, { recursive: true });
+  for (const name of fs.readdirSync(fontDir)) {
+    if (/\.(woff2|txt)$/i.test(name)) fs.copyFileSync(path.join(fontDir, name), path.join(dest, name));
+  }
+}
 
 function embedJson(value) {
   return JSON.stringify(value).replace(/</g, "\\u003c");
@@ -56,7 +64,9 @@ const note = [
 fs.writeFileSync(path.join(outDir, "LOCAL.txt"), note);
 
 if (standalonePath) {
-  const css = fs.readFileSync(cssPath, "utf8");
+  const css = fs.readFileSync(cssPath, "utf8")
+    .replace(/url\((["']?)fonts\//g, "url($1assets/fonts/")
+    .replace(/url\((["']?)grain\.png/g, "url($1assets/grain.png");
   const js = fs.readFileSync(jsPath, "utf8");
   const extend = extendPath ? fs.readFileSync(extendPath, "utf8") : "";
   const cloned = JSON.parse(JSON.stringify(data));

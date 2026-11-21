@@ -180,6 +180,12 @@ function scanAndLogic() {
   const csvRows = fs.readFileSync(path.join(root, "evidence.csv"), "utf8").trim().split(/\n/);
   check(csvRows.length === 21 && csvRows[1].startsWith("ip-coke-holidays-2025,") && csvRows[20].startsWith("image-sephora-chatgpt-2026,"), "csv keeps the original rows and lists all twenty");
   const appSource = fs.readFileSync(path.join(root, "assets/app.js"), "utf8");
+  const css = fs.readFileSync(path.join(root, "assets/styles.css"), "utf8");
+  check(css.includes("Songti SC") && css.includes("PingFang SC") && css.includes("Noto Serif CJK SC") && css.includes("Noto Sans CJK SC") && css.includes("Source Han Serif SC") && css.includes("Source Han Sans SC"), "cjk stack names faces that exist on phones");
+  check(!css.includes("fonts.googleapis.com") && !css.includes("fonts.gstatic.com") && !css.includes("WenQuanYi"), "type does not call a font host or a desktop-only family");
+  check(css.includes("source-serif-4-latin-400.woff2") && css.includes("source-serif-4-latin-600.woff2"), "latin display face is referenced locally");
+  check(fs.existsSync(path.join(root, "assets/fonts/source-serif-4-latin-400.woff2")) && fs.existsSync(path.join(root, "assets/fonts/source-serif-4-latin-600.woff2")), "latin display files are in the repo");
+  check(css.includes("prefers-reduced-motion") && css.includes(":focus-visible") && css.includes(":focus:not(:focus-visible)"), "focus and reduced motion stay explicit");
   check(appSource.includes('var KEY = "ai-brand-case-selection-v1"') && appSource.includes('var SCHEMA = "ai-brand-case-selection/v1"') && appSource.includes('var SCROLL_KEY = "ai-brand-case-return-v1"'), "storage keys stay literal");
   check(appSource.includes("画面载入中") && appSource.includes("图片未能显示") && appSource.includes("建议，非已落地") && appSource.includes('section("对标建议"'), "existing labels stay");
   check(api.inWindow("2026-05-19", "6m") === true && api.inWindow("2026-05-18", "6m") === false, "public six-month boundary stays 2026-05-19");
@@ -371,6 +377,20 @@ async function browserTests(origin) {
       lead: document.getElementById('book-lead').textContent,
       newWord: document.body.innerText.includes('NEW')
     })`);
+    const barBox = await evaluate(cdp, sessionId, `document.fonts.ready.then(() => {
+      const bar = document.getElementById("sticky").getBoundingClientRect();
+      return {
+        h: Math.round(bar.height),
+        vh: window.innerHeight,
+        title: getComputedStyle(document.getElementById("book-title")).fontFamily,
+        body: getComputedStyle(document.body).fontFamily,
+        font: document.fonts.check('600 32px "Source Serif 4"')
+      };
+    })`);
+    check(barBox.h < 170 && barBox.h < barBox.vh * 0.34, "collapsed bar stays compact " + JSON.stringify(barBox));
+    check(barBox.title.includes("Source Serif 4") && barBox.title.includes("Songti SC") && barBox.title.includes("Noto Serif CJK SC"), "title stack is the self-hosted latin face then songti");
+    check(barBox.body.includes("PingFang SC") && barBox.body.includes("Noto Sans CJK SC") && barBox.body.includes("Source Han Sans SC"), "body stack names phone sans faces");
+    check(barBox.font === true, "self-hosted semibold face loaded");
     check(narrow.width === 360, "viewport is 360");
     check(narrow.overflow <= 1, "no page overflow at 360");
     check(narrow.filtersHidden === true && narrow.expanded === "false", "filters start collapsed on a narrow screen");
@@ -469,6 +489,8 @@ async function browserTests(origin) {
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
     })`);
     check(fanShown.imgs === 0 && fanShown.shot.includes("此例没有入库图片") && !fanShown.shot.includes("图片未能显示") && fanShown.open === true && fanShown.summary === "可打开的来源" && fanShown.links >= 2 && fanShown.text.includes("建议，非已落地") && fanShown.overflow <= 1, "link-only detail stays usable " + JSON.stringify(fanShown));
+    await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-linkonly-360.png");
 
     await openAt(cdp, sessionId, origin + "/#case-ip-tmall-fuli-2026", 390);
     const refreshed = await evaluate(cdp, sessionId, "({width: window.innerWidth, open: !document.getElementById('reader').hidden, status: document.querySelector('#reader .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
@@ -521,6 +543,14 @@ async function browserTests(origin) {
       if (pageText.toLowerCase().includes(phrase.toLowerCase())) failures.push("rendered page contains a private phrase");
     }
     await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-1280.png");
+    await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
+    await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.getElementById('reader-title').textContent.includes('Sephora')");
+    await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-1280.png");
+    await cdp.send("Page.navigate", { url: origin + "/#case-ip-jingpai-jiuling-2026" }, sessionId);
+    await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.querySelector('#reader .shot.is-link-only')");
+    await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-linkonly-1280.png");
   } finally {
     cdp.close();
     chrome.proc.kill("SIGKILL");
@@ -543,6 +573,7 @@ async function bundleFile() {
   check(result.status === 0, "local bundle script exits cleanly");
   const html = fs.readFileSync(path.join(out, "index.html"), "utf8");
   check(html.includes("casebook-data") && !html.includes("private-book"), "bundle embeds data for file opening");
+  check(fs.existsSync(path.join(out, "assets/fonts/source-serif-4-latin-600.woff2")), "bundle keeps the self-hosted latin face");
   for (const phrase of PHRASES) {
     if (html.toLowerCase().includes(phrase.toLowerCase())) failures.push("public bundle contains a private phrase");
   }

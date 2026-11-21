@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f3efe6">
   <title>AI品牌案例筛选册</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/source-serif-4-latin-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -23,42 +25,42 @@
         <p class="count" id="count" aria-live="polite">显示 —</p>
         <button type="button" id="filter-toggle" aria-expanded="false" aria-controls="filters">筛选</button>
       </div>
-      <div class="chip-row" role="group" aria-label="挑选状态" data-filter-group="status">
+      <div class="chip-row chip-scroll" role="group" aria-label="挑选状态" data-filter-group="status">
         <button type="button" data-value="all" aria-pressed="true">全部状态</button>
         <button type="button" data-value="未处理" aria-pressed="false">未处理 <span data-count-for="未处理">0</span></button>
         <button type="button" data-value="入选" aria-pressed="false">入选 <span data-count-for="入选">0</span></button>
         <button type="button" data-value="候补" aria-pressed="false">候补 <span data-count-for="候补">0</span></button>
         <button type="button" data-value="暂不考虑" aria-pressed="false">暂不考虑 <span data-count-for="暂不考虑">0</span></button>
       </div>
-      <div id="filters" hidden>
-        <div class="tool-block" role="group" aria-label="类别">
-          <span class="tool-label" id="cat-label">类别</span>
-          <div class="chip-row" data-filter-group="category" aria-labelledby="cat-label">
-            <button type="button" data-value="all" aria-pressed="true">全部</button>
-            <button type="button" data-value="ip" aria-pressed="false">IP</button>
-            <button type="button" data-value="brand" aria-pressed="false">品牌</button>
-            <button type="button" data-value="image" aria-pressed="false">形象</button>
-          </div>
-        </div>
-        <div class="tool-block" role="group" aria-label="时间">
-          <span class="tool-label" id="time-label">时间</span>
-          <div class="chip-row" data-filter-group="window" aria-labelledby="time-label">
-            <button type="button" data-value="all" aria-pressed="true">全部时间</button>
-            <button type="button" data-value="6m" aria-pressed="false">近6个月</button>
-            <button type="button" data-value="12m" aria-pressed="false">近12个月</button>
-            <button type="button" data-value="earlier" aria-pressed="false">更早</button>
-          </div>
-          <p class="hint" id="time-hint"></p>
-        </div>
-        <div id="round-slot"></div>
-        <label class="search" for="q">搜索案例
-          <input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="标题、品牌或关键词">
-        </label>
-        <div class="actions">
-          <button type="button" id="reset-filters" class="quiet">重置筛选</button>
+      <p class="warn" id="save-warn" hidden>无法写入本浏览器存储，刷新后挑选会丢失。</p>
+    </div>
+    <div id="filters" hidden>
+      <div class="tool-block" role="group" aria-label="类别">
+        <span class="tool-label" id="cat-label">类别</span>
+        <div class="chip-row" data-filter-group="category" aria-labelledby="cat-label">
+          <button type="button" data-value="all" aria-pressed="true">全部</button>
+          <button type="button" data-value="ip" aria-pressed="false">IP</button>
+          <button type="button" data-value="brand" aria-pressed="false">品牌</button>
+          <button type="button" data-value="image" aria-pressed="false">形象</button>
         </div>
       </div>
-      <p class="warn" id="save-warn" hidden>无法写入本浏览器存储，刷新后挑选会丢失。</p>
+      <div class="tool-block" role="group" aria-label="时间">
+        <span class="tool-label" id="time-label">时间</span>
+        <div class="chip-row" data-filter-group="window" aria-labelledby="time-label">
+          <button type="button" data-value="all" aria-pressed="true">全部时间</button>
+          <button type="button" data-value="6m" aria-pressed="false">近6个月</button>
+          <button type="button" data-value="12m" aria-pressed="false">近12个月</button>
+          <button type="button" data-value="earlier" aria-pressed="false">更早</button>
+        </div>
+        <p class="hint" id="time-hint"></p>
+      </div>
+      <div id="round-slot"></div>
+      <label class="search" for="q">搜索案例
+        <input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="标题、品牌或关键词">
+      </label>
+      <div class="actions">
+        <button type="button" id="reset-filters" class="quiet">重置筛选</button>
+      </div>
     </div>
 
     <main id="cases">
