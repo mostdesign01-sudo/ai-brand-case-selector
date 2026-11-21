@@ -8,6 +8,8 @@
 
 图片是公开报道或官方频道的封面和配图，并在案例页保留说明。没有入库静帧的案例只给出可打开的来源链接。完整影片只链接到原始页面。
 
+标题里的拉丁字母使用仓库内的 Source Serif 4（SIL Open Font License，仅 Latin 常规与半粗两份 woff2）。中文不内嵌字体。标题按设备回退到宋体：Songti SC、华文宋体、思源宋体 / Noto Serif CJK。正文按设备回退到黑体：苹方、思源黑体 / Noto Sans CJK、HarmonyOS Sans、微软雅黑，以及 system-ui。页面不向字体托管服务发请求。
+
 ## 本地打开
 
 在本目录启动静态服务器后打开首页。直接用文件地址打开时，浏览器会拦截 `evidence.json`。

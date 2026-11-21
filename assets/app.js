@@ -548,7 +548,21 @@
       }
     }
 
-    function renderCard(item) {
+    function folioOf(index) {
+      var n = index + 1;
+      return (n < 10 ? "0" : "") + n;
+    }
+
+    function fillMeta(meta, item, index) {
+      meta.appendChild(el(doc, "span", { class: "folio" }, folioOf(index)));
+      meta.appendChild(el(doc, "span", { class: "cat" }, item.category_label || item.category || ""));
+      meta.appendChild(el(doc, "span", { class: "when" }, item.date_label || item.date_iso || ""));
+      meta.appendChild(el(doc, "span", { class: "confidence" }, "置信 " + (item.confidence_label || "")));
+      appendRecency(meta, item);
+      appendRound(meta, item);
+    }
+
+    function renderCard(item, index) {
       var article = el(doc, "article", {
         class: "card",
         id: "card-" + item.id,
@@ -562,16 +576,13 @@
       article.appendChild(shot);
       var body = el(doc, "div", { class: "card-body" });
       var meta = el(doc, "p", { class: "meta" });
-      meta.appendChild(el(doc, "span", null, item.category_label || item.category || ""));
-      meta.appendChild(el(doc, "span", null, item.date_label || item.date_iso || ""));
-      meta.appendChild(el(doc, "span", null, "置信 " + (item.confidence_label || "")));
-      appendRecency(meta, item);
-      appendRound(meta, item);
+      fillMeta(meta, item, index);
       body.appendChild(meta);
       var heading = el(doc, "h2");
       heading.appendChild(el(doc, "a", { class: "title-link", href: "#case-" + item.id }, item.title));
       body.appendChild(heading);
       body.appendChild(el(doc, "p", { class: "brand" }, item.brand || ""));
+      body.appendChild(stampBar(item.id));
       if (item.summary) body.appendChild(el(doc, "p", { class: "summary" }, item.summary));
       if (item.advice) {
         var teaser = el(doc, "p", { class: "advice-teaser" });
@@ -586,7 +597,6 @@
         row.appendChild(link(doc, source.url, "主来源"));
         body.appendChild(row);
       }
-      body.appendChild(stampBar(item.id));
       article.appendChild(body);
       return article;
     }
@@ -647,12 +657,12 @@
       reader.appendChild(hero);
       var first = (item.media || [])[0];
       if (first && first.caption) reader.appendChild(el(doc, "p", { class: "detail-caption" }, first.caption));
+      var caseIndex = 0;
+      state.cases.forEach(function (candidate, i) {
+        if (candidate.id === item.id) caseIndex = i;
+      });
       var meta = el(doc, "p", { class: "meta" });
-      meta.appendChild(el(doc, "span", null, item.category_label || ""));
-      meta.appendChild(el(doc, "span", null, item.date_label || item.date_iso || ""));
-      meta.appendChild(el(doc, "span", null, "置信 " + (item.confidence_label || "")));
-      appendRecency(meta, item);
-      appendRound(meta, item);
+      fillMeta(meta, item, caseIndex);
       reader.appendChild(meta);
       reader.appendChild(el(doc, "h1", { id: "reader-title" }, item.title));
       reader.appendChild(el(doc, "p", { class: "brand" }, (item.brand || "") + (item.source_type ? " · " + item.source_type : "")));
@@ -746,7 +756,13 @@
       var settle = function () {
         var view = doc.defaultView;
         if (!view || card.hidden) return;
-        var top = Math.max(0, card.getBoundingClientRect().top + (view.pageYOffset || view.scrollY || 0) - 96);
+        var bar = doc.getElementById("sticky");
+        var clearance = 96;
+        if (bar && bar.getBoundingClientRect) {
+          var barHeight = Math.round(bar.getBoundingClientRect().height);
+          if (barHeight > 48 && barHeight < 200) clearance = barHeight + 10;
+        }
+        var top = Math.max(0, card.getBoundingClientRect().top + (view.pageYOffset || view.scrollY || 0) - clearance);
         var scroller = view.document && (view.document.scrollingElement || view.document.documentElement);
         var previous = scroller && scroller.style ? scroller.style.scrollBehavior : "";
         if (scroller && scroller.style) scroller.style.scrollBehavior = "auto";
@@ -962,7 +978,7 @@
       var loaded = loadMap(root.localStorage, data.cases.map(function (item) { return item.id; }));
       state.map = loaded.map;
       if (loaded.error) setWarn("本浏览器里的挑选记录无法读取，已按未处理显示。之后的挑选仍会尝试保存。", true);
-      data.cases.forEach(function (item) { list.appendChild(renderCard(item)); });
+      data.cases.forEach(function (item, index) { list.appendChild(renderCard(item, index)); });
       renderNotes(data);
       var extra = doc.getElementById("extra");
       if (extra && typeof ext.listExtra === "function") ext.listExtra({ doc: doc, el: el, link: link, data: data, container: extra });
