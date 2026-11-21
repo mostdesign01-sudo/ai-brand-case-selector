@@ -1,11 +1,11 @@
 {
   "title": "AI品牌案例筛选册",
   "type": "链接可打开的静态筛选册。能打开链接只说明该链接可访问，不是访问控制。",
-  "lead": "二十例已核验的公开案例，涵盖 IP、品牌与形象。先看画面和日期，再读证据，再做挑选。挑选只保存在这台浏览器。没有入库静帧的案例保留来源链接。",
-  "verified_on": "2026-11-21",
+  "lead": "二十三例已核验的公开案例，涵盖 IP、品牌与形象。先看画面和日期，再读证据，再做挑选。挑选只保存在这台浏览器。没有入库静帧的案例保留来源链接。",
+  "verified_on": "2026-11-22",
   "timezone": "Asia/Taipei (UTC+8)",
-  "selected_count": 20,
-  "scope_note": "本册现收20例已核验的公开品牌案例：IP 10例、品牌 4例、形象 6例。最先收录的6例记录于2026-11-19；其后追加14例，其中10例记录于2026-11-20，4例记录于2026-11-21。各例的日期、时间窗说明和核验日保持原记录。页面上的时间筛选按站点日期2026-11-21计算，不回写到各例。只保留公开事实、日期、证据、来源与局限。公司或机构陈述的效率、会员、门店、播放和转化数字未独立核验。多邻国、StockX、Cadbury等线索仍未计入。没有入库静帧的案例只提供可打开的来源链接。挑选状态由浏览者在本浏览器标记，不代表案例已被批准。",
+  "selected_count": 23,
+  "scope_note": "本册现收23例已核验的公开品牌案例：IP 10例、品牌 6例、形象 7例。最先收录的6例记录于2026-11-19；其后10例记录于2026-11-20，4例记录于2026-11-21，3例记录于2026-11-22。原先20例的日期、时间窗说明和核验日保持原记录。页面上的时间筛选仍按站点日期2026-11-21计算，不回写到各例。只保留公开事实、日期、证据、来源与局限。公司或机构陈述的效率、会员、门店、播放和转化数字未独立核验。多邻国、StockX、Cadbury等线索仍未计入。没有入库静帧的案例只提供可打开的来源链接。挑选状态由浏览者在本浏览器标记，不代表案例已被批准。",
   "time_basis": {
     "verified_on": "2026-11-21",
     "six_months_from": "2026-05-21",
@@ -1504,6 +1504,354 @@
       ],
       "scale_limits": "本应用的用户数、对话次数、停留市场、持续时间均未核实。不得用全球会员总数代表本试点规模。不得因Sephora是大型零售商就写成大规模已落地。结账尚未被官方写成已上线。",
       "advice": "建议先在一个明确标注的对话入口做单一品类的发现与咨询，必须明示AI身份、知识边界和转人工路径。先闭环问答与商品跳转，支付和终局结论不要一上来就在对话里自动完成。不得把全体会员或全站用户数当成这一入口的规模；本例中8000万是全球会员的公司陈述，不是该ChatGPT应用的使用量。以上为建议，非已落地。"
+    },
+    {
+      "id": "brand-puma-aicreator-2026",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "品牌视觉系统",
+        "消费者共创",
+        "运动品牌",
+        "生成式设计工具",
+        "官方成品"
+      ],
+      "cross_tags": [
+        "社群参与"
+      ],
+      "title": "PUMA AI Creator：球迷用生成式工具设计、品牌审核后成为官方球衣",
+      "brand": "PUMA × Manchester City / Olympique de Marseille",
+      "date_iso": "2026-08-27",
+      "date_label": "2026-08-27（PUMA官方Media Hub发布曼城26/27第三球衣，并开始销售）",
+      "window": "90d",
+      "window_note": "按本轮核验日2026-11-22，近90天自2026-08-24起，本例主日期2026-08-27落入近90天。平台本身于2024年12月上线，2025年1月完成曼城投票，2026年1月23日推出马赛第二版，这些是同一系统的既有节点，不另开新例，也不把主日期改写成平台上线日。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment-2026-11-22",
+      "verified_on": "2026-11-22",
+      "summary": "PUMA把生成式AI做成面向球迷的球衣设计平台AI Creator：球迷用提示词、自定义工具和滑杆生成方案，再经评分与投票进入短名单。2026-08-27，PUMA官方新闻稿宣布曼城26/27第三球衣由一名球迷用该工具完成的设计胜出，并作为专业足球官方第三球衣上场和销售。这不是一张生成海报，而是把品牌约束下的生成设计，收成可发售的官方视觉成品。",
+      "ai_where": "生成式AI用在球迷端的球衣图案共创。PUMA 2026-08-27官方稿写明：The 26/27 Third Kit was created using PUMA AI Creator, a custom generative AI tool that turns written prompts into kit designs within seconds。2026-01-23马赛篇官方稿写明第二版与DEEPOBJECTS合作，使用text prompting、customization tools and intuitive sliders。曼城官网2025-01-24投票页同样写明由DEEPOBJECTS驱动。官方同时写明成品仍可能由PUMA设计团队调整，以符合联赛规则及俱乐部表现与传统标准；不得把球迷生成图直接写成未经审核即成为比赛用衣。2025年1月还曾有球员用同一工具设计的限量门将球衣上场，这是更早的官方节点，不能与2026-08-27的曼城第三球衣混成同一天发布。",
+      "evidence": [
+        "PUMA Media Hub 2026-08-27官方稿标题与导语写明：fans were given the power to design a kit using AI, with the winning fan-created design now revealed as the official Third kit；并称这是professional football’s first fan-designed AI kit to be worn by players on the pitch and sold to supporters。",
+        "同一官方稿写明平台于2024年12月上线，Cityzens from over 200 countries，resulting in over 180,000 unique shirts；Following 1.7 million platform ratings后进入十强，2025年1月由球迷投票选出；胜出方案为白色底配中央双色饰带（half sky blue, half navy）及随光线变化的渐变。球衣自2026-08-27起在puma.com和部分零售渠道发售。",
+        "上述180,000件、1.7 million ratings、200多个国家均为公司在该官方稿中的陈述，本册未独立核验。曼城官网2025-01-24投票页在更早时点写过1.6 million ratings与同样的180,000设计，两处官方数字接近但不相同，应分别标注日期，不得自行抹平。",
+        "PUMA Media Hub 2026-01-23官方稿宣布与马赛合作推出AI Creator第二版，用于设计2027/28赛季官方第三球衣；写明proprietary, award-winning，并由DEEPOBJECTS提供生成式技术。截至本轮核验，未见马赛该赛季球衣已经上场或发售的同等官方成品稿，不得把第二版平台发布写成已经完成的比赛用衣。"
+      ],
+      "benchmark": "对标价值在于：生成式工具被放进品牌和俱乐部的约束里，让消费者参与官方视觉资产的生产，但仍保留人类审核、规则合规和品牌标准。壁垒是平台与联赛规范、设计审核流程、以及把共创结果做成可销售成品的供应链。不能把“首个AI球迷设计球衣”的官方自我表述写成已独立核实的行业第一，也不能把参与人数或评分次数当成效果证明。",
+      "audience": "人群：曼城全球球迷及参与AI Creator的用户；后续购买26/27第三球衣的消费者。触点：aicreator.puma.com、PUMA与俱乐部官方发布、puma.com及指定零售。用户价值：把球衣设想做成可能上场的官方设计。品牌目标：用共创加深社区关系，并把生成设计收成官方产品。实际独立核验的购买人数未公布。",
+      "media": [
+        {
+          "file": "assets/puma-mancity-third-kit-kv.jpg",
+          "original": "https://mediahub.puma.com/articles/designed-by-one-of-us-puma-and-manchester-city-unveil-the-2627-third-kit",
+          "caption": "PUMA官方2026-08-27球衣形象照，证明该第三球衣作为官方产品被拍摄和发布。这是成品摄影，不能单独证明生成过程，也不能显示参赛量。",
+          "alt": "PUMA官方发布的曼城26/27第三球衣形象照：三名模特穿着白色底、中央蓝白饰带的球衣。"
+        },
+        {
+          "file": "assets/mancity-aicreator-vote-kv.jpg",
+          "original": "https://www.mancity.com/news/club/man-city-launch-fan-vote-for-202627-third-kit-with-puma-ai-creator-63873309",
+          "caption": "曼城官方投票主视觉，可见十件入围设计及AI Creator标识。左上白色饰带方案与后来官方发布的成品方向一致，但本图是投票阶段物料，不能代替2026-08-27的成品发布，也不能核验评分次数。",
+          "alt": "曼城官网投票页主视觉：十件入围球衣方案围绕“A.I. CREATOR VOTE FOR THE MANCHESTER CITY 26/27 THIRD KIT”排列。"
+        },
+        {
+          "file": "assets/puma-om-aicreator-kv.jpg",
+          "original": "https://mediahub.puma.com/articles/puma-revives-its-award-winning-ai-creator-platform-with-olympique-de-marseille",
+          "caption": "这是第二版平台的招募视觉，不是已经上场的马赛2027/28球衣，不能写成该俱乐部成品已经发售。",
+          "alt": "PUMA官方马赛篇主视觉：一件带有线框效果的球衣，文字为Design the 27/28 Olympique de Marseille third kit及AICREATOR.PUMA.COM。"
+        }
+      ],
+      "media_links": [
+        {
+          "url": "https://mediahub.puma.com/articles/designed-by-one-of-us-puma-and-manchester-city-unveil-the-2627-third-kit",
+          "note": "PUMA官方发布页，含更多比赛服摄影。"
+        },
+        {
+          "url": "https://aicreator.puma.com/faqs/",
+          "note": "平台说明页；本轮未将FAQ全文作为主证据通读。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://mediahub.puma.com/articles/designed-by-one-of-us-puma-and-manchester-city-unveil-the-2627-third-kit",
+          "title": "DESIGNED BY ONE OF US: PUMA AND MANCHESTER CITY UNVEIL THE 26/27 THIRD KIT",
+          "publisher": "PUMA Media Hub",
+          "date": "2026-08-27",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；主视觉已下载",
+          "label": "DESIGNED BY ONE OF US: PUMA AND MANCHESTER CITY UNVEIL THE 26/27 THIRD KIT（2026-08-27）"
+        },
+        {
+          "url": "https://mediahub.puma.com/articles/puma-revives-its-award-winning-ai-creator-platform-with-olympique-de-marseille",
+          "title": "PUMA REVIVES ITS AWARD-WINNING AI CREATOR PLATFORM WITH OLYMPIQUE DE MARSEILLE",
+          "publisher": "PUMA Media Hub",
+          "date": "2026-01-23",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；平台第二版主视觉已下载",
+          "label": "PUMA REVIVES ITS AWARD-WINNING AI CREATOR PLATFORM WITH OLYMPIQUE DE MARSEILLE（2026-01-23）"
+        },
+        {
+          "url": "https://www.mancity.com/news/club/man-city-launch-fan-vote-for-202627-third-kit-with-puma-ai-creator-63873309",
+          "title": "Man City launch fan vote for 2026/27 Third kit with PUMA AI Creator",
+          "publisher": "Manchester City",
+          "date": "2025-01-24",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；投票主视觉已下载。页内写明胜出设计将于2026年夏季公布。",
+          "label": "Man City launch fan vote for 2026/27 Third kit with PUMA AI Creator（2025-01-24）"
+        },
+        {
+          "url": "https://x.com/ManCity/status/2092869901061132586",
+          "title": "Manchester City official post introducing the 26/27 Third Kit designed with PUMA AI Creator",
+          "publisher": "X / @ManCity",
+          "date": "2026-08-27",
+          "type": "x",
+          "accessed_on": "2026-11-22",
+          "status": "公开读取；仅作热度线索，不作机制证据",
+          "label": "Manchester City official post introducing the 26/27 Third Kit designed with PUMA AI Creator（2026-08-27）"
+        }
+      ],
+      "heat": "X公开读取，采集时间2026-11-22（Asia/Shanghai, UTC+8）。曼城官方账号@ManCity在2026-08-27 07:00 UTC的发布帖（https://x.com/ManCity/status/2092869901061132586）显示印象数412,383、赞2,780、转发290；同日08:30 UTC另一条“Our 26/27 Third Kit is out now”显示印象数489,688、赞8,156、转发605。这些是平台公开指标，不能写成销售量或全球热度总值。PUMA官方账号本轮只检索到2026-01-29马赛相关帖，不把不同活动的热度加总。",
+      "limits": "参与国家数、独特球衣数、平台评分次数均为官方在不同日期的公司陈述，未独立核验；2025-01与2026-08的评分次数表述不完全相同。官方“professional football’s first”是自我表述，不是本册独立核实的行业第一。马赛第二版在本轮未见同等成品上场稿。本环境未能打开可能存在的Instagram/TikTok原帖。曼城官网2026年8月的揭幕专页本轮检索未找到，成品证据以PUMA Media Hub 2026-08-27稿为准。成品摄影不能单独证明生成过程。",
+      "frontier_mechanism": "不是用一句提示生成一张运动广告图。官方机制是把生成式设计放进球迷可操作的平台，在俱乐部与品牌规范里产出候选球衣，再经评分、投票和设计团队审核，最后成为可上场、可销售的官方视觉产品。它与普通生成图的差别在于：有持续平台、有约束和审核，并且有官方成品闭环。",
+      "scale_evidence": [
+        {
+          "claim": "PUMA 2026-08-27官方稿称，来自200多个国家的球迷提交了超过180,000件独特球衣，并经过1.7 million platform ratings后进入十强、于2025年1月投票。",
+          "source_url": "https://mediahub.puma.com/articles/designed-by-one-of-us-puma-and-manchester-city-unveil-the-2627-third-kit",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "曼城官网2025-01-24投票页在当时写明1.6 million ratings by fans on the platform，以及over 180,000 dream kits。与一年后PUMA稿的1.7 million ratings应分别记录，不得自行合并成已核验总数。",
+          "source_url": "https://www.mancity.com/news/club/man-city-launch-fan-vote-for-202627-third-kit-with-puma-ai-creator-63873309",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "官方写明26/27第三球衣自2026-08-27起在puma.com和部分零售伙伴发售。这是覆盖渠道的官方表述，不是已核实的销量。",
+          "source_url": "https://mediahub.puma.com/articles/designed-by-one-of-us-puma-and-manchester-city-unveil-the-2627-third-kit",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_page"
+        }
+      ],
+      "scale_limits": "提交量、评分数、国家数和“首个”表述均为公司/俱乐部官方陈述，未独立核验。发售不等于已核实销量。不能因为PUMA或曼城是大型品牌就写成大规模效果已经验证。马赛2027/28球衣不得计入已完成规模。",
+      "advice": "若校准品牌视觉共创或限量视觉企划，可考虑做一个有明确约束的生成式设计入口，让用户在已有品牌色、标志保护区、品类版式里共创，再由设计审核后决定是否做成限量款或活动视觉。必须标明这是AI辅助共创、哪些元素不可改，并保留人工审核。参与量不要用全部注册用户数代替。以上为建议，非已落地。"
+    },
+    {
+      "id": "brand-zalando-aicontent-2026",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "品牌内容系统",
+        "电商视觉",
+        "生成式营销内容",
+        "本地化",
+        "人机共创"
+      ],
+      "cross_tags": [
+        "商品页视频"
+      ],
+      "title": "Zalando站内营销内容系统：用生成式AI做灵感层，主视觉仍由人主导",
+      "brand": "Zalando",
+      "date_iso": "2026-05-06",
+      "date_label": "2026-05-06（Zalando企业官网发布内容系统专稿，定义90%口径）",
+      "window": "12m",
+      "window_note": "按本轮核验日2026-11-22，近6个月自2026-05-22起，本例主日期2026-05-06早于该起点，属于近12个月。2026-03-12财报已出现相关规模陈述，但口径不如5月6日专稿清楚，故主日期用专稿日，不回写成财报日。2025-05-07数字孪生试点是相关但不同机制，不并成同一项目，也不单开新例。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment-2026-11-22",
+      "verified_on": "2026-11-22",
+      "summary": "Zalando在2026-05-06官方专稿中，把站内营销内容的生产方式写成一套可运行的内容系统：用平台趋势信号发现话题，用生成式AI快速出灵感层物料，再由创意团队决定味道和最终效果。专稿明确：打开网站或应用时看到的横幅、趋势焦点、战役图像和预告中，大部分由生成式AI制作；这不包括商品详情页，也不包括站外广告。主季战役仍由真人主导。这是时尚电商的品牌内容操作系统，不是单条生成广告。",
+      "ai_where": "生成式AI主要用在站内“灵感层”营销内容，以及基于已有商品摄影制作的商品页视频。2026-05-06官方访谈写明：banners, trend highlights, campaign imagery, teasers — most of this content is created using generative AI. Not product detail page or advertising outside Zalando。创意团队仍定义taste and the final vibe，并引导模型保留真实纹理与光线。专稿另写已制作170,000条基于现有商品摄影的AI视频，若商品页有视频则优先展示；这条与90%灵感层口径不是同一件事，必须分开写。2026-03-12财报曾写scaled its AI-generated product content from near zero to 90%，用词是product content，不如5月专稿精确；本册以5月6日对90%的界定为准，不得把财报这句写成商品详情页或目录图已经90%由AI生成。2025-05-07数字孪生试点是与ORENDT STUDIOS合作的高保真三维模特复制，官方当时仍写pilot，不得与上述生成式营销内容系统等同。",
+      "evidence": [
+        "Zalando企业官网2026-05-06专稿How Zalando tells better stories写明：When we shared our financial results for 2025, one of the figures stood out: 90% of Zalando’s on-site marketing content is now generated by AI。内容解决方案副总裁Matthias Haase在同一页解释该数字的含义，并举出当时仍由真人主导的Lily Collins春夏战役作为对照。",
+        "同一专稿写明：过去单次制作周期可能要六到八周，生成式AI把周期缩短到几天，当年目标是从发现趋势到上线不到24小时；并称Customers are engaging 10% more with this content and spending more time on the platform。周期、参与度和“一年前几乎为零”均为公司陈述，未独立核验。",
+        "同一专稿写明已制作170,000 AI-generated videos based on our existing product photography，且商品页若有视频会先展示。该数字是公司陈述，且属于商品页视频，不得并入90%站内营销内容口径。",
+        "Zalando 2026-03-12全年业绩官方稿写明：On the marketing front, the company scaled its AI-generated product content from near zero to 90% in just one year, reducing campaign creation times from six weeks to mere days and boosting content output by 70%。其中product content与70%产出提升均为公司陈述；90%的精确对象以2026-05-06专稿为准。"
+      ],
+      "benchmark": "对标价值在于：把生成式内容放进电商日常灵感层，同时把主战役留在真人制作，并用官方文字分清适用范围。壁垒是趋势信号、品牌味道审核、本地化质量，以及如何避免把生成图与商品实物细节混淆。90%、70%、10%和17万条视频都只是公司陈述，不能当成可直接搬用的效果指标。",
+      "audience": "人群：Zalando网站和应用中浏览灵感层内容的消费者，官方称覆盖多个欧洲市场。触点：站内横幅、趋势焦点、战役图像、预告，以及部分商品页视频。用户价值：看到更及时、更本地的搭配与趋势内容。品牌目标：让店铺内容跟上潮流并提高停留。本系统的独立核验使用人数未公布；财报中的活跃客户数不能直接当成该内容系统的用户数。",
+      "media": [
+        {
+          "file": "assets/zalando-ai-content-2026.jpg",
+          "original": "https://corporate.zalando.com/en/technology/how-zalando-tells-better-stories",
+          "caption": "这是该内容系统专稿的主视觉，页面未标注这张图本身由生成式AI制作，因此不能用它证明任何单帧就是AI结果，也不能显示90%比例。",
+          "alt": "Zalando 2026-05-06官方专稿主视觉：两名模特在街边水果店前穿着牛仔造型。"
+        },
+        {
+          "file": "assets/zalando-digital-twin-2025.jpg",
+          "original": "https://corporate.zalando.com/en/technology/zalando-explores-digital-twins-high-fidelity-replicas-real-models",
+          "caption": "这是相关但不同机制的数字孪生试点配图，官方当时仍写pilot。不得用它证明2026年所说的90%站内营销内容，也不能在未标注的情况下指认哪一侧是孪生。",
+          "alt": "Zalando 2025-05-07数字孪生试点页配图：同一名模特左右两帧面部特写对照。"
+        }
+      ],
+      "media_links": [
+        {
+          "url": "https://corporate.zalando.com/en/technology/how-zalando-tells-better-stories",
+          "note": "2026-05-06官方内容系统专稿。"
+        },
+        {
+          "url": "https://corporate.zalando.com/en/investor-relations/zalando-full-year-2025-results",
+          "note": "2026-03-12官方业绩稿，含相关规模陈述，口径须与5月专稿对照。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://corporate.zalando.com/en/technology/how-zalando-tells-better-stories",
+          "title": "How Zalando tells better stories",
+          "publisher": "Zalando Corporate",
+          "date": "2026-05-06",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；主视觉已下载",
+          "label": "How Zalando tells better stories（2026-05-06）"
+        },
+        {
+          "url": "https://corporate.zalando.com/en/investor-relations/zalando-full-year-2025-results",
+          "title": "Zalando delivers strong 2025 results, expects further acceleration in 2026 through scaling AI innovations",
+          "publisher": "Zalando Corporate",
+          "date": "2026-03-12",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；规模陈述已记录，口径须与5月6日专稿对照",
+          "label": "Zalando delivers strong 2025 results, expects further acceleration in 2026 through scaling AI innovations（2026-03-12）"
+        },
+        {
+          "url": "https://corporate.zalando.com/en/technology/zalando-explores-digital-twins-high-fidelity-replicas-real-models",
+          "title": "Zalando explores digital twins – high-fidelity replicas of real models",
+          "publisher": "Zalando Corporate",
+          "date": "2025-05-07",
+          "type": "official",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；仅作相关试点对照，不与90%内容系统等同",
+          "label": "Zalando explores digital twins – high-fidelity replicas of real models（2025-05-07）"
+        }
+      ],
+      "heat": "未核实。本轮用from:Zalando OR from:ZalandoSE OR from:Zalando_Corp在X公开检索，结果为0，未能确认对应官方账号的相关帖子，故不以X热度作为证据。",
+      "limits": "90%、制作周期、内容产出提升70%、互动提升10%、17万条视频、以及财报中的product content表述，均为公司陈述，未独立核验。必须采用2026-05-06专稿对90%的界定：站内营销/灵感层，不包括商品详情页和站外广告。不得把活跃客户总数、Plus会员数或其他AI项目（尺码、购物助手、发现流、agentic commerce）并入本例规模。数字孪生仍是试点，机制不同。专稿主视觉未标明是否为AI生成，不能当单帧证据。",
+      "frontier_mechanism": "不是用一句提示生成一张时尚大片交差。官方把它写成可重复的内容生产系统：用平台趋势信号发现题目，用生成式AI在几天甚至目标24小时内做出站内灵感层内容，再由人决定风格与发布；主战役仍保留真人制作。它与普通生成图的差别在于：有适用范围、有人审和主次分层，并且被写成覆盖日常站内内容而不是单次战役。",
+      "scale_evidence": [
+        {
+          "claim": "2026-05-06官方专稿写明90% of Zalando’s on-site marketing content is now generated by AI，并界定为站内横幅、趋势焦点、战役图像和预告，不包括商品详情页和站外广告。",
+          "source_url": "https://corporate.zalando.com/en/technology/how-zalando-tells-better-stories",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "同一专稿称制作周期从六到八周缩短到几天，当年目标不到24小时；Customers are engaging 10% more with this content；并称已制作170,000条基于现有商品摄影的AI视频。均为公司陈述。",
+          "source_url": "https://corporate.zalando.com/en/technology/how-zalando-tells-better-stories",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "2026-03-12官方业绩稿写scaled its AI-generated product content from near zero to 90% in just one year，campaign creation times from six weeks to mere days，content output by 70%。其中product content口径不如5月专稿清楚，不得直接写成详情页已经90%由AI生成。",
+          "source_url": "https://corporate.zalando.com/en/investor-relations/zalando-full-year-2025-results",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "上述比例、周期、互动、视频条数均为公司陈述，未独立核验。不得用全站活跃客户数代表本内容系统的触达。不得把数字孪生试点、尺码AI、购物助手或发现流的用户数并入本例。不能因为Zalando是大型电商就写成效果已独立验证。",
+      "advice": "若校准电商或零售品牌的内容生产，可把“主视觉/主战役仍由人做”和“日常灵感层在规范里用生成式工具加速”分开，而不是用同一套开放提示覆盖全部页面。必须写清哪些位置允许AI内容、如何审核、如何披露，且不能把商品实物细节页与灵感层混用同一口径。效率数字不要直接套用他方公司陈述。以上为建议，非已落地。"
+    },
+    {
+      "id": "image-florasis-sensory-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "专业能力可见化",
+        "展会体验",
+        "感官研究",
+        "美妆研发"
+      ],
+      "cross_tags": [],
+      "title": "花西子AI感官研究系统：在数贸会把研发测量做成可体验的专业形象",
+      "brand": "花西子 Florasis / 宜格美妆集团",
+      "date_iso": "2026-09-23",
+      "date_label": "2026-09-23（第五届全球数字贸易博览会开幕；潮新闻2026-09-24、人民网2026-09-27作现场报道）",
+      "window": "90d",
+      "window_note": "按本轮核验日2026-11-22，近90天自2026-08-24起，数贸会开幕日2026-09-23落入近90天。检索还出现2026年4月消博会相关报道，本轮未全文通读那些页面，只作为更早公开演示的线索，不把主日期改到4月，也不把未通读内容写成已核验事实。",
+      "source_type": "行业与官方媒体报道（含公司负责人现场说明；未见品牌官网可打开的新闻稿）",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "increment-2026-11-22",
+      "verified_on": "2026-11-22",
+      "summary": "花西子在2026年9月的第五届全球数字贸易博览会上，把“多维全息AI感官行为研究系统”做成可现场体验的专业展示：采集脑电、眼动、微表情等数据，并由“感官研究智能体”转译成受试者能看懂的个性化体验报告。潮新闻、人民网均引用宜格美妆集团公共事务总经理曾敏的现场说明，并刊出展位与设备照片。这是把研发与专业测量能力做成可被看见的品牌形象，不是生成一张美妆广告，也不是人物头像生成。因未见品牌官网原文，可信度为中高。",
+      "ai_where": "报道写明该系统由花西子团队自主研发，用于美妆研发，并在展会现场供观众体验。机制被描述为多模态实时感官解码，加上感官研究智能体，把脑电波、眼动、微表情等数据转译为个性化体验报告。潮新闻还写到现场观众闻香后看到报告的场景。本册只记录这些已读报道中的机制表述，不把“医疗和神经科学级”“测谎仪”“秒级”“AI比我更懂我”写成已核实的医学或效果结论。也未打开品牌官网或微博原文，不能补充未核验的产品界面说明。",
+      "evidence": [
+        "潮新闻2026-09-24报道：第五届全球数字贸易博览会9月23日在杭州开幕，花西子首次亮相，携东方美妆研发智能体、花养科技成果及新品入驻丝路电商展区；并刊出“现场观众体验花西子多维全息AI感官行为研究系统。受访者供图”。",
+        "同一报道写明系统搭载多模态“实时感官解码”技术及“花西子感官研究智能体”，实时采集和处理脑电波、眼动、微表情等感官数据，把数据转译为受试者易懂的个性化体验报告。文中“秒级”“医疗和神经科学级黑科技”“测谎仪”属于报道用语或公司/现场宣传表述，不是本册独立核验结论。",
+        "人民网2026-09-27报道同样描述该系统在数贸会亮相，并引用花西子母公司宜格美妆集团公共事务总经理曾敏关于数贸会与出海的说明；同时写明该系统应用于美妆研发。两边报道可交叉对照，但仍不是品牌官网新闻稿。",
+        "潮新闻配图可见展位标识“花西子 FLORASIS”、带有“花西子多维全息AI感官行为研究系统 2.0”字样的体验区和现场屏幕。这些照片证明展会现场存在该系统的可见装置与界面，不能用来核验读数是否科学有效，也不能证明该系统已在日常零售门店铺开。"
+      ],
+      "benchmark": "对标价值在于：把原本在实验室里的测量和研发过程，做成消费者在展会上可以看见、可以体验、并拿到一份解释性报告的专业形象。壁垒是测量方法的边界披露、报告是否被误认为医学结论、以及从展会演示走到日常可核对触点的能力。缺失品牌官网原文，故不能把报道中的效率或出海数字写成已核实规模。",
+      "audience": "人群：数贸会现场参观和体验该展位的观众。触点：杭州第五届全球数字贸易博览会丝路电商展区的花西子展位。用户价值：现场体验并看到一份被转译的感官报告。品牌目标：展示研发与科技能力，服务品牌专业形象。展会以外是否有常设体验，本轮未见品牌官网确认。",
+      "media": [
+        {
+          "file": "assets/florasis-sensory-station.jpg",
+          "original": "https://tidenews.com.cn/news.html?id=3569667",
+          "caption": "可见展会体验装置与系统名称。不能用这张照片核验读数是否准确，也不能证明电极数量、医学级别或日常门店已经部署。",
+          "alt": "潮新闻配图：体验者头戴电极帽涂口红，身后屏幕写有“花西子多维全息AI感官行为研究系统 2.0”，旁有工作人员。"
+        },
+        {
+          "file": "assets/florasis-sensory-screen.jpg",
+          "original": "https://tidenews.com.cn/news.html?id=3569667",
+          "caption": "可见现场展示用的数据界面，证明该系统在展会上被展示。屏幕上的数字和图表未经本册核验，不能当效果证据，也不是完整的个性化报告原件。",
+          "alt": "潮新闻配图：屏幕上显示曲线、摄像画面和图表，上方标识为“花西子多维全息AI感官行为研究系统 2.0”。"
+        },
+        {
+          "file": "assets/florasis-expo-booth.jpg",
+          "original": "https://tidenews.com.cn/news.html?id=3569667",
+          "caption": "可见展位与现场人流，证明这是公开展会触点。不能从照片估算参观人数，也不能单独证明AI机制。",
+          "alt": "潮新闻配图：花西子FLORASIS数贸会展位外有参观者排队或围观。"
+        }
+      ],
+      "media_links": [
+        {
+          "url": "https://tidenews.com.cn/news.html?id=3569667",
+          "note": "潮新闻原文，含多张受访者供图。"
+        },
+        {
+          "url": "http://finance.people.com.cn/n1/2026/0927/c1004-40806261.html",
+          "note": "人民网转述页。本轮WebFetch已通读；随后直接curl曾返回错误，以已通读文本为准。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tidenews.com.cn/news.html?id=3569667",
+          "title": "乘“数”而上，花西子携AI感官研究系统首秀第五届数贸会",
+          "publisher": "潮新闻",
+          "date": "2026-09-24",
+          "type": "press",
+          "accessed_on": "2026-11-22",
+          "status": "200，已通读；现场配图已下载。报道标注受访者供图。",
+          "label": "乘“数”而上，花西子携AI感官研究系统首秀第五届数贸会（2026-09-24）"
+        },
+        {
+          "url": "http://finance.people.com.cn/n1/2026/0927/c1004-40806261.html",
+          "title": "花西子携AI感官研究系统首秀第五届数贸会",
+          "publisher": "人民网",
+          "date": "2026-09-27",
+          "type": "press",
+          "accessed_on": "2026-11-22",
+          "status": "WebFetch已通读；本轮后续curl曾失败，未作为新的事实来源加料。",
+          "label": "花西子携AI感官研究系统首秀第五届数贸会（2026-09-27）"
+        }
+      ],
+      "heat": "未核实。本环境无微博连接器，花西子官方微博原文未能打开。报道未给出经本册核验的参观人数或传播数据。",
+      "limits": "未见花西子或宜格美妆官网新闻稿；机制与现场描述来自主流媒体对展会和公司负责人的报道，故可信度为中高。“医疗和神经科学级”“秒级”“测谎仪”及110多个国家和地区等均为报道或公司陈述，未独立核验，不得写成医学认证或已核实的全球规模。本例证明的是展会可见的专业体验，不是日常零售门店已铺开的诊断设备。2026年4月消博会相关报道本轮未全文通读，不作主证据。个性化报告原件未见完整官方文本。",
+      "frontier_mechanism": "不是用生成模型去做一张东方美妆海报。已读报道把它写成可在现场体验的研发测量系统：采集多模态感官数据，再用智能体转成受试者能看懂的报告，从而让专业研究过程被看见。它与普通生成图的差别在于：核心是可见的专业测量与解释，而不是生成视觉内容。测量是否达到所谓医疗或神经科学标准，本册未核验。",
+      "scale_evidence": [
+        {
+          "claim": "宜格美妆集团公共事务总经理曾敏在报道中称，花西子产品已销往全球110多个国家和地区。该数字描述的是品牌出海范围，不是本感官系统的使用人数或门店数，不得误用。",
+          "source_url": "https://tidenews.com.cn/news.html?id=3569667",
+          "observed_at": "2026-11-22",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "展会体验人次、报告生成量、系统是否进入日常门店或实验室常规流程，均未核实。不得用品牌出海国家数代表本系统规模。不得把展会演示写成已经规模化落地。",
+      "advice": "若校准如何让专业能力被用户看见，可考虑在有限的线下或活动场景里，把一项真正存在的检测或研究过程做成可解释的体验报告，而不是只生成一张“很专业”的宣传图。必须写清这是辅助说明、不是医学或最终鉴定结论，并给出人工复核路径。展会演示不能直接写成已在全站或全部门店上线。以上为建议，非已落地。"
     }
   ],
   "appendix": [
@@ -1526,6 +1874,10 @@
     {
       "heading": "访问限制",
       "body": "联合利华官网配图CDN、数英案例图片与视频返回403，已改用美通社官方配图或媒体转载主视觉，并保留原链。Adobe博文配图下载失败。中国网页面复查出现500。天猫官方微博未能全文打开。公共检索未找到可口可乐官方账号对应帖，热度不以社交转发补写。"
+    },
+    {
+      "heading": "2026-11-22 增补三例",
+      "body": "本轮只增加3例，质量优先于凑数。\nPUMA官方“professional football’s first / for the first time in professional football”是自我表述，不是本册独立核实的行业第一。180,000件、1.7 million ratings、200多个国家是公司陈述；曼城官网2025-01-24写过1.6 million ratings，应分别标注，不得抹平。马赛第二版不得写成已经上场或发售。\nZalando 90%口径以2026-05-06官方专稿为准：站内灵感层营销内容（横幅、趋势、战役图像、预告），不包括商品详情页和站外广告。170,000条商品页视频、互动提升10%、周期从六到八周缩短到几天、产出提升70%均为公司陈述，且视频口径不得并入90%。不得用活跃客户总数代表本系统使用人数。专稿主视觉未标明是否为AI生成。2025数字孪生试点不得等同于该内容系统。\n花西子未见品牌官网新闻稿，可信度为中高。“医疗和神经科学级”“测谎仪”“秒级”及产品销往110多个国家和地区均为报道或公司陈述；出海数字不是该感官系统的使用或门店规模。本例只证明数贸会展会可见体验，不能写成日常门店已铺开。"
     }
   ]
 }

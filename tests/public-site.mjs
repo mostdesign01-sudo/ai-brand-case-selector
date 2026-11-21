@@ -60,6 +60,14 @@ function textFiles(dir) {
   return out;
 }
 
+function hasPrivatePhrase(text, phrase) {
+  const hay = String(text).toLowerCase();
+  const needle = String(phrase).toLowerCase();
+  const seasonYear = ["20", "27"].join("");
+  if (needle === seasonYear) return hay.split(seasonYear + "/28").join("").includes(seasonYear);
+  return hay.includes(needle);
+}
+
 const data = JSON.parse(fs.readFileSync(path.join(root, "evidence.json"), "utf8"));
 const ids = data.cases.map((item) => item.id);
 const ORIGINALS = [
@@ -86,11 +94,18 @@ const ADDITIONS = [
   "image-kerastase-kscan-2026",
   "image-sephora-chatgpt-2026"
 ];
-const ALL_IDS = ORIGINALS.concat(ADDITIONS);
+const ADDED = [
+  "brand-puma-aicreator-2026",
+  "brand-zalando-aicontent-2026",
+  "image-florasis-sensory-2026"
+];
+const ALL_IDS = ORIGINALS.concat(ADDITIONS, ADDED);
 const RECENT_IDS = [
   "brand-anta-ai365-2026",
   "brand-loreal-creaitech-2026",
+  "brand-puma-aicreator-2026",
   "brand-unilever-packaging-2026",
+  "image-florasis-sensory-2026",
   "image-kerastase-kscan-2026",
   "image-loreal-cisce-2026",
   "image-lv-comelz-2026",
@@ -100,6 +115,14 @@ const RECENT_IDS = [
   "ip-jingpai-jiuling-2026",
   "ip-tmall-fuli-2026",
   "ip-unisport-zoai-2026"
+];
+const NINETY_IDS = [
+  "brand-puma-aicreator-2026",
+  "image-florasis-sensory-2026",
+  "ip-bluemoon-jingjing-2026",
+  "ip-fanta-haunted-2026",
+  "ip-jingpai-jiuling-2026",
+  "ip-tmall-fuli-2026"
 ];
 const LINK_ONLY = [
   "ip-bluemoon-jingjing-2026",
@@ -131,17 +154,24 @@ function scanAndLogic() {
     const text = fs.readFileSync(file, "utf8");
     const rel = path.relative(root, file);
     for (const phrase of PHRASES) {
-      if (text.toLowerCase().includes(phrase.toLowerCase())) failures.push(rel + " contains a private phrase");
+      if (hasPrivatePhrase(text, phrase)) failures.push(rel + " contains a private phrase");
     }
   }
-  check(JSON.stringify(ids) === JSON.stringify(ALL_IDS), "twenty ids keep the original six first");
-  check(new Set(ids).size === 20, "twenty unique ids");
+  check(JSON.stringify(ids) === JSON.stringify(ALL_IDS), "ids keep the original order and append the three new cases");
+  check(new Set(ids).size === 23 && ids.length === 23, "twenty-three unique ids");
+  for (const id of ADDED) check(ids.includes(id), "new case is present " + id);
+  check(data.cases.slice(0, 20).every((item) => item.verified_on !== "2026-11-22"), "original cases keep their verification dates");
+  const addedById = Object.fromEntries(data.cases.slice(20).map((item) => [item.id, item]));
+  check(addedById["brand-puma-aicreator-2026"].date_iso === "2026-08-27" && addedById["brand-puma-aicreator-2026"].category === "brand" && addedById["brand-puma-aicreator-2026"].confidence === "high", "puma case keeps the verified facts");
+  check(addedById["brand-zalando-aicontent-2026"].date_iso === "2026-05-06" && addedById["brand-zalando-aicontent-2026"].category === "brand" && addedById["brand-zalando-aicontent-2026"].confidence === "high", "zalando case keeps the verified facts");
+  check(addedById["image-florasis-sensory-2026"].date_iso === "2026-09-23" && addedById["image-florasis-sensory-2026"].category === "image" && addedById["image-florasis-sensory-2026"].confidence === "midhigh", "florasis case keeps the verified facts");
+  check(addedById["brand-puma-aicreator-2026"].limits.includes("professional football") && addedById["brand-zalando-aicontent-2026"].limits.includes("不包括商品详情页") && addedById["image-florasis-sensory-2026"].limits.includes("不是日常零售门店已铺开"), "new cases keep the evidence guards");
   for (const item of data.cases) {
     if (ADVICE[item.id]) check(item.advice === ADVICE[item.id], "stored suggestion matches the public copy for " + item.id);
     else check(typeof item.advice === "string" && item.advice.includes("建议，非已落地"), "added suggestion keeps the public marker for " + item.id);
   }
   check(!Object.prototype.hasOwnProperty.call(data, "directions"), "no proposal block in public evidence");
-  const expectedCounts = { ip: 10, brand: 4, image: 6 };
+  const expectedCounts = { ip: 10, brand: 6, image: 7 };
   for (const category of ["ip", "brand", "image"]) {
     check(data.cases.filter((item) => item.category === category).length === expectedCounts[category], expectedCounts[category] + " cases in " + category);
   }
@@ -151,14 +181,52 @@ function scanAndLogic() {
   check(basis.six_months_from === "2026-05-21" && basis.filter_six_months_from === "2026-05-21" && basis.twelve_months_from === "2025-11-21" && basis.filter_twelve_months_from === "2025-11-21" && basis.ninety_days_from === "2026-08-23", "site filters use the 2026-11-21 basis");
   check(api.inWindow("2026-05-21", "6m", basis) === true && api.inWindow("2026-05-20", "6m", basis) === false, "site six-month boundary is 2026-05-21");
   const siteRecent = data.cases.filter((item) => api.isRecent(item.date_iso, basis)).map((item) => item.id).sort();
-  check(JSON.stringify(siteRecent) === JSON.stringify(RECENT_IDS), "site recent marker matches the current twenty");
-  check(data.verified_on === "2026-11-21" && data.selected_count === 20, "site count and date are updated");
-  check(data.lead.includes("二十例") && data.lead.includes("挑选只保存在这台浏览器"), "lead names twenty cases");
-  check(!data.scope_note.includes("只收6例") && data.scope_note.includes("20例"), "scope no longer describes a six-case set");
+  check(JSON.stringify(siteRecent) === JSON.stringify(RECENT_IDS), "site recent marker matches the current twenty-three");
+  check(data.verified_on === "2026-11-22" && data.selected_count === 23, "site count and date are updated");
+  check(data.lead.includes("二十三例") && data.lead.includes("挑选只保存在这台浏览器"), "lead names twenty-three cases");
+  check(!data.scope_note.includes("只收6例") && data.scope_note.includes("23例") && data.scope_note.includes("2026-11-22"), "scope describes the twenty-three case set");
   const appendixText = JSON.stringify(data.appendix);
   check(!appendixText.includes("未计入6例") && !appendixText.includes("不计入6例") && !appendixText.includes("不凑进6例"), "appendix drops the six-case exclusion wording");
   check(appendixText.includes("看球搭子AI范志毅") && appendixText.includes("现已作为案例收入本册"), "fanzhiyi appendix now includes the case");
   check(appendixText.includes("飞天小女警") && appendixText.includes("现已作为案例收入本册"), "meitu appendix now includes the case");
+  check(appendixText.includes("质量优先于凑数") && appendixText.includes("professional football") && appendixText.includes("170,000") && appendixText.includes("不能写成日常门店已铺开"), "appendix notes this increment and its evidence guards");
+  const publicText = ["evidence.json", "index.html", "assets/app.js", "assets/styles.css", "README.md", "evidence.csv"];
+  const privacyTerms = [
+    chars(0x5f97, 0x7269),
+    ["De", "wu"].join(""),
+    ["de", "wu"].join(""),
+    ["Ha", "o"].join(""),
+    ["NO", "NO"].join(""),
+    ["NI", "NI"].join(""),
+    ["T", "7"].join(""),
+    chars(0x4e92, 0x8054, 0x5b9d, 0x5730),
+    chars(0x9274, 0x522b, 0x5361),
+    chars(0x7b7e, 0x6536, 0x4f53, 0x9a8c),
+    ["#00D", "0DB"].join(""),
+    chars(0x4e13, 0x9879)
+  ];
+  let privacyHits = 0;
+  for (const rel of publicText) {
+    const text = fs.readFileSync(path.join(root, rel), "utf8");
+    for (const phrase of privacyTerms) {
+      if (text.toLowerCase().includes(phrase.toLowerCase())) {
+        privacyHits += 1;
+        failures.push(rel + " privacy hit");
+      }
+    }
+  }
+  check(privacyHits === 0, "privacy scan over public text has zero hits");
+  const seasonYear = ["20", "27"].join("");
+  const seasonToken = seasonYear + "/28";
+  let seasonHits = 0;
+  let otherYear = false;
+  for (const file of textFiles(root)) {
+    const text = fs.readFileSync(file, "utf8");
+    const parts = text.split(seasonToken);
+    seasonHits += parts.length - 1;
+    if (parts.join("").includes(seasonYear)) otherYear = true;
+  }
+  check(seasonHits === 3 && otherYear === false, "the only year-marker hits are the public kit season citation");
   check(data.cases[0].window_note.startsWith("距核验日约12个半月"), "original holiday window note stays");
   check(data.cases[5].window_note.includes("2026-11-19仍把Shield"), "original authentication window note stays");
   for (const id of LINK_ONLY) {
@@ -178,7 +246,8 @@ function scanAndLogic() {
   const lv = data.cases.find((item) => item.id === "image-lv-comelz-2026");
   check(lv.media[0].caption.includes("不是工厂量产车间照片") && lv.summary.includes("VivaTech 2026"), "lv remains an exhibition demo");
   const csvRows = fs.readFileSync(path.join(root, "evidence.csv"), "utf8").trim().split(/\n/);
-  check(csvRows.length === 21 && csvRows[1].startsWith("ip-coke-holidays-2025,") && csvRows[20].startsWith("image-sephora-chatgpt-2026,"), "csv keeps the original rows and lists all twenty");
+  check(csvRows.length === 24 && csvRows[1].startsWith("ip-coke-holidays-2025,") && csvRows[20].startsWith("image-sephora-chatgpt-2026,") && csvRows[21].startsWith("brand-puma-aicreator-2026,") && csvRows[22].startsWith("brand-zalando-aicontent-2026,") && csvRows[23].startsWith("image-florasis-sensory-2026,"), "csv keeps the original rows and lists all twenty-three");
+  check(csvRows[21].includes(",increment-2026-11-22,90d,2026-11-22") && csvRows[22].includes(",increment-2026-11-22,12m,2026-11-22") && csvRows[23].includes(",increment-2026-11-22,90d,2026-11-22"), "csv rows record round, window, and verification date");
   const appSource = fs.readFileSync(path.join(root, "assets/app.js"), "utf8");
   const css = fs.readFileSync(path.join(root, "assets/styles.css"), "utf8");
   check(css.includes("Songti SC") && css.includes("PingFang SC") && css.includes("Noto Serif CJK SC") && css.includes("Noto Sans CJK SC") && css.includes("Source Han Serif SC") && css.includes("Source Han Sans SC"), "cjk stack names faces that exist on phones");
@@ -213,11 +282,11 @@ function scanAndLogic() {
   const saved = JSON.parse(storage.getItem(api.KEY));
   check(saved["ip-tmall-fuli-2026"] === "入选" && !saved.selections, "saved value stays a plain map");
   const exported = api.toExport(data.cases, loaded.map);
-  check(exported.schema === api.SCHEMA && exported.selections.length === 20, "JSON export keeps the v1 schema");
+  check(exported.schema === api.SCHEMA && exported.selections.length === 23, "JSON export keeps the v1 schema");
   const csv = api.toCsv(exported.selections);
   check(csv.charCodeAt(0) === 0xfeff && csv.includes("天猫") && csv.includes("候补"), "CSV export keeps title, status, and source");
   const imported = api.validateImport(JSON.stringify(exported), ids);
-  check(imported.ok && imported.selections.length === 20, "JSON export imports back");
+  check(imported.ok && imported.selections.length === 23, "JSON export imports back");
   check(api.validateImport(JSON.stringify({ schema: "other", selections: [] }), ids).ok === false, "unknown schema is rejected");
   check(api.parseCaseHash("#case-ip-tmall-fuli-2026") === "ip-tmall-fuli-2026", "detail hash round-trips");
 }
@@ -337,7 +406,7 @@ async function waitFor(cdp, sessionId, expression) {
 async function openAt(cdp, sessionId, url, width) {
   await cdp.send("Emulation.setDeviceMetricsOverride", { width, height: 900, deviceScaleFactor: 1, mobile: width < 800 }, sessionId);
   await cdp.send("Page.navigate", { url }, sessionId);
-  await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 20 && document.getElementById('loading').hidden");
+  await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('loading').hidden");
 }
 
 async function shot(cdp, sessionId, file) {
@@ -395,14 +464,21 @@ async function browserTests(origin) {
     check(narrow.overflow <= 1, "no page overflow at 360");
     check(narrow.filtersHidden === true && narrow.expanded === "false", "filters start collapsed on a narrow screen");
     check(JSON.stringify(narrow.recent) === JSON.stringify(RECENT_IDS), "recent marks follow the site six-month window");
-    check(JSON.stringify(narrow.tight) === JSON.stringify(["ip-bluemoon-jingjing-2026", "ip-fanta-haunted-2026", "ip-jingpai-jiuling-2026", "ip-tmall-fuli-2026"]), "ninety-day marks follow the site date");
-    check(narrow.counts["未处理"] === "20" && narrow.counts["入选"] === "0", "status counts start untreated");
-    check(narrow.cats.ip === 10 && narrow.cats.brand === 4 && narrow.cats.image === 6, "category counts match the twenty cases");
-    check(narrow.count === "显示 20 / 20", "count shows twenty cases");
+    check(JSON.stringify(narrow.tight) === JSON.stringify(NINETY_IDS), "ninety-day marks follow the site date");
+    check(narrow.counts["未处理"] === "23" && narrow.counts["入选"] === "0", "status counts start untreated");
+    check(narrow.cats.ip === 10 && narrow.cats.brand === 6 && narrow.cats.image === 7, "category counts match the twenty-three cases");
+    check(narrow.count === "显示 23 / 23", "count shows twenty-three cases");
     check(narrow.hint.includes("2026-05-21") && narrow.hint.includes("2026-11-21"), "time hint documents the site date");
     check(narrow.appendix.includes("现已作为案例收入本册") && !narrow.appendix.includes("未计入6例") && !narrow.appendix.includes("不计入6例"), "appendix includes the former exclusions");
     check(narrow.contain === true && narrow.crop === false, "poster uses contain and a film still stays cropped");
-    check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("二十例") && narrow.newWord === false, "lead explains twenty local cases without a fake new flag");
+    check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("二十三例") && narrow.newWord === false, "lead explains twenty-three local cases without a fake new flag");
+    const addedCards = await evaluate(cdp, sessionId, `Promise.all(${JSON.stringify(ADDED)}.map(async (id) => {
+      const img = document.querySelector("#card-" + id + " img");
+      if (img && img.decode) { try { await img.decode(); } catch (err) {} }
+      const teaser = document.querySelector("#card-" + id + " .advice-teaser");
+      return { id, width: img ? img.naturalWidth : 0, advice: teaser ? teaser.textContent : "", title: document.querySelector("#card-" + id + " .title-link") ? document.querySelector("#card-" + id + " .title-link").textContent : "" };
+    }))`);
+    check(addedCards.length === 3 && addedCards.every((card) => card.width > 0 && card.advice.includes("建议，非已落地") && card.title.length > 0), "new cases render a decoded still and the suggestion marker " + JSON.stringify(addedCards));
     const teasers = await evaluate(cdp, sessionId, "Object.fromEntries([...document.querySelectorAll('article.card')].map((card) => [card.getAttribute('data-case-id'), card.querySelector('.advice-teaser') ? card.querySelector('.advice-teaser').textContent : '']))");
     for (const id of ORIGINALS) {
       const opening = ADVICE[id].split("。")[0];
@@ -427,7 +503,7 @@ async function browserTests(origin) {
 
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-tmall-fuli-2026 button[data-status=\"入选\"]').click(); document.querySelector('#card-brand-unilever-packaging-2026 button[data-status=\"入选\"]').click(); document.querySelector('#card-image-loreal-cisce-2026 button[data-status=\"候补\"]').click(); document.querySelector('#card-ip-coke-holidays-2025 button[data-status=\"暂不考虑\"]').click();");
     const after = await evaluate(cdp, sessionId, "Object.fromEntries(Array.from(document.querySelectorAll('[data-count-for]')).map((node) => [node.getAttribute('data-count-for'), node.textContent]))");
-    check(after["入选"] === "2" && after["候补"] === "1" && after["暂不考虑"] === "1" && after["未处理"] === "16", "status counts follow the four choices");
+    check(after["入选"] === "2" && after["候补"] === "1" && after["暂不考虑"] === "1" && after["未处理"] === "19", "status counts follow the four choices");
     await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"status\"] button[data-value=\"入选\"]').click()");
     const picked = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id')).sort()");
     check(JSON.stringify(picked) === JSON.stringify(["brand-unilever-packaging-2026", "ip-tmall-fuli-2026"]), "入选 filter shows the two selected cases");
@@ -437,7 +513,7 @@ async function browserTests(origin) {
     check(empty === true, "empty search offers a reset");
     await evaluate(cdp, sessionId, "document.getElementById('empty-reset').click()");
     const restored = await evaluate(cdp, sessionId, "({shown: Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).length, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), query: document.getElementById('q').value})");
-    check(restored.shown === 20 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
+    check(restored.shown === 23 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
 
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-tmall-fuli-2026 .title-link').click()");
     await waitFor(cdp, sessionId, "document.getElementById('reader') && !document.getElementById('reader').hidden && document.getElementById('reader-title')");
@@ -510,7 +586,7 @@ async function browserTests(origin) {
     check(failed.failed === true && failed.text.includes("图片未能显示") && failed.overflow <= 1, "a failed image keeps its frame and link");
 
     await evaluate(cdp, sessionId, "localStorage.setItem('ai-brand-case-selection-v1', JSON.stringify({'image-loreal-cisce-2026':'候补'})); location.href = location.pathname;");
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 20 && document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]')");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]')");
     const migrated = await evaluate(cdp, sessionId, "document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')");
     check(migrated === "候补", "an existing plain selection map is kept after reload");
 
@@ -540,7 +616,7 @@ async function browserTests(origin) {
     check(wide.resources.every((name) => name.startsWith(origin)), "page only loads same-origin files");
     const pageText = await evaluate(cdp, sessionId, "document.body.innerText");
     for (const phrase of PHRASES) {
-      if (pageText.toLowerCase().includes(phrase.toLowerCase())) failures.push("rendered page contains a private phrase");
+      if (hasPrivatePhrase(pageText, phrase)) failures.push("rendered page contains a private phrase");
     }
     await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-1280.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
@@ -575,7 +651,7 @@ async function bundleFile() {
   check(html.includes("casebook-data") && !html.includes("private-book"), "bundle embeds data for file opening");
   check(fs.existsSync(path.join(out, "assets/fonts/source-serif-4-latin-600.woff2")), "bundle keeps the self-hosted latin face");
   for (const phrase of PHRASES) {
-    if (html.toLowerCase().includes(phrase.toLowerCase())) failures.push("public bundle contains a private phrase");
+    if (hasPrivatePhrase(html, phrase)) failures.push("public bundle contains a private phrase");
   }
   const userDir = fs.mkdtempSync(path.join(os.tmpdir(), "bundle-chrome-"));
   const chrome = await startChrome(userDir);
@@ -589,7 +665,7 @@ async function bundleFile() {
     const url = "file://" + path.join(out, "index.html");
     await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 800, deviceScaleFactor: 1, mobile: true }, sessionId);
     await cdp.send("Page.navigate", { url }, sessionId);
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 20 && document.getElementById('loading').hidden");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('loading').hidden");
     const offline = await evaluate(cdp, sessionId, "document.getElementById('error') ? document.getElementById('error').textContent : ''");
     check(offline === "", "bundled file opens without fetching evidence.json");
   } finally {
