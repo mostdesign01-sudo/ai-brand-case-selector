@@ -36,22 +36,29 @@ const PHRASES = [
   chars(0x4e13, 0x9879),
   chars(0x63d0, 0x6848),
   chars(0x5019, 0x9009, 0x7814, 0x7a76, 0x65b9, 0x5411),
+  chars(0x5019, 0x9009, 0x4e13, 0x9879),
+  chars(0x4e92, 0x8054, 0x5b9d, 0x5730),
+  chars(0x9274, 0x522b, 0x5361),
+  chars(0x7b7e, 0x6536, 0x4f53, 0x9a8c),
+  ["#00D", "0DB"].join(""),
+  ["00D", "0DB"].join(""),
   ["/Us", "ers/"].join(""),
   ["/ho", "me/"].join(""),
-  ["private-book", "let"].join("")
+  ["/cursor/", "stores"].join(""),
+  ["private-book", "let"].join(""),
+  ["private-out", "put"].join("")
 ];
 
-const SITE_FILES = [
-  "index.html",
-  "README.md",
-  "evidence.json",
-  "evidence.csv",
-  "assets/app.js",
-  "assets/styles.css",
-  "assets/favicon.svg",
-  ".github/workflows/pages.yml",
-  "tools/bundle-local.mjs"
-];
+function textFiles(dir) {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...textFiles(full));
+    else if (/\.(html|md|json|csv|js|mjs|css|yml|svg|txt)$/i.test(entry.name)) out.push(full);
+  }
+  return out;
+}
 
 const data = JSON.parse(fs.readFileSync(path.join(root, "evidence.json"), "utf8"));
 const ids = data.cases.map((item) => item.id);
@@ -74,14 +81,27 @@ function memoryStorage() {
   };
 }
 
+const ADVICE = {
+  "ip-coke-holidays-2025": "若校准自有角色，优先做“同一角色在多镜头、多情绪、多场景中保持可识别”的叙事短片，而不是再做一个新形象。先写角色圣经和禁用项，再允许AI执行。节日或大促档期上线前，单独评估“看起来像AI”对鉴别与潮流信任的副作用。用户可先在活动页或视频渠道看到短片，再进入角色相关的商品或内容集合；不把“看起来像AI”本身当成卖点。建议先做30–60秒样片，盲测“是否还是同一只角色、是否像廉价生成”，不通过则停止扩写正片。",
+  "ip-tmall-fuli-2026": "可对照自有角色做“有性格的主角+商家/品类伙伴客串”的短剧校准，而不是先扩出全新家族。先定义角色可表演的性格与情绪，再谈AI同框。授权与品牌安全要先行，否则多IP同框会先在法务和规范上失败。故事主线、价值观和任何涉及鉴别结论的台词必须人工写、人工审，不能用AI直接做真伪判决台词。建议先做3集样片看完播与“角色是否可识别”，完播差或人设漂移则停。",
+  "brand-coke-fizzion-2025": "若做可治理的视觉系统，建议先把现有品牌规范（含包装、卡片、中英标志组合）整理成可抽检的规则，再试点“设计系统+生成变体+人工放行”。不要从自动改logo开始。不要把未核实色值写进系统当官方色。2026-07-20可口可乐另发全球视觉识别升级，官方只写Brand Center与tech-powered Design Intelligence tools，未点名Fizzion或AI。两篇稿可对照，不能直接画等号。",
+  "brand-unilever-packaging-2026": "自有或联名包装、卡片、开箱物料可对照做“概念到结构到货架/开箱”的试点，而不是先批量生成节日包装图案。先固化品牌色、标志安全区、材料与开盒动线，再让AI在约束里出方案。官方效率数字只可作量级参考，不可写入承诺。结构安全、法规字样、最终打样必须人工与工艺确认。",
+  "image-loreal-cisce-2026": "建议把鉴别、仓储、物流、质检里已经真实存在的能力，做成用户能看懂的解释，而不是再做数字人形象。可试点“开箱之前看见这条链”的短内容，素材必须来自真实流程。AI漫剧可以作传播外壳，但鉴别结论不能由漫剧角色宣布。不能用生成影像假充真实质检现场。",
+  "image-therealreal-auth-2025": "建议对外只说清“AI做什么、人做什么、哪一步不可替代”。不要用数字人或头像承载鉴别承诺。可把过程可视化（拍摄、比对、专家签字、证书），让专业被看见。任何准确率数字都必须可追溯到官方或可复核实验，不能写在营销超级符号上。终检必须是有资格的人；不能把未独立核验的准确率写进对用户承诺。"
+};
+
 function scanAndLogic() {
-  for (const rel of SITE_FILES) {
-    const text = fs.readFileSync(path.join(root, rel), "utf8");
+  for (const file of textFiles(root)) {
+    const text = fs.readFileSync(file, "utf8");
+    const rel = path.relative(root, file);
     for (const phrase of PHRASES) {
       if (text.toLowerCase().includes(phrase.toLowerCase())) failures.push(rel + " contains a private phrase");
     }
   }
   check(JSON.stringify(ids) === JSON.stringify(ORIGINALS), "six stable public ids");
+  for (const item of data.cases) {
+    check(item.advice === ADVICE[item.id], "stored suggestion matches the public copy for " + item.id);
+  }
   check(!Object.prototype.hasOwnProperty.call(data, "directions"), "no proposal block in public evidence");
   for (const category of ["ip", "brand", "image"]) {
     check(data.cases.filter((item) => item.category === category).length === 2, "two cases in " + category);
@@ -285,6 +305,11 @@ async function browserTests(origin) {
     check(narrow.cats.ip === 2 && narrow.cats.brand === 2 && narrow.cats.image === 2, "two cards in each category");
     check(narrow.contain === true && narrow.crop === false, "poster uses contain and a film still stays cropped");
     check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.newWord === false, "lead explains local selection without a fake new flag");
+    const teasers = await evaluate(cdp, sessionId, "Object.fromEntries([...document.querySelectorAll('article.card')].map((card) => [card.getAttribute('data-case-id'), card.querySelector('.advice-teaser') ? card.querySelector('.advice-teaser').textContent : '']))");
+    for (const id of ORIGINALS) {
+      const opening = ADVICE[id].split("。")[0];
+      check(teasers[id] && teasers[id].includes("建议，非已落地") && teasers[id].includes(opening), "card teaser keeps the suggestion opening for " + id);
+    }
     await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-360.png");
 
     await evaluate(cdp, sessionId, "document.getElementById('filter-toggle').click()");
@@ -327,10 +352,16 @@ async function browserTests(origin) {
     check(detail.hash === "#case-ip-tmall-fuli-2026", "detail address keeps the stable id");
     check(detail.title.includes("天猫"), "detail shows the case title");
     check(detail.picture > 0 && detail.ready === true, "detail picture decoded " + JSON.stringify({ picture: detail.picture, ready: detail.ready }));
-    check(JSON.stringify(detail.sections) === JSON.stringify(["AI机制", "前沿性", "规模证据", "对标价值", "受众与触点", "来源与局限"]), "evidence sections follow the reading order");
+    check(JSON.stringify(detail.sections) === JSON.stringify(["AI机制", "前沿性", "规模证据", "对标价值", "受众与触点", "来源与局限", "对标建议"]), "evidence sections follow the reading order");
     check(detail.scale === "规模未核实" && detail.frontier.includes("未单列"), "scale and frontier stay honest");
     check(detail.pressed === "入选" && detail.source === true && detail.note.includes("这台浏览器"), "shortlist and sources stay on the detail");
     check(detail.overflow <= 1, "detail does not overflow at 360");
+    for (const id of ORIGINALS) {
+      await evaluate(cdp, sessionId, "location.hash = " + JSON.stringify("case-" + id));
+      await waitFor(cdp, sessionId, "document.querySelector('#reader .advice') && document.getElementById('reader-title')");
+      const shown = await evaluate(cdp, sessionId, "document.querySelector('#reader .advice').textContent");
+      check(shown.includes("对标建议") && shown.includes("建议，非已落地") && shown.includes(ADVICE[id]), "detail shows the suggestion copy for " + id);
+    }
 
     await openAt(cdp, sessionId, origin + "/#case-ip-tmall-fuli-2026", 390);
     const refreshed = await evaluate(cdp, sessionId, "({width: window.innerWidth, open: !document.getElementById('reader').hidden, status: document.querySelector('#reader .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
@@ -386,7 +417,7 @@ async function browserTests(origin) {
   } finally {
     cdp.close();
     chrome.proc.kill("SIGKILL");
-    fs.rmSync(userDir, { recursive: true, force: true });
+    try { fs.rmSync(userDir, { recursive: true, force: true }); } catch (err) { /* the browser may still be releasing its profile */ }
   }
 }
 
@@ -426,7 +457,7 @@ async function bundleFile() {
   } finally {
     cdp.close();
     chrome.proc.kill("SIGKILL");
-    fs.rmSync(userDir, { recursive: true, force: true });
+    try { fs.rmSync(userDir, { recursive: true, force: true }); } catch (err) { /* the browser may still be releasing its profile */ }
   }
 }
 

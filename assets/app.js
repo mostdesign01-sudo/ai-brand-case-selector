@@ -69,7 +69,7 @@
   }
 
   function haystack(item) {
-    var bits = [item.title, item.brand, item.summary, item.id, item.ai_where, (item.tags || []).join(" ")];
+    var bits = [item.title, item.brand, item.summary, item.id, item.ai_where, item.advice, (item.tags || []).join(" ")];
     (item.evidence || []).forEach(function (line) { bits.push(line); });
     bits.push(item.limits || "");
     return bits.join(" ");
@@ -573,6 +573,13 @@
       body.appendChild(heading);
       body.appendChild(el(doc, "p", { class: "brand" }, item.brand || ""));
       if (item.summary) body.appendChild(el(doc, "p", { class: "summary" }, item.summary));
+      if (item.advice) {
+        var teaser = el(doc, "p", { class: "advice-teaser" });
+        teaser.appendChild(el(doc, "span", { class: "advice-kicker" }, "建议，非已落地"));
+        var opening = String(item.advice).split("。")[0];
+        teaser.appendChild(doc.createTextNode(" " + opening + "。"));
+        body.appendChild(teaser);
+      }
       var source = primarySource(item);
       if (source.url) {
         var row = el(doc, "p", { class: "primary" });
@@ -714,6 +721,14 @@
         tail.appendChild(more);
       }
       reader.appendChild(section("来源与局限", tail));
+      if (item.advice) {
+        var suggestion = el(doc, "div");
+        suggestion.appendChild(el(doc, "p", { class: "advice-kicker" }, "建议，非已落地"));
+        addParagraphs(doc, suggestion, item.advice);
+        var advice = section("对标建议", suggestion);
+        advice.classList.add("advice");
+        reader.appendChild(advice);
+      }
       if (typeof ext.detailExtra === "function") ext.detailExtra({ doc: doc, el: el, link: link, item: item, data: state.data, container: reader });
       if (back.focus) back.focus();
     }

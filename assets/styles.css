@@ -254,6 +254,17 @@ button.quiet, .quiet { background: transparent; }
   border: 1px dashed var(--line);
 }
 .advice-kicker, .proposals h2 { color: var(--muted); }
+.advice-kicker { font-family: var(--mono); font-size: 12px; margin: 0 0 8px; }
+.advice-teaser {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.advice-teaser .advice-kicker { margin: 0 6px 0 0; }
 details summary {
   min-height: 44px;
   display: flex;
