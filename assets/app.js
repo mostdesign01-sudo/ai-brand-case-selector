@@ -490,19 +490,48 @@
       }
       var contain = preferContain(media);
       if (contain) shot.classList.add("is-contain");
-      var img = el(doc, "img", { src: file, alt: String((media && media.caption) || item.title).split("。")[0] });
+      var img = el(doc, "img", {
+        src: file,
+        alt: String((media && media.caption) || item.title).split("。")[0],
+        loading: "eager",
+        decoding: "sync"
+      });
       var opener = el(doc, "a", { class: "media-link", href: "#case-" + item.id });
       opener.appendChild(img);
       opener.appendChild(el(doc, "span", { class: "visually-hidden" }, item.title));
+      var pending = el(doc, "p", { class: "shot-status" }, "画面载入中");
+      shot.classList.add("is-pending");
       shot.appendChild(opener);
-      img.addEventListener("error", function () {
+      shot.appendChild(pending);
+      var settled = false;
+      var fail = function () {
+        if (settled) return;
+        settled = true;
+        shot.classList.remove("is-pending");
         shot.classList.add("is-failed");
         if (opener.parentNode) opener.remove();
+        if (pending.parentNode) pending.remove();
+        Array.prototype.forEach.call(shot.querySelectorAll(".shot-tool"), function (node) { node.remove(); });
         var box = el(doc, "div", { class: "shot-fallback" });
         box.appendChild(el(doc, "p", null, "图片未能显示"));
         if (original) box.appendChild(link(doc, original, "打开原始图片来源"));
         shot.appendChild(box);
+      };
+      var ready = function () {
+        if (settled) return;
+        if (!(img.naturalWidth > 0)) { fail(); return; }
+        settled = true;
+        shot.classList.remove("is-pending");
+        shot.classList.add("is-ready");
+        if (pending.parentNode) pending.remove();
+      };
+      img.addEventListener("load", ready);
+      img.addEventListener("error", function () {
+        settled = false;
+        fail();
       });
+      if (img.complete) ready();
+      if (settled && shot.classList.contains("is-failed")) return;
       var fit = el(doc, "button", { type: "button", class: "shot-tool fit-toggle", "aria-pressed": contain ? "true" : "false" }, contain ? "裁切浏览" : "完整显示");
       fit.addEventListener("click", function (event) {
         event.preventDefault();
@@ -710,8 +739,6 @@
       };
       settle();
       if (doc.defaultView) doc.defaultView.setTimeout(settle, 0);
-      var title = card.querySelector(".title-link");
-      if (title && title.focus) title.focus({ preventScroll: true });
     }
 
     function showCase(id) {

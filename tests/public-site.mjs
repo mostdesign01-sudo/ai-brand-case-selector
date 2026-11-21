@@ -245,6 +245,7 @@ async function openAt(cdp, sessionId, url, width) {
 }
 
 async function shot(cdp, sessionId, file) {
+  await evaluate(cdp, sessionId, "Promise.all([...document.images].filter((img) => img.getAttribute('src') && img.getBoundingClientRect().bottom > 0 && img.getBoundingClientRect().top < innerHeight).map((img) => (img.decode ? img.decode() : Promise.resolve()).catch(() => {}))).then(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))");
   const image = await cdp.send("Page.captureScreenshot", { format: "png" }, sessionId);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, Buffer.from(image.data, "base64"));
@@ -319,10 +320,13 @@ async function browserTests(origin) {
       pressed: document.querySelector('#reader .stamp[aria-pressed="true"]').getAttribute('data-status'),
       source: !!document.querySelector('#reader .src-list a[href^="http"]'),
       note: document.getElementById('reader-warn').textContent,
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      picture: document.querySelector('#reader img') ? document.querySelector('#reader img').naturalWidth : 0,
+      ready: document.querySelector('#reader .shot').classList.contains('is-ready')
     })`);
     check(detail.hash === "#case-ip-tmall-fuli-2026", "detail address keeps the stable id");
     check(detail.title.includes("天猫"), "detail shows the case title");
+    check(detail.picture > 0 && detail.ready === true, "detail picture decoded " + JSON.stringify({ picture: detail.picture, ready: detail.ready }));
     check(JSON.stringify(detail.sections) === JSON.stringify(["AI机制", "前沿性", "规模证据", "对标价值", "受众与触点", "来源与局限"]), "evidence sections follow the reading order");
     check(detail.scale === "规模未核实" && detail.frontier.includes("未单列"), "scale and frontier stay honest");
     check(detail.pressed === "入选" && detail.source === true && detail.note.includes("这台浏览器"), "shortlist and sources stay on the detail");
@@ -332,6 +336,7 @@ async function browserTests(origin) {
     const refreshed = await evaluate(cdp, sessionId, "({width: window.innerWidth, open: !document.getElementById('reader').hidden, status: document.querySelector('#reader .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
     check(refreshed.width === 390 && refreshed.open === true && refreshed.status === "入选", "detail and selection survive refresh " + JSON.stringify(refreshed));
     check(refreshed.overflow <= 1, "no page overflow at 390");
+    await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
     await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-390.png");
     await evaluate(cdp, sessionId, "document.getElementById('back').click()");
     await waitFor(cdp, sessionId, "document.getElementById('reader').hidden && document.getElementById('card-ip-tmall-fuli-2026')");
