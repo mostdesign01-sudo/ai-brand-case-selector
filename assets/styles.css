@@ -182,6 +182,17 @@ button.quiet, .quiet { background: transparent; }
   padding: 12px;
   color: var(--muted);
 }
+.shot.is-link-only {
+  aspect-ratio: auto;
+  overflow: visible;
+}
+.shot.is-link-only .shot-fallback {
+  position: relative;
+  inset: auto;
+  min-height: 148px;
+  justify-content: flex-start;
+}
+.shot-fallback a { overflow-wrap: anywhere; }
 .media-link, .title-link {
   color: inherit;
   text-decoration: none;

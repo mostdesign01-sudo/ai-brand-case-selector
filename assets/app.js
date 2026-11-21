@@ -478,7 +478,7 @@
       var file = safeAsset(media && media.file);
       var original = safeHttpUrl(media && media.original) || safeHttpUrl(primarySource(item).url);
       if (!file) {
-        shot.classList.add("is-failed");
+        shot.classList.add("is-failed", "is-link-only");
         var emptyBox = el(doc, "div", { class: "shot-fallback" });
         emptyBox.appendChild(el(doc, "p", null, "此例没有入库图片"));
         if (original) emptyBox.appendChild(link(doc, original, sourceVerb(original)));
@@ -703,8 +703,10 @@
       var remote = item.remote_only || [];
       var links = item.media_links || [];
       if (extras.length || remote.length || links.length) {
-        var more = el(doc, "details", { class: "more-media" });
-        more.appendChild(el(doc, "summary", null, "其余画面与原链"));
+        var moreAttrs = { class: "more-media" };
+        if (!(item.media || []).length) moreAttrs.open = "open";
+        var more = el(doc, "details", moreAttrs);
+        more.appendChild(el(doc, "summary", null, (item.media || []).length ? "其余画面与原链" : "可打开的来源"));
         extras.forEach(function (shot) {
           var fig = el(doc, "div", { class: "shot" });
           attachImage(fig, shot, item);

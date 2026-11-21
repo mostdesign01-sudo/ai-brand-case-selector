@@ -1,15 +1,19 @@
 {
   "title": "AI品牌案例筛选册",
   "type": "链接可打开的静态筛选册。能打开链接只说明该链接可访问，不是访问控制。",
-  "verified_on": "2026-11-19",
+  "lead": "二十例已核验的公开案例，涵盖 IP、品牌与形象。先看画面和日期，再读证据，再做挑选。挑选只保存在这台浏览器。没有入库静帧的案例保留来源链接。",
+  "verified_on": "2026-11-21",
   "timezone": "Asia/Taipei (UTC+8)",
-  "selected_count": 6,
-  "scope_note": "核验日2026-11-19（Asia/Taipei，UTC+8）。首轮只收6例已核验的公开品牌案例，IP、品牌、形象各2例。先广搜去重，再交叉核验官方、机构、制作方与可查看素材。只保留公开事实、日期、证据、来源与局限。数量不足时不凑数。多邻国等相关线索未升格为已证实案例。公司陈述的效率数字与奖项未独立核验。挑选状态由浏览者在本浏览器标记，不代表案例已被批准。",
+  "selected_count": 20,
+  "scope_note": "本册现收20例已核验的公开品牌案例：IP 10例、品牌 4例、形象 6例。最先收录的6例记录于2026-11-19；其后追加14例，其中10例记录于2026-11-20，4例记录于2026-11-21。各例的日期、时间窗说明和核验日保持原记录。页面上的时间筛选按站点日期2026-11-21计算，不回写到各例。只保留公开事实、日期、证据、来源与局限。公司或机构陈述的效率、会员、门店、播放和转化数字未独立核验。多邻国、StockX、Cadbury等线索仍未计入。没有入库静帧的案例只提供可打开的来源链接。挑选状态由浏览者在本浏览器标记，不代表案例已被批准。",
   "time_basis": {
-    "verified_on": "2026-11-19",
-    "six_months_from": "2026-05-19",
-    "twelve_months_from": "2025-11-19",
-    "note": "近6个月为日期不早于2026-05-19；近12个月为日期不早于2025-11-19；更早为早于2025-11-19。与原核验口径一致。"
+    "verified_on": "2026-11-21",
+    "six_months_from": "2026-05-21",
+    "twelve_months_from": "2025-11-21",
+    "ninety_days_from": "2026-08-23",
+    "filter_six_months_from": "2026-05-21",
+    "filter_twelve_months_from": "2025-11-21",
+    "note": "时间筛选以站点日期2026-11-21计算：近90天不早于2026-08-23，近6个月不早于2026-05-21，近12个月不早于2025-11-21，更早为早于2025-11-21。各例自己的 window、window_note 与 verified_on 保持原记录，不按这一基准回写。与个别案例在2026-11-20写下的窗口说明可能相差一天。"
   },
   "cases": [
     {
@@ -425,20 +429,1099 @@
       "heat": "不适用单次campaign热度。会员数、鉴定量以官方页面当时表述为准，未另核。",
       "limits": "这是持续产品能力，不是2026新广告。博客头图不像流程实拍，本册不入库以免误导。鉴别页较少使用“artificial intelligence”一词，需与博客合读。没有可下载的Vision界面截图。",
       "advice": "建议对外只说清“AI做什么、人做什么、哪一步不可替代”。不要用数字人或头像承载鉴别承诺。可把过程可视化（拍摄、比对、专家签字、证书），让专业被看见。任何准确率数字都必须可追溯到官方或可复核实验，不能写在营销超级符号上。终检必须是有资格的人；不能把未独立核验的准确率写进对用户承诺。"
+    },
+    {
+      "id": "ip-fanta-haunted-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "自有角色宇宙",
+        "季节内容平台",
+        "叙事广告",
+        "包装触点"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "芬达 Haunted Universe：把万圣节做成可续写的自有角色宇宙",
+      "brand": "Fanta / The Coca-Cola Company",
+      "date_iso": "2026-08-26",
+      "date_label": "2026-08-26全球新闻稿（预告页另标08-24）",
+      "window": "6m",
+      "window_note": "相对2026-11-20，属于近90天且近6个月。",
+      "source_type": "官方新闻稿 + 可口可乐加拿大整合营销负责人访谈 + 制作工作室项目页",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "芬达在2026万圣节推出自有娱乐宇宙，四个原创角色有独立性格与故事，并延伸到包装与预告片。全球新闻稿写明与GRAiL合作、以人主导、用新技术完成视觉规模；“人工智能”一词出现在可口可乐加拿大负责人对行业媒体的说明中，不宜写成全球新闻稿原文。",
+      "ai_where": "用在角色世界与预告片的视觉制作，以人主导创意和决策。官方全球稿写的是new technology / human-led creative process；可口可乐加拿大整合营销负责人Jacques Blanchet对Strategy表示，GRAiL是AI-powered娱乐工作室，AI对完成该项目关键，但创作仍由人驱动。Ghost Face是授权客座角色，不是四个原创角色之一。",
+      "evidence": [
+        "可口可乐公司新闻稿标注08-24，电头ATLANTA, Aug. 26, 2026：Fanta’s Haunted Universe，四个原创角色，与GRAiL合作，introductory cinematic trailer，并以人主导的创造性过程使用技术。",
+        "全球营销副总裁Ibrahim Khan原话把该项目写成从collaborator到creator，要建立原创角色与故事。",
+        "Strategy 2026-09-01访谈可口可乐加拿大Jacques Blanchet：AI was key to the project's completion，同时强调The idea came first, and technology helped bring it to life。",
+        "官方可下载主视觉可见四个原创角色；罐装系列图含四个原创角色与授权的Ghost Face Punch。加拿大官网嵌入预告片YouTube封面（OnlkT6HqCr4）。"
+      ],
+      "benchmark": "对标价值在于：把节庆从单次联名改成可逐年续写的自有角色平台，并落到包装。壁垒是角色要能被记住、授权客座与原创必须分清、以及全球稿对“AI”措辞谨慎——对外叙事不能比官方更满。",
+      "audience": "全球万圣节与年轻饮料消费者；加拿大等市场有货架包装。用户价值是可收集的角色与故事。品牌目标是从借IP变成建IP。预告与包装曝光量未独立核验；网上流传的百亿级曝光不予采用。",
+      "media": [
+        {
+          "file": "assets/fanta-haunted-kv.jpg",
+          "original": "https://www.coca-colacompany.com/content/dam/corporate/us/en/Haunted-Icons-KV-Landscape.jpg",
+          "caption": "可口可乐公司官方主视觉：四个原创万圣节角色同时扑向镜头，分别为吸血鬼、南瓜稻草人、戴墨镜的狼人与机械义肢的绿色怪物。图注含The Coca-Cola Company 2026版权。这是角色设计图，不能单独证明制作工具链。"
+        },
+        {
+          "file": "assets/fanta-can-lineup.jpg",
+          "original": "https://www.coca-colacompany.com/content/dam/corporate/us/en/Fanta-Halloween-Full-Can-Line-Up.jpg",
+          "caption": "官方罐装系列图，口号“WANTA FANTA? RUN FOR IT”。从左到右可见四个原创角色包装，以及居中的Ghost Face Punch。Ghost Face为授权客座，不是原创四角色之一。"
+        },
+        {
+          "file": "assets/fanta-trailer-yt.jpg",
+          "original": "https://www.youtube.com/watch?v=OnlkT6HqCr4",
+          "caption": "芬达加拿大活动页嵌入的预告片YouTube封面：两个南瓜头角色抬着芬达箱，箱内是五款万圣节罐。片尾版权写明Ghost Face为授权商标。封面用于证明可观看预告存在，不是逐帧鉴定。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "可口可乐公司官方新闻稿（主来源）",
+          "url": "https://www.coca-colacompany.com/media-center/fanta-haunted-universe-halloween",
+          "status": "200，已通读"
+        },
+        {
+          "label": "官方Ghost Face Punch新闻稿（说明授权客座）",
+          "url": "https://www.coca-colacompany.com/media-center/ghost-face-punch-fanta-halloween-2026",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Strategy对可口可乐加拿大负责人的访谈",
+          "url": "https://strategyonline.ca/2026/09/01/fanta-haunted-universe/",
+          "status": "200，已通读；AI表述来自该访谈，不是全球新闻稿原文"
+        },
+        {
+          "label": "GRAiL项目页",
+          "url": "https://www.welcometograil.com/projects/fanta-haunted-universe",
+          "status": "200，已通读；页文较短，未单独展开模型细节"
+        },
+        {
+          "label": "芬达加拿大活动页预告",
+          "url": "https://www.coca-cola.com/ca/en/offerings/fanta/fanta-halloween/fanta-haunted-universe",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "预告播放量与货架销量未核实。不采用未经核验的曝光数字。",
+      "limits": "全球官方稿未直接写generative AI，本册把AI机制主要记在加拿大负责人访谈与行业报道上，可信度为中高。无Instagram/TikTok连接器，未打开官方社交原帖。",
+      "frontier_mechanism": "可口可乐加拿大负责人在行业访谈中把它与AI驱动的工作室联系起来；全球新闻稿写的是new technology与人类主导，未直接写AI。它被当成可续写的节庆角色宇宙，而不是单张生成海报。未采用未经核验的曝光数字。",
+      "scale_evidence": [],
+      "scale_limits": "全球曝光、播放量未核实。不得使用未经证实的十亿级印象数字。",
+      "advice": "若做自有节庆或活动角色，建议优先建立可续写的角色宇宙和包装触点，而不是再签一个短期授权。上线材料必须写清哪些是自有、哪些是授权。建议先用预告和一组包装样稿做识别度测试，角色记不住或授权边界不清则不要扩成系列。以上为建议，非已落地。",
+      "media_links": []
+    },
+    {
+      "id": "ip-bluemoon-jingjing-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "AI漫剧",
+        "虚拟角色",
+        "内容电商",
+        "可复用IP"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "蓝月亮《我的旅行搭子，惊变一朵云》：泡沫精灵净净的20集AI漫剧",
+      "brand": "蓝月亮 / 净享",
+      "date_iso": "2026-09-30",
+      "date_label": "2026-09-30淘宝独家首发（官网2026-10-31复盘）",
+      "window": "6m",
+      "window_note": "相对2026-11-20，属于近90天且近6个月。",
+      "source_type": "蓝月亮官网转载/发布的公司稿（并注明21世纪经济报道原文）",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "蓝月亮官方网站2026-10-31发布：联合出品的20集品牌定制AI漫剧于9月30日淘宝首发，把净享泡沫沐浴露卖点写成有性格缺陷的泡沫精灵“净净”。这是可连载的虚拟IP，而不是单支广告。播放量与费用效果为公司/报道陈述，未独立核验。",
+      "ai_where": "用在20集品牌定制漫剧的内容生产，使虚拟IP“净净”完成首季叙事，并与旅行装产品页联动。官网明确写成AI漫剧，但未公开具体模型与分镜工具。",
+      "evidence": [
+        "蓝月亮官网2026-10-31：《我的旅行搭子，惊变一朵云》20集，9月30日淘宝独家首发，10月3日起多平台更新，国庆假期内全集更新。",
+        "官网把“一泵出泡、一冲即净”转化为泡沫精灵陪伴角色；并写净净能感知情绪、会飞行、雨天需穿雨衣，具备完整性格与“小缺陷”。",
+        "官网写明淘宝店铺设置AI短剧专属货架（承接期至11月30日），连接到旅行装购买。",
+        "全网播放量超4500万、淘宝超4000万等数字来自该稿，未独立核验。未能下载到可确认的剧照，保留官网与报道原链。"
+      ],
+      "benchmark": "对标价值在于：用连续剧给一个产品特性做人格，并接到可关闭的商品货架，形成可复用“内容母体”。壁垒是人设要站得住、内容场与商品场的衔接不能做成硬广，以及播放量不能替代完播与理解度。",
+      "audience": "国庆出行与个护相关年轻用户。触点是淘宝短剧、多平台官方账号和店铺货架。品牌目标是为净享旅行场景建立心智。播放与转化数据未独立核验。",
+      "media": [],
+      "media_links": [
+        {
+          "label": "蓝月亮官网报道页（主来源，未见可确认剧照）",
+          "url": "https://www.bluemoon.com.cn/detail/211"
+        },
+        {
+          "label": "21世纪经济报道原文（官网注明）",
+          "url": "https://m.21jingji.com/article/20261030/herald/b7295e54790bf13667676b45c285476c.html"
+        }
+      ],
+      "sources": [
+        {
+          "label": "蓝月亮官网（主来源）",
+          "url": "https://www.bluemoon.com.cn/detail/211",
+          "status": "200，已通读；页内无可用剧照"
+        },
+        {
+          "label": "21世纪经济报道",
+          "url": "https://m.21jingji.com/article/20261030/herald/b7295e54790bf13667676b45c285476c.html",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "稿件中的4500万/4000万播放量为公司/报道陈述，未独立核验。",
+      "limits": "未能从官网或报道页下载到可确认的净净剧照，故以可点击原链代替配图。无抖音/微博/小红书/淘宝连接器，未打开平台内播放页原文。",
+      "frontier_mechanism": "官方把它做成以角色净净为主角的系列AI漫剧，而不是单集生成广告。",
+      "scale_evidence": [
+        {
+          "claim": "官方或相关报道陈述为20集，播放量4500万。该播放量为公司/媒体陈述，未独立核验。",
+          "source_url": "https://www.bluemoon.com.cn/detail/211",
+          "observed_at": "2026-11-20",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "20集可在官方复盘中核对存在；4500万播放量未独立核验。角色静帧本册未能下载确认。",
+      "advice": "若给自有角色或一个产品特性做连载，建议先写性格缺陷和禁说清单，再允许AI出分集画面。片尾可以接到专题或商品集合，但不要让角色代替专业判断或承诺功效。建议先做3集样片看完播和人设是否可识别，完播差或角色漂移则停。以上为建议，非已落地。"
+    },
+    {
+      "id": "ip-jingpai-jiuling-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "AI漫剧",
+        "数字人人格化",
+        "长线内容"
+      ],
+      "cross_tags": [],
+      "title": "中国劲酒《九灵传》：让已有数字人拥有性格与世界观",
+      "brand": "劲牌 / 中国劲酒",
+      "date_iso": "2026-09-04",
+      "date_label": "2026-09-04上线（广告门2026-09-22报道）",
+      "window": "6m",
+      "window_note": "相对2026-11-20，属于近90天且近6个月。",
+      "source_type": "行业媒体报道，含承制方北京玩意互动说明；未见品牌官网可打开原文",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "行业媒体写明：2026-09-04，中国劲酒联合北京玩意互动上线养生酒行业品牌AI漫剧《九灵传》，把已有数字人东方劲、方晓静、养生鸭写入完整性格与玄幻世界观。这与“先做形象再补故事”的路径相关。打开劲牌官网栏目超时，广告门配图链接失效，故以原链备份，可信度为中高。",
+      "ai_where": "用在AI漫剧生产，把已有数字人从孤立虚拟形象做成有人物羁绊的系列内容。承制方在报道中强调AI负责工业化生产，剧本与世界观仍是前提。具体模型未公开。",
+      "evidence": [
+        "广告门2026-09-22：2026年9月4日《九灵传》上线，已登录中国劲酒视频号、抖音号及漫剧平台。",
+        "报道写明三位数字人不再是孤立平面形象，而拥有性格、身世与羁绊；故事把品牌理念写进人物底色，而不是外部剧集硬植入。",
+        "承制方北京玩意互动在同一报道中以第一人称说明其角色：品牌价值为本，AI技术为器。",
+        "劲牌官网栏目 jingpai.com/col95/1148 本次请求504，未能作为官方原文。无视频号/抖音连接器，未打开平台内播放页。配图原链404。"
+      ],
+      "benchmark": "对标价值在于：先激活已有数字人，再补人格与世界观，而不是再做一个空壳形象。壁垒是证据目前停在行业媒体与承制方，品牌官网未核验；酒类内容只作方法对照，不直接搬用到其他品类。",
+      "audience": "报道称面向年轻圈层。触点为视频号、抖音与漫剧平台。用户价值是可追更的故事。传播效果未核实。",
+      "media": [],
+      "media_links": [
+        {
+          "label": "广告门报道（当前可打开的主文本；配图链接404）",
+          "url": "https://www.adquan.com/article/364468"
+        }
+      ],
+      "sources": [
+        {
+          "label": "广告门报道（主文本来源）",
+          "url": "https://www.adquan.com/article/364468",
+          "status": "200，已通读；配图404"
+        },
+        {
+          "label": "数英转载",
+          "url": "https://www.digitaling.com/articles/1589314.html",
+          "status": "403，未能通读正文"
+        },
+        {
+          "label": "劲牌官网栏目（拟作官方原文）",
+          "url": "https://jingpai.com/col95/1148",
+          "status": "504，未能打开"
+        }
+      ],
+      "heat": "播放与讨论量未核实。",
+      "limits": "无品牌官网通读文本；无抖音/视频号连接器；广告门配图失效。本例不升格为“高”可信度。",
+      "frontier_mechanism": "行业媒体与项目方把它写成AI奇幻漫剧/角色叙事。官网栏目此前打开超时，机制细节以已读来源为限。",
+      "scale_evidence": [],
+      "scale_limits": "播放与投放规模未核实。官网未打开，配图有404，不以失效图为证。",
+      "advice": "若已有数字形象但缺少故事，建议优先补人设与三集样片，而不是重新建模。上线前必须能指出官方或权利人出处。酒类叙事只作方法对照，不直接搬用到其他品类。以上为建议，非已落地。"
+    },
+    {
+      "id": "ip-unisport-zoai-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "AI角色",
+        "始终在线",
+        "专业导购",
+        "运动零售"
+      ],
+      "cross_tags": [
+        "形象"
+      ],
+      "title": "Unisport Zoai：明示自己是AI的耐克足球鞋专家角色",
+      "brand": "Unisport（运动零售商，不是耐克官方角色）",
+      "date_iso": "2026-06-11",
+      "date_label": "2026-06-11丹麦官网发布（法语页06-12，LinkedIn 06-15）",
+      "window": "6m",
+      "window_note": "相对2026-11-20，属于近6个月。",
+      "source_type": "Unisport官网发布 + 官方角色站 + 代理商案例页",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "运动零售商Unisport在2026年6月推出AI角色Zoai：一位明示自己是AI的巴黎风足球鞋专家，在zoai.unisportstore.com和@bootsbyzoai提供对话式导购，并与真人专家JayMike并存。这不是耐克官方角色。机构所述浏览与对话量为陈述数字，未独立核验。",
+      "ai_where": "用在始终在线的对话角色：比较鞋款、解释技术、按踢法给建议。官方强调她不是传统聊天窗口，也不替代真人创作者。知识范围官方写明专注耐克足球鞋，包括新一代Mercurial。",
+      "evidence": [
+        "Unisport丹麦官网2026-06-11与法国官网2026-06-12发布Zoai，并给出zoai.unisportstore.com与社交账号@bootsbyzoai。",
+        "官方角色站现仍可打开，页面写明Boot obsessed、Parisienne、Winger，并写清她是AI Nike boot expert。",
+        "官方稿写明由荷兰运动营销机构On Your Marks共同开发；代理商案例页称获2026 Lovie Award相关奖项，奖项本身未独立核验。",
+        "官方明确：Zoai不替换JayMike与人类创作者，而是延长其专业能力的可及时间。"
+      ],
+      "benchmark": "对标价值在于：角色有人设、有专业边界、有真人对照、并且公开承认自己是AI。壁垒是知识必须可追溯到商品事实、要避免装成人，以及零售商角色不能冒充品牌官方。",
+      "audience": "寻找耐克足球鞋建议的球员与球迷。触点是独立站点、TikTok/Instagram/Snapchat（未打开这些平台原文）。用户价值是随时可问。代理商所称互动量未核实。",
+      "media": [
+        {
+          "file": "assets/zoai-share.jpg",
+          "original": "https://zoai.unisportstore.com/images/misc/share.jpg",
+          "caption": "Zoai官方站点分享图：角色坐在鞋墙前的木桌后，身穿Unisport与Nike标识卫衣，手持粉白足球鞋，身旁有手机。来源：zoai.unisportstore.com。"
+        },
+        {
+          "file": "assets/zoai-video-thumb.jpg",
+          "original": "https://unisport-zoai.b-cdn.net/landingspage/misc/video-thumbnail.jpg",
+          "caption": "官方角色站视频缩略图：真人创作者举着手机，屏幕中是Zoai形象，左侧大字“AI BOOT EXPERT”。用于说明该角色被公开写成AI专家，不能单独证明对话质量。"
+        },
+        {
+          "file": "assets/zoai-portrait.jpg",
+          "original": "https://www.unisport.dk/stories/velkommen-zoai/",
+          "caption": "Unisport官网新闻使用的角色肖像：同一形象在鞋墙前展示粉白足球鞋。来源为官网报道配图。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Unisport丹麦官网发布（主来源之一）",
+          "url": "https://www.unisport.dk/stories/velkommen-zoai/",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Unisport法国官网发布",
+          "url": "https://www.unisportstore.fr/stories/unisport-presente-zoai/",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Zoai官方角色站",
+          "url": "https://zoai.unisportstore.com/",
+          "status": "200，已通读"
+        },
+        {
+          "label": "On Your Marks案例页",
+          "url": "https://www.onyourmarks.agency/en/cases/zoai-ai-creator-en-nike-boot-expert/",
+          "status": "200，已通读；奖项与互动量为机构陈述"
+        }
+      ],
+      "heat": "机构所述观看、互动与对话量未独立核验。",
+      "limits": "这是Unisport零售商角色，不是耐克官方IP。无TikTok/Instagram/Snapchat连接器，未打开@bootsbyzoai原帖。",
+      "frontier_mechanism": "官方把它写成明示身份的零售端AI足球鞋专家，可对话且不替代真人专家，而不是生成一张代言人脸。",
+      "scale_evidence": [],
+      "scale_limits": "代理商所述浏览与对话数据未独立核验。",
+      "advice": "若做品类顾问或陪伴角色，建议先写清“我是AI、我答什么、我不答什么、何时交给人”。不要做成假冒真人的代言。建议先在一个明确入口试点单一品类问答，并把越权和伪装真人作为停用条件。以上为建议，非已落地。",
+      "media_links": []
+    },
+    {
+      "id": "ip-coke-fanzhiyi-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "数字人陪伴",
+        "实时对话",
+        "赛事运营",
+        "真人肖像"
+      ],
+      "cross_tags": [
+        "形象"
+      ],
+      "title": "可口可乐看球搭子AI范志毅：官方小程序里的赛事陪伴角色",
+      "brand": "可口可乐中国 / 与百度合作",
+      "date_iso": "2026-06-17",
+      "date_label": "2026-06-17可口可乐中国官网（行业报道写06-12开赛日上线）",
+      "window": "6m",
+      "window_note": "相对2026-11-20，属于近6个月。",
+      "source_type": "可口可乐中国官网 + 行业报道（技术细节多来自后者，须分开写）",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "可口可乐中国2026-06-17官网写明：以范志毅为原型，与百度合作，结合AI技术打造数字角色“看球搭子AI范志毅”，通过官方小程序提供赛事播报与围绕世界杯的实时趣味对话。这是已核实的官方陪伴角色。时延、情绪识别、以及“TVC由prompt生成”等说法主要来自行业或技术方报道，未在该官网同等表述，不得写成官网事实。",
+      "ai_where": "用在官方小程序中的实时对话数字角色，提供赛事播报与趣味对话。官网确认“结合AI技术”。更细的时延与生成链路见行业报道，只作转述。",
+      "evidence": [
+        "可口可乐中国官网2026-06-17原文：以中国足坛标志性人物范志毅为原型，与百度携手，结合AI技术打造数字角色“看球搭子AI范志毅”，通过官方小程序提供赛事播报以及围绕FIFA世界杯的实时趣味对话。",
+        "广告门等行业报道写06-12开赛日上线，并描述语音/文字互动、可口可乐吧小程序。技术参数（如2秒时延、情绪识别）来自这些报道，不是官网原文。",
+        "量子位等还写到另有AI生成TVC。该说法未见可口可乐中国该篇官网同等表述，本册不把它算作已核实项目内容。",
+        "未能下载到可确认的数字人静态图（广告门配图链接404），保留官网与报道原链。官网该页配图为受邀观赛者与包装，不能当作数字人证据。"
+      ],
+      "benchmark": "对标价值在于：把公众人物变成可互动的赛事陪伴，并写在官方渠道里。最大壁垒是肖像、声音与风格授权，以及必须公开这是数字人。不能把行业报道里的能力清单全部当成品牌承诺。",
+      "audience": "关注世界杯的中国消费者。触点是可口可乐官方小程序。用户价值是随时可问的看球陪伴。互动量未核实。",
+      "media": [],
+      "media_links": [
+        {
+          "label": "可口可乐中国官网（主来源；该页配图不是数字人）",
+          "url": "https://www.coca-cola.com/cn/zh/media-center/Coke_2026FIFA"
+        },
+        {
+          "label": "广告门报道（上线日与互动形式补充；配图404）",
+          "url": "https://www.adquan.com/article/361234"
+        }
+      ],
+      "sources": [
+        {
+          "label": "可口可乐中国官网（主来源）",
+          "url": "https://www.coca-cola.com/cn/zh/media-center/Coke_2026FIFA",
+          "status": "200，已通读"
+        },
+        {
+          "label": "广告门报道",
+          "url": "https://www.adquan.com/article/361234",
+          "status": "200，已通读；配图404"
+        },
+        {
+          "label": "新浪转凤凰WEEKLY财经",
+          "url": "https://finance.sina.com.cn/stock/t/2026-06-12/doc-iniccspr3562049.html",
+          "status": "200，已通读，非官网"
+        }
+      ],
+      "heat": "小程序使用量与对话量未核实。",
+      "limits": "未能保存数字人静帧。无微信小程序登录核验。行业报道中的TVC/时延等未写入该官网，不作官网事实。涉及真人肖像，版权与披露是硬边界。",
+      "frontier_mechanism": "官网确认存在可对话的看球搭子AI范志毅。不得把非官方报道中的时延或由提示词生成TVC等说法写成官方事实。涉及真人肖像。",
+      "scale_evidence": [],
+      "scale_limits": "用户量与对话量未核实。数字人静帧未确认下载。",
+      "advice": "若做赛事或大促陪伴，建议优先使用已获授权的自有角色，尽量避免未授权的真人分身。若涉及真人形象，必须有授权、有披露、有人工值守规则。以上为建议，非已落地。"
+    },
+    {
+      "id": "ip-adidas-backyard-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "运动品牌",
+        "历史形象再现",
+        "影视制作",
+        "授权与终审"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "阿迪达斯 Backyard Legends：用自有工具做历史球星面容，表演仍由真人完成",
+      "brand": "adidas",
+      "date_iso": "2026-05-07",
+      "date_label": "2026-05-07新闻室发布（略早于近6个月窗口）",
+      "window": "12m",
+      "window_note": "相对2026-11-20，影片发布于05-07，略早于近6个月起点05-20；赛事沟通延续至6月世界杯。按真实日期记为近12个月，不改写成新例。",
+      "source_type": "官方影片与新闻室沟通 + 后期公司奖项说明 + 代理商访谈",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "adidas为2026世界杯发布影片Backyard Legends。官方沟通写的是尖端CGI与视觉效果。后期公司Untold Studios在奖项说明中写明：自有工具VEIL用于贝克汉姆、齐达内、德尔·皮耶罗的早期2000年代面容复现；动作由替身拍摄，AI不生成表演与创意方向，并在隔离基础设施上运行。贝克汉姆本人有 Oversight 但未到该场拍摄。这是高规格运动片中的受控面容技术，不是可随便复用的角色生成器。",
+      "ai_where": "用在三位历史球星的面容复现。奖项说明强调：替身与导演决定表演，AI只做面部转换，艺术家再精修；不使用公共AI系统。官方adidas新闻沟通未直接写“AI”一词，故机制证据以制作公司第一人称与代理商访谈为主。",
+      "evidence": [
+        "elevenfiftyfive新闻室2026-05-07发布该片，并引述adidas全球品牌传播副总裁Florian Alt；页面写明blends cutting edge CGI and visual effects。官方影片可在YouTube观看。",
+        "Untold Studios奖项说明：VEIL用于三位足球偶像早期2000年代面容；替身拍摄；AI不生成表演、动作或创意方向；工具在隔离基础设施运行。",
+        "The Drum 2026-08-04访谈Lola USA的JD Jurentkuff：贝克汉姆有oversight、buy-in与approval，但并未为这些镜头到场。",
+        "本册所存静帧为官方影片封面、球场全景与梅西在场真实出演镜头，用于证明这是官方运动大片；它们不能单独证明面容工具。历史球星面容场景请看正片。"
+      ],
+      "benchmark": "对标价值在于：运动品牌如何在高规格影片里有限使用AI，并保留真人表演、本人授权与隔离工具链。壁垒极高：肖像权、替身拍摄、自有工具与公众对“复活昔日球星”的伦理敏感。不适合作为“用生成视频节省拍摄”的泛化模板。",
+      "audience": "全球足球与运动文化观众。触点是YouTube与赛事媒体。公司后续财报曾提及该营销的曝光，数字未独立核验，本册不引用为效果证明。",
+      "media": [
+        {
+          "file": "assets/adidas-backyard-yt.jpg",
+          "original": "https://www.youtube.com/watch?v=mJJY53qhJe0",
+          "caption": "官方影片《adidas Backyard Legends》YouTube封面，标题字样清晰，可见当代运动员与街头球场。来源：公开影片封面，不是历史球星面容镜头的逐帧截取。"
+        },
+        {
+          "file": "assets/adidas-backyard-pitch.jpg",
+          "original": "https://www.elevenfiftyfive.com/newsroom/2026/adidas-backyard-legends",
+          "caption": "adidas新闻室合作渠道发布的影片静帧：公寓楼之间的笼式球场与围观人群，中央叠加官方标志。用于说明影片的街头场景，不能证明AI面容工具。"
+        },
+        {
+          "file": "assets/adidas-backyard-messi.jpg",
+          "original": "https://www.elevenfiftyfive.com/newsroom/2026/adidas-backyard-legends",
+          "caption": "同一新闻室静帧：梅西与另一位出演者坐在汽车上。这是在世运动员的真实出演镜头，不是VEIL面容复现证据，列入是为避免把整部影片都说成AI生成。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "adidas新闻室沟通（elevenfiftyfive，2026-05-07）",
+          "url": "https://www.elevenfiftyfive.com/newsroom/2026/adidas-backyard-legends",
+          "status": "200，已通读"
+        },
+        {
+          "label": "官方影片",
+          "url": "https://www.youtube.com/watch?v=mJJY53qhJe0",
+          "status": "可观看"
+        },
+        {
+          "label": "Untold Studios奖项说明（VEIL机制主证据）",
+          "url": "https://kinsalesharks.awardsengine.com/?action=ows%3Aentries.details&e=215605&project_year=2026",
+          "status": "200，已通读"
+        },
+        {
+          "label": "The Drum代理商访谈",
+          "url": "https://www.thedrum.com/news/anatomy-of-an-ad-how-adidas-made-the-world-cup-blockbuster-backyard-legends",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "观看与传播量未独立核验。",
+      "limits": "官方新闻沟通写CGI/VFX，未直接写AI；AI机制来自后期公司与代理商。面容复现镜头需看正片。不可推广为无授权的人物生成。",
+      "frontier_mechanism": "制作方奖项说明把它与专有面部复现（VEIL）及隔离基础设施联系起来，现场使用替身；官方影片与elevenfiftyfive新闻稿写的是CGI/VFX，未写AI。这不是“用通用生成视频省掉拍摄”的模板。梅西镜头是现场表演，不能当VEIL证据。",
+      "scale_evidence": [],
+      "scale_limits": "制作规模、镜头数量与投放市场未在本册独立核验。",
+      "advice": "若内容涉及运动员、历史人物或其他真人形象，建议先解决授权与披露，再谈技术。默认路径仍是自有角色，而不是复现真人。影片中的表演与面容生成必须分开说明，不能把真人出演写成整段都由模型完成。以上为建议，非已落地。",
+      "media_links": []
+    },
+    {
+      "id": "brand-anta-ai365-2026",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "设计大模型",
+        "穿搭系统",
+        "运动品牌",
+        "零售体验"
+      ],
+      "cross_tags": [
+        "形象"
+      ],
+      "title": "安踏AI365：灵龙设计大模型与灵犀穿搭大模型",
+      "brand": "安踏集团",
+      "date_iso": "2026-05-29",
+      "date_label": "2026-05-29发布灵犀（灵龙为2025-10-31；官网2026-09-10再次确认）",
+      "window": "6m",
+      "window_note": "以灵犀官方发布日2026-05-29作为本例主日期，落入近6个月。灵龙发布于2025-10-31，属前序官方基础，不改写成2026新模型。",
+      "source_type": "安踏相关官方渠道：产业创新联合体新闻、来源标注为安踏集团的发布稿、安踏官网新闻",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "安踏2025-10-31发布自研设计大模型“灵龙”，2026-05-29发布穿搭大模型“灵犀”，并在2026-09-10官网新闻中把二者写入AI365全链路。灵龙面向设计生产，灵犀面向消费者穿搭、虚拟试穿与海报。效率、退换货与数字人直播GMV等为公司陈述，未独立核验。本册下载体为产品图或通用配图，不是模型界面截图。",
+      "ai_where": "灵龙：文生图、线稿生图、鞋服与图案设计、爆款拓展、印刷预演，强调品牌一致性。灵犀：用户上传照片与场景后生成穿搭方案并查看上身效果，含推荐、虚拟试衣/试鞋、换背景；稿件写明上传图片仅用于当次请求。数字人直播是同一战略下的另一应用，不单独再占一例。",
+      "evidence": [
+        "体育用品产业创新联合体官网2025-10-31：安踏发布灵龙，并提出AI365；写明文生图、线稿生图、鞋服设计、图案创意、爆款拓展等能力。文中效率与订货额为公司陈述。",
+        "2026-05-29来源标注为“安踏集团”的发布稿（新浪转载）：灵犀在产业创新联合体理事会上发布，面向零售终端，用户上传照片与场景即可生成穿搭并看上身效果。试运行期天猫测试店铺的退换货、转化等数字为公司陈述，未独立核验。",
+        "安踏官网2026-09-10新闻：以AI365构建研发、供应链、营销与零售闭环，并点名自研灵龙、灵犀。",
+        "已保存联合体新闻页跑步产品图；灵犀发布稿配图为通用“Ai”图形，不是产品界面，故不把后者当作功能证据。"
+      ],
+      "benchmark": "对标价值在于：运动品牌把设计系统与消费者穿搭连成一条官方战略，而不是单次广告。壁垒是自有产品数据、品牌一致性评估、以及试用数据不能直接当成另一品牌或平台的结果。不得把未核实的品牌色值写入该系统当已核实规范。",
+      "audience": "对内是安踏设计与零售团队，对外是购物用户。触点包括设计工具与天猫等测试店铺。公司所述订货额、转化、数字人直播数据未独立核验。",
+      "media": [
+        {
+          "file": "assets/anta-linglong-sgiic.jpg",
+          "original": "https://sgiic.anta.com/news/articles/17?from=union_news",
+          "caption": "体育用品产业创新联合体发布“灵龙”新闻页配图：三名跑者在墙边奔跑，可见安踏鞋服。这是产品宣传图，不能当作设计大模型界面或输出样张。"
+        }
+      ],
+      "media_links": [
+        {
+          "label": "灵犀发布稿（来源标注安踏集团；页内配图为通用示意，未收入为功能证据）",
+          "url": "https://finance.sina.com.cn/wm/2026-05-29/doc-inhzqptf9363895.shtml"
+        }
+      ],
+      "sources": [
+        {
+          "label": "产业创新联合体：灵龙发布（2025-10-31）",
+          "url": "https://sgiic.anta.com/news/articles/17?from=union_news",
+          "status": "200，已通读"
+        },
+        {
+          "label": "来源标注安踏集团的灵犀发布稿（2026-05-29）",
+          "url": "https://finance.sina.com.cn/wm/2026-05-29/doc-inhzqptf9363895.shtml",
+          "status": "200，已通读"
+        },
+        {
+          "label": "安踏官网新闻再次确认AI365与两个模型（2026-09-10）",
+          "url": "https://anta.cn/news/detail?id_news=883",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "未独立核验。",
+      "limits": "未见官方产品界面截图。效率、退换货、订货额、数字人直播GMV均为公司陈述。灵龙是2025年发布，不得改写成2026新模型。",
+      "frontier_mechanism": "官方AI365把设计侧（灵龙）与零售体验侧（灵犀）连在一起，不是只做一个生成海报工具。具体界面截图本册未取得官方产品UI。",
+      "scale_evidence": [
+        {
+          "claim": "公司陈述中出现退换货、转化、订货额、数字人直播GMV等数字。均为公司陈述，未独立核验。",
+          "source_url": "https://finance.sina.com.cn/wm/2026-05-29/doc-inhzqptf9363895.shtml",
+          "observed_at": "2026-11-20",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "上述效率与销售数字均未独立核验。不能只因为安踏是大型运动品牌就写成已全面铺开。",
+      "advice": "若做可治理的设计系统，建议同时规定“对内生图”和“对消费者试穿或搭配”的数据与审核边界。先选一个品类小范围试行，不要把公司陈述的订货额、转化或效率写成已验证收益。不得把未核实的品牌色值写入系统当已核实规范。以上为建议，非已落地。"
+    },
+    {
+      "id": "image-zhuanzhuan-aiauth-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "AI鉴定",
+        "官方验",
+        "二手信任",
+        "人工与履约"
+      ],
+      "cross_tags": [],
+      "title": "转转AI拍图验真：把鉴定过程写进商品页",
+      "brand": "转转集团",
+      "date_iso": "2026-04-15",
+      "date_label": "2026-04-15公司新闻稿（稿件称今年初上线）",
+      "window": "12m",
+      "window_note": "相对2026-11-20，新闻稿在近12个月、略早于近6个月窗口。上线时间按公司所说“今年初”，未另见更精确的官方日。",
+      "source_type": "转转集团经亚太商讯发布的官方新闻稿",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "转转2026-04-15官方新闻稿宣布：自主研发的“AI拍图验真”用于二手奢侈品鉴定，并向香港扩展业务。新闻稿展示App中“本商品经AI鉴定，该商品鉴定为假”的结果页，同时把“官方验”写成检测、质检报告与售后承诺。准确率、效率倍数和错单统计为公司陈述，未独立核验。该稿未把人工复检流程写清楚，本册不补写。",
+      "ai_where": "用在奢侈品包袋等品类的拍图鉴定：公司称基于真实商品图片与深度学习，把传统人工鉴定时间压缩到秒级，并在App展示AI鉴定结果。官方验仍包含检测、报告和售后，二者在稿中并列，不能自动等同为“AI已经终检”。",
+      "evidence": [
+        "亚太商讯2026-04-15，来源写zhuan zhuan，联系人为转转集团公关部：宣布AI拍图验真取得突破，并计划把AI鉴定扩展到更多品牌与腕表等品类。",
+        "稿件配图三张均已保存：北京二奢仓店、青岛智能质检中心、App内“鉴定不通过 / AI鉴定 / 鉴定为假”的结果页。结果页是直接的产品界面证据。",
+        "青岛配图可见机械臂与手机充电架，说明的是智能质检中心现场，不能单独证明奢侈品模型。",
+        "LV错误率不足万分之一、GUCCI零错误、效率提升近900倍等，均为该稿公司陈述，未独立核验。后续行业报道重复这些数字，不构成第二次核验。"
+      ],
+      "benchmark": "对标价值在于：把鉴定结果和判断点照片直接给到用户看，而不只是口头说“有AI”。壁垒是准确率声明如何不被写成绝对承诺，以及官方验履约与模型结果如何分工。对标的是表达方式与边界，不是把对方准确率或效率数字直接搬过来。",
+      "audience": "二手奢侈品与高价值商品交易者。触点是转转App结果页、官方验报告与仓店。用户价值是看见依据。公司所述准确率未核实。",
+      "media": [
+        {
+          "file": "assets/zhuanzhuan-app-ai-auth.jpg",
+          "original": "https://photos.acnnewswire.com/20260415zhuan3.jpg",
+          "caption": "公司新闻稿配图，说明为转转App内商品AI鉴定信息：标题“鉴定不通过”，多张包袋局部“养护判断点”照片，底部写“本商品经AI鉴定，该商品「鉴定为假」”，并有9.3分提示。这是官方发布的结果页截图，不能用来核验该结论是否正确。"
+        },
+        {
+          "file": "assets/zhuanzhuan-beijing-store.jpg",
+          "original": "https://photos.acnnewswire.com/20260415zhuan1.jpg",
+          "caption": "同一新闻稿配图：北京“超级转转”二奢仓店货架与“首店开业”立牌。用于说明官方验的线下履约空间，不是模型界面。"
+        },
+        {
+          "file": "assets/zhuanzhuan-qingdao-qc.jpg",
+          "original": "https://photos.acnnewswire.com/20260415zhuan2.jpg",
+          "caption": "同一新闻稿配图：青岛智能质检中心，机械臂正在对手机充电架作业。用于说明质检现场，不能单独证明奢侈品拍图验真模型。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "转转集团官方新闻稿（亚太商讯，主来源）",
+          "url": "https://acnnewswire.com/press-release/simplifiedchinese/106371/%E8%87%AA%E4%B8%BB%E7%A0%94%E5%8F%91ai%E9%89%B4%E5%AE%9A%E6%8A%80%E6%9C%AF%E9%A2%86%E8%B7%91%E4%BA%8C%E6%89%8B%E5%B8%82%E5%9C%BA-%E4%B8%AD%E5%9B%BD%E4%BA%8C%E6%89%8B%E6%96%B0%E6%B6%88%E8%B4%B9%E5%B9%B3%E5%8F%B0%E3%80%8C%E8%BD%AC%E8%BD%AC%E3%80%8D%E8%BF%9B%E5%86%9B%E9%A6%99%E6%B8%AF",
+          "status": "200，已通读"
+        }
+      ],
+      "heat": "未核实。",
+      "limits": "准确率与效率为公司陈述。新闻稿未清晰写人工复检步骤，本册不作补充想象。后续媒体稿不是第二次官方核验。",
+      "frontier_mechanism": "官方把AI拍图验真做成商品页上可查看的结果，而不是生成一张防伪宣传图。官方稿未清楚写明该拍照产品是否必须经过人工复检，不能自行补写。官方验（检测、报告、售后）需与该AI产品分开描述。",
+      "scale_evidence": [
+        {
+          "claim": "官方公关稿陈述准确率与效率提升，并称早期2026上线。具体数字为公司陈述，未独立核验。",
+          "source_url": "https://acnnewswire.com/press-release/simplifiedchinese/106371/%E8%87%AA%E4%B8%BB%E7%A0%94%E5%8F%91ai%E9%89%B4%E5%AE%9A%E6%8A%80%E6%9C%AF%E9%A2%86%E8%B7%91%E4%BA%8C%E6%89%8B%E5%B8%82%E5%9C%BA-%E4%B8%AD%E5%9B%BD%E4%BA%8C%E6%89%8B%E6%96%B0%E6%B6%88%E8%B4%B9%E5%B9%B3%E5%8F%B0%E3%80%8C%E8%BD%AC%E8%BD%AC%E3%80%8D%E8%BF%9B%E5%86%9B%E9%A6%99%E6%B8%AF",
+          "observed_at": "2026-11-20",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "覆盖品类、日调用量和准确率均未独立核验。",
+      "advice": "建议在商品或结果页同时写清：AI看了什么、结论是不是终局、人在哪一步介入、错了如何赔。没有后两句，不要上“鉴定为真/假”的自动句式。准确率与效率数字若未经独立核验，不能写成对用户的承诺。以上为建议，非已落地。",
+      "media_links": []
+    },
+    {
+      "id": "ip-mikkeller-switchhit-2026",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "角色口型同步",
+        "实时数据",
+        "活动体验"
+      ],
+      "cross_tags": [],
+      "title": "Mikkeller The Switch Hit：让古装剧角色为棒球比赛做实时解说",
+      "brand": "Mikkeller",
+      "date_iso": "2026-03-08",
+      "date_label": "2026-03-08世界棒球经典赛台湾对韩国当日（奥美案例页）",
+      "window": "12m",
+      "window_note": "相对2026-11-20，属于近12个月，早于近6个月窗口。",
+      "source_type": "奥美亚太官方案例页；活动日期与赛事结果可交叉核对",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "奥美亚太案例页写明：世界棒球经典赛期间，Mikkeller与Ogilvy Taiwan做了“不看比赛的观赛派对”。现场改看台湾古装剧，幕后用当场比赛数据、ElevenLabs声音克隆和实时口型同步，让清朝角色为比赛做解说。台湾当天5:4胜韩国。这是一次活动型的角色表演，不是长期产品。未见Mikkeller品牌官网长文，静帧也不能清楚显示古装角色正在解说。",
+      "ai_where": "用在把实时赛况写成角色口播，并做声音克隆与口型同步。案例页点名ElevenLabs与real-time lip sync。AI不替代活动概念本身。",
+      "evidence": [
+        "Ogilvy亚太案例页：The Switch Hit by Mikkeller，live WBC data, ElevenLabs voice cloning and real-time lip sync turned Qing dynasty characters into live baseball commentators。并写台湾当天5:4胜韩国。",
+        "中央社等赛事报道可核对：2026-03-08东京巨蛋，台湾延长赛5:4胜韩国。",
+        "Love the Work报名页有活动相关影像；本册保存的一帧是一名观众看屏幕，无法看清古装角色口播画面，故只作活动发生的旁证，并保留原链。"
+      ],
+      "benchmark": "对标价值在于：让已有角色（或剧中人物）承接实时信息，而不是另做一场普通直播。壁垒是声音与形象授权、实时正确率、以及这仍是单场活动，复制成长期产品需要另建运营。",
+      "audience": "不愿直视比赛又想跟上赛况的台湾棒球球迷，以及活动现场观众。效果与传播量未核实。",
+      "media": [
+        {
+          "file": "assets/mikkeller-switchhit-still.jpg",
+          "original": "https://www.lovethework.com/en/work/entries/the-switch-hit-by-mikkeller-777497",
+          "caption": "Love the Work条目中的活动影像：一名观众面向笔记本电脑屏幕。屏幕内容无法确认为古装角色解说画面，因此只证明活动影像存在，不能单独作为口型同步的视觉证据。请以奥美案例页与原链为准。"
+        }
+      ],
+      "media_links": [
+        {
+          "label": "奥美亚太官方案例页（机制主来源）",
+          "url": "https://www.ogilvy.com/ap/work/switch-hit-mikkeller"
+        }
+      ],
+      "sources": [
+        {
+          "label": "奥美亚太案例页（主来源）",
+          "url": "https://www.ogilvy.com/ap/work/switch-hit-mikkeller",
+          "status": "200，已通读"
+        },
+        {
+          "label": "Love the Work条目",
+          "url": "https://www.lovethework.com/en/work/entries/the-switch-hit-by-mikkeller-777497",
+          "status": "200，已打开并保存一帧"
+        },
+        {
+          "label": "中央社赛果核对",
+          "url": "https://www.cna.com.tw/news/aspt/202603085002.aspx",
+          "status": "用于核对日期与比分，不是广告案例页"
+        }
+      ],
+      "heat": "未核实。",
+      "limits": "未见Mikkeller官网长文。静帧不能展示角色口播。声音克隆涉及表演者或角色授权，细节未在案例页完整展开。",
+      "frontier_mechanism": "代理商官方项目页写明：用WBC实时数据、ElevenLabs声音克隆和实时口型，让剧集角色担任解说。这是实时数据驱动的角色表演，不是预先生成一张海报。",
+      "scale_evidence": [],
+      "scale_limits": "观看人数与互动量未核实。现有静帧无法清楚显示角色正在解说。",
+      "advice": "若探索动态表情或角色口播，建议先用已有授权角色做一场闭环活动：实时信息从哪里来、错了如何纠正、授权是否覆盖声音与口型。不要直接拿未授权剧集人物做常态功能。这是一次性活动的方法对照，不能当成已规模化的常设能力。以上为建议，非已落地。"
+    },
+    {
+      "id": "ip-meitu-mcd-ppg-2025",
+      "category": "ip",
+      "category_label": "IP",
+      "tags": [
+        "用户共创",
+        "AI Agent",
+        "IP联名",
+        "到店体验"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "美图×麦当劳飞天小女警：让用户进入IP画风的互动玩法",
+      "brand": "美图 / 麦当劳（美图官方合作页）",
+      "date_iso": "2025-11-29",
+      "date_label": "2025-11-29至12-10活动期（中国日报网2025-12-09；美图官方合作页）",
+      "window": "12m",
+      "window_note": "相对2026-11-20，刚好落入近12个月。不改写成2026新项目。",
+      "source_type": "美图官方合作页；中国日报网等报道补充档期。未见麦当劳官网长文。",
+      "confidence": "midhigh",
+      "confidence_label": "中高",
+      "round": "new",
+      "verified_on": "2026-11-20",
+      "summary": "美图官方合作页写明：与麦当劳联名飞天小女警“爆脆星星”时，用RoboNeo品牌影像AI Agent，让用户上传照片、输入口令后生成该IP画风内容，并植入新品与门店。中国日报网等写活动期约2025-11-29至12-10，北上广深有线下点位。这是用户参与式IP，不是单片广告。未见麦当劳官网同等长文，故可信度为中高。",
+      "ai_where": "用在对话式生图/生视频工作流：上传照片、固定口令、生成飞天小女警画风，并尝试保留用户特征、植入汉堡与门店场景。美图称为品牌定制的AI创意工作流，而不是通用滤镜贴纸。",
+      "evidence": [
+        "美图官网合作页《美图x麦当劳，开启首个AI Agent创意互动玩法》描述RoboNeo工作流、口令触发、画风还原与产品植入，并配有主视觉和效果拼图。",
+        "中国日报网2025-12-09等报道补充了活动执行期与部分城市线下点位。",
+        "已保存美图官方主视觉与效果拼图：可见“麦麦版AI创意Agent”标题、RoboNeo对话界面、用户生成的IP画风人像与汉堡、以及漫画风门店场景。"
+      ],
+      "benchmark": "对标价值在于：让用户成为IP故事里的人，而不是只看联名包装。壁垒是IP授权范围、生成物是否损坏角色识别、以及品牌官网交叉核验仍不完整。",
+      "audience": "美图与麦当劳年轻用户，以及到店参与者。官方或报道中的曝光数字未独立核验。",
+      "media": [
+        {
+          "file": "assets/meitu-mcd-kv.jpg",
+          "original": "https://www.meitu.com/zh/partner/92",
+          "caption": "美图官方合作页主视觉：McDonald’s×美图标志下，标题为“撒花～‘麦麦版’是AI创意Agent”，周围是飞天小女警角色。用于说明官方如何命名这场互动。"
+        },
+        {
+          "file": "assets/meitu-mcd-transform.jpg",
+          "original": "https://www.meitu.com/zh/partner/92",
+          "caption": "同一官方长图中的效果说明：RoboNeo对话界面、用户按“上传单人图 / 回答固定口令 / 触发AI特效”生成的IP画风人像与汉堡，以及漫画风麦当劳门店场景。来源为美图官方合作页，不是麦当劳官网页面。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "美图官方合作页（主来源）",
+          "url": "https://www.meitu.com/zh/partner/92",
+          "status": "200，已通读"
+        },
+        {
+          "label": "中国日报网报道（档期补充）",
+          "url": "https://caijing.chinadaily.com.cn/a/202512/09/WS6937b613a310942cc4995b06.html",
+          "status": "检索确认；用于补充活动期，不是麦当劳官网"
+        }
+      ],
+      "heat": "报道或品牌所述曝光、参与量未独立核验。",
+      "limits": "未见麦当劳官网长文。无美图App内活动复现。外部IP授权细节未公开全文。日期在近12个月边缘，不改写成2026新案。",
+      "frontier_mechanism": "美图官方合作页把它写成与麦当劳、飞天小女警相关的AI Agent共创玩法，而不是单张换脸海报。麦当劳官方长文未见。",
+      "scale_evidence": [],
+      "scale_limits": "参与人数与投放周期效果未核实。",
+      "advice": "若与外部IP或自有角色做共创玩法，建议先限定口令、画风和可植入的商品，再开放用户上传。生成结果必须能被认成同一个角色，并避免把用户照片用到授权范围之外。建议先小范围测试“是否还是同一角色、是否越权使用用户肖像”，不通过则停止扩量。以上为建议，非已落地。",
+      "media_links": []
+    },
+    {
+      "id": "brand-loreal-creaitech-2026",
+      "category": "brand",
+      "category_label": "品牌",
+      "tags": [
+        "视觉系统",
+        "内容触点一致性",
+        "内部创意平台",
+        "治理与规范"
+      ],
+      "cross_tags": [],
+      "title": "欧莱雅 CreAItech 生成式内容平台",
+      "brand": "L'Oréal Groupe",
+      "date_iso": "2026-06-11",
+      "date_label": "2026-06-11（官方VivaTech新闻稿；平台早于该日已在使用）",
+      "window": "6m",
+      "window_note": "按本轮核验日2026-11-21，属于近6个月（自2026-05-21）。这是官方在VivaTech 2026对已运行平台及新增二氧化碳估算功能的确认，不是把平台伪装成2026-06才上线。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment",
+      "verified_on": "2026-11-21",
+      "summary": "欧莱雅官方把CreAItech写成集团自建的生成式美妆内容平台，用于在品牌遗产约束下规模化制作图像、视频、声音和三维数字孪生。2026-06-11官方新闻稿再次确认该平台，并写明现已内置二氧化碳估算。",
+      "ai_where": "用在内部营销与创意生产，而不是一条对外广告片。平台接入Google、Adobe、NVIDIA、Seedance、OMI等模型，输出图像、视频、声音和三维数字孪生。官方伦理边界写明：不以生成式、仿真的人脸、身体、头发或皮肤去支撑或夸大产品功效。人仍在中心。官方并写明内置二氧化碳估算，把能耗换算成驾驶公里、流媒体时长或口红产量等可读指标。",
+      "evidence": [
+        "欧莱雅官方CreAItech页面写明：This technology is designed and built by L’Oréal；integrates high-performing models from tech leaders and startups, including Google, Adobe, NVIDIA, Seedance and OMI；to scale the creation of images, videos, sound, and 3D digital twins。",
+        "同一官方页写明 Already adopted by thousands of users across the Group，并写明 we do not use AI-generated life-like faces, body, hair, or skin to support or enhance product benefits；today CreAItech features a built-in CO2 estimator。",
+        "欧莱雅2026-06-11 VivaTech新闻稿在“AI Powered Consumer & Marketer Journeys”下写明：CreAItech: L'Oréal's in-house generative AI content platform, powered by models from Google, Adobe and Seedance, produces brand assets at scale… It now features a built-in CO₂ estimator。",
+        "2025年报摘要页同样把CreAItech写成in-house Gen AI Beauty Content Lab，并称empowers thousands of users to generate unique, on-brand images and assets。该处的“thousands of users”与官方产品页一致，均为公司陈述。"
+      ],
+      "benchmark": "对标价值在于可治理的品牌内容操作系统：多模态资产、模型接入、知识产权与伦理禁区、排放可见，而不是多做一个生成按钮。壁垒是品牌遗产入库、禁用项可执行、人工终审，以及不能把“数千名用户”直接写成效果。它与本册已有的欧莱雅链博会案例不是同一项目：后者看供应链与工厂质检如何被看见，本例看对内创意系统。",
+      "audience": "人群：集团内部营销、创作者与技术团队，不是直接面向消费者的试用入口。触点：内部平台，最终间接出现在各品牌的传播物料。用户价值：对消费者是更一致的品牌表达，而非“我用了这个工具”。品牌目标：在保持品牌识别的前提下提高创意敏捷，并显示责任边界。采用人数与产出量为公司陈述，未独立核验。",
+      "media": [
+        {
+          "file": "assets/loreal-creaitech-hero.jpg",
+          "original": "https://www.loreal.com/en/articles/science-and-technology/loreals-creaitech/",
+          "caption": "欧莱雅官方CreAItech页面主视觉：人物手持标有CREAITECH字样的罐装与瓶装，周围有虹彩花朵与果实。来源：官方产品页VivaTech 2026路径配图。这是平台宣传主视觉，不是内部工具界面截图，也不能据此判断某件商品广告是否由该平台生成。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "欧莱雅官方CreAItech页面（主来源）",
+          "url": "https://www.loreal.com/en/articles/science-and-technology/loreals-creaitech/",
+          "status": "200，已通读；配图已收入本册"
+        },
+        {
+          "label": "欧莱雅VivaTech 2026官方新闻稿（2026-06-11）",
+          "url": "https://www.loreal.com/en/press-release/research-and-innovation/l-oreal-unveils-the-future-of-beauty-at-its-vivatech-2026-beauty-odyssey",
+          "status": "200，已通读"
+        },
+        {
+          "label": "欧莱雅2025年报摘要（CreAItech表述）",
+          "url": "https://www.loreal.com/-/media/project/loreal/brand-sites/corp/master/lcorp/3-commitments/2026/esg-performance/loreal-2025-annual-report-en.pdf",
+          "status": "检索可见对应段落；数千名用户为公司陈述"
+        }
+      ],
+      "heat": "未核实。X上可见转述帖，互动很低，不作为热度或机制证据。",
+      "limits": "平台上线的精确日期官方未给出，本例日期取2026-06-11官方新闻稿。“数千名用户/thousands of users”为公司陈述，未独立核验，也未给出国家、品牌或日活拆分。65,000+员工接受生成式AI培训、L’OréalGPT使用人数等是更宽的集团数字，不能直接算作CreAItech规模。未见官方工具界面或可核对的对外物料清单被标注为该平台产出。不得与链博会案例或Beauty Genius混为一谈。",
+      "frontier_mechanism": "不是普通一句提示出一张图。官方机制是自建内容平台：接入多个指定模型，覆盖图像、视频、声音和三维数字孪生，并把品牌遗产、知识产权安全、禁止用仿真人体部位夸大功效，以及二氧化碳估算写进同一工作流。人仍做创意方向和终审。这与单次文生图工具的差别在于治理、多模态资产和责任边界被做成平台能力。",
+      "scale_evidence": [
+        {
+          "claim": "官方产品页写明 Already adopted by thousands of users across the Group。",
+          "source_url": "https://www.loreal.com/en/articles/science-and-technology/loreals-creaitech/",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "2026-06-11官方新闻稿写明该平台produces brand assets at scale，并确认现已内置二氧化碳估算。",
+          "source_url": "https://www.loreal.com/en/press-release/research-and-innovation/l-oreal-unveils-the-future-of-beauty-at-its-vivatech-2026-beauty-odyssey",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "2025年报摘要同样写明empowers thousands of users to generate unique, on-brand images and assets，并点名与Nvidia、Google、Adobe合作。",
+          "source_url": "https://www.loreal.com/-/media/project/loreal/brand-sites/corp/master/lcorp/3-commitments/2026/esg-performance/loreal-2025-annual-report-en.pdf",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "“数千名用户”和“at scale”都是公司陈述，未见独立审计或按市场/品牌拆分。资产件数、上线物料量、持续周期中的日活均未核实。不能因为欧莱雅是大型集团，就把本平台写成已覆盖全球消费者。",
+      "advice": "若做可治理的视觉工作台，建议优先让规范可被机器执行、输出可被人工退回，而不是先做一条生成广告。先写入标志、字体、已核实的品牌色彩和禁用组合，再允许出包装、卡片和活动变体。对外发布必须人审。不要用仿真人脸去证明商品效果。官方“数千名用户”等表述只作公司陈述，不能写成已验证效果。以上为建议，非已落地。"
+    },
+    {
+      "id": "image-lv-comelz-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "供应链可见",
+        "专业工艺",
+        "数字孪生",
+        "人工终审"
+      ],
+      "cross_tags": [
+        "品牌"
+      ],
+      "title": "路易威登×Comelz：皮革数字孪生与AI裁切辅助",
+      "brand": "Louis Vuitton / LVMH × Comelz",
+      "date_iso": "2026-06-19",
+      "date_label": "2026-06-19（LVMH官方VivaTech报道；展期2026-06-16至19）",
+      "window": "6m",
+      "window_note": "按本轮核验日2026-11-21，属于近6个月。这是官方在VivaTech 2026公开展示该工艺辅助系统的日期，不把设备更早存在的可能性改写成新发布。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment",
+      "verified_on": "2026-11-21",
+      "summary": "LVMH官方在VivaTech 2026把路易威登与Comelz的合作写成：把一张皮革数字化为数字孪生，由AI识别天然特征并给出裁切建议，工匠审阅或调整后仍保留最终决定。这是把专业工艺过程做成可被看见的能力，而不是生成一张广告图。",
+      "ai_where": "用在皮革裁切前的识别与建议：扫描皮革、生成数字孪生、识别天然特征与缺陷、准备裁切建议。LVMH官方写明建议随后由工匠验证或调整，artisans retain full control over the final decision。Comelz官方把该系统称为NEK+|BRAIN，并写明设备端推理、无需云连接，以及双光照与多相机成像。供应商页另有未具名客户的产线指标，不能记成路易威登的成绩。",
+      "evidence": [
+        "LVMH Maisons x Tech Partners官方页写明：Louis Vuitton is presenting an intuitive, high-performance solution that harnesses artificial intelligence to support artisans in the leather-cutting process. Developed with Comelz… digitize a hide and create its digital twin. AI precisely identifies the hide’s natural characteristics and prepares cutting suggestions, which are then validated or adjusted by artisans, who retain full control over the final decision。",
+        "LVMH 2026-06-19官方报道复述：the machine designed by Comelz for Louis Vuitton, which creates a digital twin of leather hides and uses AI to precisely identify their unique characteristics and more complex areas in preparation for cutting。",
+        "Comelz官方VivaTech页写明：LVMH selected NEK+|BRAIN… Presented within Louis Vuitton’s innovation journey, the system combines advanced vision technology and artificial intelligence to create a digital twin of leather hides and automatically identify defects and material characteristics before cutting。配图可见展台标题AI-enhanced savoir-faire for artisans及扫描设备。",
+        "Comelz产品页补充技术细节：16台高分辨率相机、顶部与侧向双光照、On-device AI processing without cloud connectivity；并提供未具名客户在2026-02-23至26的产线对照表。该表未写路易威登，不得记为LV规模。"
+      ],
+      "benchmark": "对标价值在于：把供应链和工艺判断做成可看见、可纠正的过程，并明确人做终局。壁垒是车间数据、品质规则由客户定义、设备与保密环境，以及如何把“工厂里发生的事”翻译成用户能读懂、又不泄密的说明。不能把它简化成“用AI省掉拍摄”。",
+      "audience": "直接使用者是路易威登工匠与相关生产环节；消费者侧目前可核对的可见触点，主要是VivaTech等展会中的工艺展示，不是已核实的商品详情页功能。品牌目标：展示工艺如何被技术增强，而不是被替换。工作坊数量、处理张数与良率在路易威登官方文本中未给出。",
+      "media": [
+        {
+          "file": "assets/lvmh-vivatech-dreamgallery.jpg",
+          "original": "https://www.lvmh.com/en/news-lvmh/for-vivatechs-10th-anniversary-lvmh-showcases-how-innovation-drives-every-stage-of-its-value-chain",
+          "caption": "LVMH官方VivaTech 2026报道封面：DreamGallery圆形展厅左侧可见LOUIS VUITTON与标题AI-enhanced savoir-faire for artisans，展位中有皮革扫描设备与彩色皮料。来源：LVMH官方新闻页。这是展览现场，不是工厂量产车间照片，图中也包含其他Maison展项，不能当作仅此一例的全貌。"
+        },
+        {
+          "file": "assets/lv-comelz-vivatech-booth.jpg",
+          "original": "https://www.comelz.com/en/comelz-at-vivatech-2026/",
+          "caption": "Comelz官方VivaTech页现场照片：展台标题为AI-enhanced savoir-faire for artisans，柜内可见皮革与屏幕上的轮廓识别画面，三人佩戴展会证件站在设备前。来源：合作方官方页，不是路易威登新闻稿配图。图中人物身份未在该页具名，不作额外推断。"
+        },
+        {
+          "file": "assets/lv-comelz-nek-brain.jpg",
+          "original": "https://www.comelz.com/en/nek-plus-brain/",
+          "caption": "Comelz官方NEK+|BRAIN产品照片：带照明与屏幕的皮革扫描设备上铺有皮料。来源：供应商产品页。这是设备外形说明，不是已确认的路易威登车间现场，不能当作用户侧鉴定结果页。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "LVMH Maisons x Tech Partners官方页（主来源）",
+          "url": "https://www.lvmh.com/en/lvmh-x-vivatech-2026/maisons-x-tech-partners-2026",
+          "status": "200，已通读"
+        },
+        {
+          "label": "LVMH VivaTech十周年官方报道（2026-06-19）",
+          "url": "https://www.lvmh.com/en/news-lvmh/for-vivatechs-10th-anniversary-lvmh-showcases-how-innovation-drives-every-stage-of-its-value-chain",
+          "status": "200，已通读；封面已收入本册"
+        },
+        {
+          "label": "Comelz官方VivaTech页",
+          "url": "https://www.comelz.com/en/comelz-at-vivatech-2026/",
+          "status": "200，已通读；现场照片已收入本册"
+        },
+        {
+          "label": "Comelz NEK+|BRAIN产品页（技术细节）",
+          "url": "https://www.comelz.com/en/nek-plus-brain/",
+          "status": "200，已通读；产线对照表为未具名客户，不记入LV规模"
+        }
+      ],
+      "heat": "未核实。",
+      "limits": "路易威登或LVMH官方文本未给出使用工坊数量、日处理皮革张数或良率。Comelz产品页的产能、得率、扫描时间等对照表标注为Client confidential | Real production environment | Feb 23-26, 2026，客户未具名，不得写成路易威登数据。消费者在购物品上能否看到该过程，官方未说明。Dior TRACE同场出现，但官方未写明使用AI，不构成本例的一部分。",
+      "frontier_mechanism": "不是文生图或用生成视频代替拍摄。官方机制是计算机视觉把一张真实皮革做成数字孪生，识别天然特征与缺陷，再给出裁切建议；工匠保留最终决定。供应商并写明设备端推理、不连云。它与普通生成图的差别在于：处理的是实物材料数字孪生和工艺决策，而不是凭空生成一张宣传图。",
+      "scale_evidence": [
+        {
+          "claim": "官方可见触点是VivaTech 2026（2026-06-16至19）的DreamGallery公开展示，以及LVMH官方页面与报道对该合作的点名。",
+          "source_url": "https://www.lvmh.com/en/news-lvmh/for-vivatechs-10th-anniversary-lvmh-showcases-how-innovation-drives-every-stage-of-its-value-chain",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_page"
+        },
+        {
+          "claim": "路易威登使用该系统的工坊数量、处理张数、持续周期与组织投入，官方未公布。",
+          "source_url": "https://www.lvmh.com/en/lvmh-x-vivatech-2026/maisons-x-tech-partners-2026",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_page"
+        }
+      ],
+      "scale_limits": "不能因为路易威登是大型品牌，就断言该系统已在全球工坊铺开。供应商未具名客户的产线指标不得记入本例。消费者触点除展会展示外未核实。",
+      "advice": "建议把专业工艺或质检过程做成用户能看懂的分层说明：哪些步骤由模型辅助，哪些由专业人员终审，而不是做一个虚拟工匠形象。先在一个品类、可控的展示或试用场景验证说明是否清楚，结果页写清适用范围。没有人审入口就不对外自动下结论。本例本身是展会演示，不得写成工厂已量产上线。以上为建议，非已落地。"
+    },
+    {
+      "id": "image-kerastase-kscan-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "专业可见",
+        "诊断相机",
+        "salon体验",
+        "人工协作"
+      ],
+      "cross_tags": [],
+      "title": "卡诗 K-SCAN：沙龙AI头皮与头发诊断相机",
+      "brand": "Kérastase / L'Oréal Groupe",
+      "date_iso": "2026-06-11",
+      "date_label": "2026-06-11（官方新闻稿确认已在使用及规模；K-SPA为首发配套）",
+      "window": "6m",
+      "window_note": "按本轮核验日2026-11-21，属于近6个月。官方写明K-SCAN already in use，故本例日期是VivaTech 2026对机制与规模的官方确认，不是把相机伪装成2026-06才首次出现。K-SPA是同日宣布的全球首发沙龙体验，诊断仍从K-SCAN开始。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment",
+      "verified_on": "2026-11-21",
+      "summary": "欧莱雅与卡诗官方把K-SCAN写成4K、三光源的AI诊断相机，用于头皮与头发分析、个性化护理建议，以及护理前后对照。2026-06-11官方新闻稿与K-SPA页面写明该相机已在9,000家沙龙使用。这是专业诊断被用户在沙龙里看见，不是生成广告图。",
+      "ai_where": "用在沙龙诊断，而不是内容生产。官方机制：UV、偏振与白光三种照明，加上4K分辨率，拍摄肉眼不易见的头皮与头发状况；由欧莱雅先进研究算法分析，并给出沙龙护理与居家方案；护理后可做前后对照。卡诗官方页写明算法trained on a large dataset containing more than 12,000 images，并能预测脱发风险。流程里需要发型师操作，用户需同意使用设备。K-STATION是后续的多技术护理设备，不要把护理仪本身写成K-SCAN。",
+      "evidence": [
+        "欧莱雅2026-06-11新闻稿写明：Every treatment begins with K-SCAN, an AI-powered diagnostic camera already in use across 9,000 salons, followed by K-STATION。",
+        "欧莱雅官方K-SPA页（Updated June 2026）复述：K-SCAN, a 4K resolution AI-powered diagnostic camera with 3 Lights Technology, already in use across 9,000 salons, providing predictive scalp analysis and high-resolution before-and-after imaging。",
+        "卡诗官方K-SCAN页写明：3 light technology made of UV, Cross-polarized & White Light；4K resolution；analyzes thanks to algorithms developed by L’Oréal Advanced Research；trained on a large dataset containing more than 12,000 images；并写明可预测脱发、给出个性化护理，以及护理后的live before & after visualization。该页同时强调专业发型师在场操作。",
+        "欧莱雅韩国官方案例页用相同的12,000张以上图像训练表述，并写韩国全国42家卡诗沙龙可体验。这是局部市场可用性，不能替代全球9,000家的公司陈述，也不能把42写成全球规模。"
+      ],
+      "benchmark": "对标价值在于：把专业判断做成用户在场可看的诊断过程，有前后对照，并且仍由专业人员操作。壁垒是设备部署、算法适用的发质与头皮类型、隐私同意，以及如何避免把预测写成确定结论。训练图像12,000张是公司陈述的数据集规模，不要与9,000家沙龙混用。",
+      "audience": "人群：到卡诗沙龙接受护理的消费者与发型师。触点：沙龙内的诊断相机、结果说明和护理前后对照。用户价值：看见原本不易察觉的头皮与头发状况，并得到个性化建议。品牌目标：把专业护理能力做成可体验的技术服务。9,000家沙龙为公司陈述，未独立核验。",
+      "media": [
+        {
+          "file": "assets/kerastase-kspa-station.jpg",
+          "original": "https://www.loreal.com/en/articles/science-and-technology/kspa/",
+          "caption": "欧莱雅官方K-SPA页面设备照片：带KÉRASTASE PARIS标识的沙龙推车，屏幕显示Loading，两侧放置多个护理或诊断工具头。来源：官方K-SPA页。这是K-SPA整机外形，官方写明护理从K-SCAN开始，但本图未单独标注哪一个工具头是K-SCAN，也不是诊断结果界面。"
+        },
+        {
+          "file": "assets/kerastase-kspa-devices.jpg",
+          "original": "https://www.loreal.com/en/articles/science-and-technology/kspa/",
+          "caption": "欧莱雅官方K-SPA页面工具特写：带蓝光的多触点护理头、手持探头与喷雾类工具，置于黑色屏幕旁。来源：官方页2026-vivatech-kspa.jpg。不能仅凭外形把其中某一件指认为K-SCAN；本图也不展示9,000家沙龙或分析结果。"
+        }
+      ],
+      "media_links": [
+        {
+          "label": "卡诗官方K-SCAN说明页（打开返回403，保留原链）",
+          "url": "https://www.kerastase.com/kscan"
+        }
+      ],
+      "sources": [
+        {
+          "label": "欧莱雅VivaTech 2026官方新闻稿（2026-06-11）",
+          "url": "https://www.loreal.com/en/press-release/research-and-innovation/l-oreal-unveils-the-future-of-beauty-at-its-vivatech-2026-beauty-odyssey",
+          "status": "200，已通读"
+        },
+        {
+          "label": "欧莱雅官方K-SPA页面（Updated June 2026）",
+          "url": "https://www.loreal.com/en/articles/science-and-technology/kspa/",
+          "status": "200，已通读；设备照片已收入本册"
+        },
+        {
+          "label": "卡诗官方K-SCAN页",
+          "url": "https://www.kerastase.com/kscan",
+          "status": "本轮检索中曾成功读取机制与12,000张训练数据表述；随后直接抓取返回403，故保留原链，并收入欧莱雅官方设备图"
+        },
+        {
+          "label": "欧莱雅韩国官方K-SCAN说明（局部市场对照）",
+          "url": "https://www.loreal.com/ko-kr/korea/pages/group/beauty-tech-case/k-scan/",
+          "status": "200，已通读；写明韩国42家沙龙，不替代全球规模陈述"
+        }
+      ],
+      "heat": "未核实。可见个别沙龙转发，不能代表9,000家使用情况。",
+      "limits": "9,000家沙龙与12,000张训练图像均为公司陈述，未独立核验。K-SCAN并非2026-06才出现，官方写的是already in use。K-SPA为首发配套体验，其中K-STATION不是诊断相机。卡诗官网本轮抓取出现403。未见官方诊断结果界面或去标识的用户病例被收入本册。不得把同集团的CreAItech或链博会案例算作本例规模。",
+      "frontier_mechanism": "不是普通生成图。官方机制是多光源（UV、偏振、白光）4K拍摄，再用研究侧算法在12,000张以上图像训练的基础上做头皮与头发分析、脱发风险预测，并给出护理建议和前后对照。发型师在场操作，用户需同意。它与文生图的差别在于：输入是真实头皮影像，输出是诊断与建议，而不是一张生成的宣传视觉。",
+      "scale_evidence": [
+        {
+          "claim": "欧莱雅官方新闻稿与K-SPA页均写明K-SCAN already in use across 9,000 salons。",
+          "source_url": "https://www.loreal.com/en/articles/science-and-technology/kspa/",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "卡诗官方页写明算法trained on a large dataset containing more than 12,000 images。这是训练数据规模，不是沙龙数量。",
+          "source_url": "https://www.kerastase.com/kscan",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "欧莱雅韩国官方页写明全国42家卡诗沙龙可体验，仅作局部市场可用性对照。",
+          "source_url": "https://www.loreal.com/ko-kr/korea/pages/group/beauty-tech-case/k-scan/",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "9,000家沙龙未给出国家分布、是否含所有门店类型、也未见独立核验。用户接待量、复检率和销售转化均未核实。韩国42家不能外推为全球规模。不能因为卡诗是全球品牌就扩大解释。",
+      "advice": "建议优先做一个需用户同意、由专业人员操作的检测辅助：让用户看到拍了什么、模型提示了什么、人如何解释，而不是自动弹出结论。先在有限门店或服务台试点，写清适用边界，不得用它替代专业终审。9,000家沙龙等数字是公司陈述，未独立核验；本册配图来自K-SPA相关设备与推车，不是K-SCAN诊断结果界面。以上为建议，非已落地。"
+    },
+    {
+      "id": "image-sephora-chatgpt-2026",
+      "category": "image",
+      "category_label": "形象",
+      "tags": [
+        "专业建议",
+        "新发现触点",
+        "对话式零售",
+        "会员档案"
+      ],
+      "cross_tags": [],
+      "title": "Sephora App in ChatGPT：对话式美妆发现试点",
+      "brand": "Sephora / LVMH",
+      "date_iso": "2026-03-24",
+      "date_label": "2026-03-24（Sephora官方新闻稿，美国试点）",
+      "window": "12m",
+      "window_note": "按本轮核验日2026-11-21，早于近6个月起点2026-05-21，属于近12个月。真实日期不改新。官方写明在美国试点，结账功能为后续更新，不得写成全球已上线可购买。",
+      "source_type": "官方项目",
+      "confidence": "high",
+      "confidence_label": "高",
+      "round": "increment",
+      "verified_on": "2026-11-21",
+      "summary": "Sephora官方于2026-03-24宣布在ChatGPT中推出Sephora应用，先在美国试点，帮助用户发现和选购方案，并可关联Beauty Insider档案做推荐。这是把零售专业建议放到新的对话入口，不是生成一张广告片。",
+      "ai_where": "用在对话式发现与推荐：用户在ChatGPT里提出美妆问题，例如寻找适合干性皮肤的粉底，Sephora应用出现并给出建议；若用户选择关联Beauty Insider档案，推荐可基于已有偏好。官方写明现阶段可使用积分、免运和样品等会员权益，未来更新才支持应用内支付与结账。LVMH在VivaTech 2026页面还提到Sephora在ChatGPT与Gemini中的美妆发现，但本例主证据以2026-03-24 Sephora新闻稿为准，不把后续渠道扩展自动写成同一天、同一范围已经上线。",
+      "evidence": [
+        "Sephora官方新闻稿2026-03-24写明：today announced a new AI-enhanced consumer experience with the launch of its app in ChatGPT. Piloting in the United States… assist customers in discovering and shopping for the right solutions with curated advice and recommendations。",
+        "同一新闻稿写明：Customers will be able to use their Sephora loyalty rewards and member benefits such as free shipping promotions and samples, with future updates enabling payments and checkout directly within the app。",
+        "新闻稿举例：ChatGPT users will prompt beauty advice in the chat (i.e., “Sephora, help me find a foundation for dry skin”), and can use the Sephora app which will appear and recommend answers based on preferences from the customer’s Sephora Beauty Insider account profile if they choose to link their Beauty Insider account。",
+        "全球首席数字官Anca Marola原话写明introduce this experience in the US market, with the goal of expanding this globally。新闻稿同时给出more than 80 million active members worldwide，这是Sephora全球会员社区规模，不是本应用的用户数。"
+      ],
+      "benchmark": "对标价值在于：专业建议出现在用户已经在使用的对话入口，并能有限调用会员档案，同时仍把支付等关键动作留在后续。壁垒是知识边界、库存与权益的真实性、披露这是品牌应用而不是“通用中立顾问”，以及跨市场扩展时的合规。不能把8000万会员写成这个试点已经触达的人数。",
+      "audience": "人群：美国ChatGPT用户中愿意试用Sephora应用的美妆消费者；若关联会员档，则是Beauty Insider用户。触点：ChatGPT内的Sephora应用。用户价值：在对话里获得基于偏好的发现与建议。品牌目标：出现在新的发现入口，并计划向全球扩展。本应用的实际使用人数未公布。",
+      "media": [
+        {
+          "file": "assets/sephora-chatgpt-kv.jpg",
+          "original": "https://newsroom.sephora.com/sephora-app-in-chatgpt-brings-a-new-personalized-beauty-experience/",
+          "caption": "Sephora官方新闻稿主视觉：ChatGPT与Sephora标识并列，英文标题为Use SEPHORA in ChatGPT。来源：Sephora Newsroom 2026-03配图。这是发布视觉，不是应用内对话或推荐结果截图，也不能显示试点用户量。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Sephora官方新闻稿（2026-03-24，主来源）",
+          "url": "https://newsroom.sephora.com/sephora-app-in-chatgpt-brings-a-new-personalized-beauty-experience/",
+          "status": "200，已通读；主视觉已收入本册"
+        },
+        {
+          "label": "LVMH VivaTech 2026 Maisons页（后续渠道对照，非本例主日期）",
+          "url": "https://www.lvmh.com/en/lvmh-x-vivatech-2026/maisons-x-tech-partners-2026",
+          "status": "200，已通读；提到ChatGPT与Gemini，不自动等同于2026-03-24美国试点范围"
+        }
+      ],
+      "heat": "未核实。",
+      "limits": "官方明确为美国试点；应用内支付与结账为future updates，不得写成已经能在对话里完成购买。80 million active members worldwide是公司陈述的全球会员规模，不是本应用活跃用户，本册不把它当作本例规模证据。推荐质量、转化和库存准确性均未核实。未见官方对话截图被收入本册。",
+      "frontier_mechanism": "不是用生成模型去做一张美妆广告图。官方机制是把零售商的专业建议和可选择关联的会员档案，放进ChatGPT这一对话入口里做发现与推荐；支付等交易动作在稿件中仍属后续。它与普通生成图的差别在于：核心是对话式推荐和会员上下文，而不是生成视觉内容。",
+      "scale_evidence": [
+        {
+          "claim": "官方写明Piloting in the United States，并表示goal of expanding this globally。这是覆盖范围的官方表述，不是已完成的全球铺开。",
+          "source_url": "https://newsroom.sephora.com/sephora-app-in-chatgpt-brings-a-new-personalized-beauty-experience/",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        },
+        {
+          "claim": "同一新闻稿写明Sephora全球社区more than 80 million active members worldwide。该数字描述的是品牌会员总体，不是ChatGPT应用的使用人数，不得误用。",
+          "source_url": "https://newsroom.sephora.com/sephora-app-in-chatgpt-brings-a-new-personalized-beauty-experience/",
+          "observed_at": "2026-11-21",
+          "evidence_type": "official_company_statement"
+        }
+      ],
+      "scale_limits": "本应用的用户数、对话次数、停留市场、持续时间均未核实。不得用全球会员总数代表本试点规模。不得因Sephora是大型零售商就写成大规模已落地。结账尚未被官方写成已上线。",
+      "advice": "建议先在一个明确标注的对话入口做单一品类的发现与咨询，必须明示AI身份、知识边界和转人工路径。先闭环问答与商品跳转，支付和终局结论不要一上来就在对话里自动完成。不得把全体会员或全站用户数当成这一入口的规模；本例中8000万是全球会员的公司陈述，不是该ChatGPT应用的使用量。以上为建议，非已落地。"
     }
   ],
   "appendix": [
     {
       "heading": "未升格的重要线索",
-      "body": "多邻国：有角色广告平台与前员工关于Modular Ads、语音和脚本生成的个人叙述，但官方广告产品页与行业报道并未清楚写明角色广告由AI生成。保持线索，不计入6例。"
+      "body": "多邻国：有角色广告平台与前员工关于Modular Ads、语音和脚本生成的个人叙述，但官方广告产品页与行业报道并未清楚写明角色广告由AI生成。保持线索，仍未计入本册。"
     },
     {
-      "heading": "已核实但未计入6例的对照",
-      "body": "可口可乐中国2026-06-17官网确认“看球搭子AI范志毅”（与百度合作的数字角色）。因已收可口可乐两例，且涉及真人肖像分身，不重复占IP席位。\n美图×麦当劳“飞天小女警”AI Agent：美图官方合作页与行业报道写明约2025-11-29至12-10的互动玩法，但未见麦当劳品牌官网长篇原文，故不计入。\nStockX 2025-06-05官方品牌保护报告写明：2024年起用机器学习为每笔进入鉴定中心的订单打风险分，并派给更有经验的人员。这是鉴别相关官方能力，但证据停在风险分派，不是终检视觉鉴定模型，故作对照而不占形象席位。\nCadbury My Cadbury Era（2024-07-23，VCCP/品牌市场总监引用）是品牌档案海报的个性化生成，时间较早，本轮不占品牌席位。"
+      "heading": "已收入本册、原先只作对照的案例",
+      "body": "可口可乐中国2026-06-17官网确认的“看球搭子AI范志毅”，现已作为案例收入本册。\n美图×麦当劳“飞天小女警”互动玩法，现已作为案例收入本册。\n安踏“灵龙”设计大模型与转转AI拍图验真，现已作为案例收入本册。"
     },
     {
-      "heading": "检索到但证据不足、本轮放弃",
-      "body": "Discovery Parks角色Bruce、Banpu FLAMO（AI活动仍为筹备表述）、安踏“灵龙”设计大模型（见媒体转述，本轮未完成安踏官网全文核验）、转转AI质检（见报端，未见官方原文）、闲鱼较早的AI鉴定报道。均不凑进6例。"
+      "heading": "已核实、仍未计入的对照",
+      "body": "StockX 2025-06-05官方品牌保护报告写明：2024年起用机器学习为每笔进入鉴定中心的订单打风险分，并派给更有经验的人员。这是鉴别相关官方能力，但证据停在风险分派，不是终检视觉鉴定模型，故仍作对照，未计入本册。\nCadbury My Cadbury Era（2024-07-23，VCCP/品牌市场总监引用）是品牌档案海报的个性化生成，时间较早，仍未计入本册。"
+    },
+    {
+      "heading": "检索到但证据不足、仍未计入",
+      "body": "Discovery Parks角色Bruce、Banpu FLAMO（AI活动仍为筹备表述）、闲鱼较早的AI鉴定报道。这些线索仍未计入本册。"
     },
     {
       "heading": "访问限制",
