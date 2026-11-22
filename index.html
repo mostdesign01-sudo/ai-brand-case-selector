@@ -8,7 +8,6 @@
   <meta name="theme-color" content="#f3efe6">
   <title>AI品牌案例筛选册</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/source-serif-4-latin-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -25,6 +24,12 @@
         <p class="count" id="count" aria-live="polite">显示 —</p>
         <button type="button" id="filter-toggle" aria-expanded="false" aria-controls="filters">筛选</button>
       </div>
+      <div class="chip-row quick-cats" role="group" aria-label="类别快速导航" data-filter-group="category">
+        <button type="button" data-value="all" aria-pressed="true">全部</button>
+        <button type="button" data-value="ip" aria-pressed="false">IP</button>
+        <button type="button" data-value="brand" aria-pressed="false">品牌</button>
+        <button type="button" data-value="image" aria-pressed="false">形象</button>
+      </div>
       <div class="chip-row chip-scroll" role="group" aria-label="挑选状态" data-filter-group="status">
         <button type="button" data-value="all" aria-pressed="true">全部状态</button>
         <button type="button" data-value="未处理" aria-pressed="false">未处理 <span data-count-for="未处理">0</span></button>
@@ -35,15 +40,6 @@
       <p class="warn" id="save-warn" hidden>无法写入本浏览器存储，刷新后挑选会丢失。</p>
     </div>
     <div id="filters" hidden>
-      <div class="tool-block" role="group" aria-label="类别">
-        <span class="tool-label" id="cat-label">类别</span>
-        <div class="chip-row" data-filter-group="category" aria-labelledby="cat-label">
-          <button type="button" data-value="all" aria-pressed="true">全部</button>
-          <button type="button" data-value="ip" aria-pressed="false">IP</button>
-          <button type="button" data-value="brand" aria-pressed="false">品牌</button>
-          <button type="button" data-value="image" aria-pressed="false">形象</button>
-        </div>
-      </div>
       <div class="tool-block" role="group" aria-label="时间">
         <span class="tool-label" id="time-label">时间</span>
         <div class="chip-row" data-filter-group="window" aria-labelledby="time-label">
@@ -52,7 +48,10 @@
           <button type="button" data-value="12m" aria-pressed="false">近12个月</button>
           <button type="button" data-value="earlier" aria-pressed="false">更早</button>
         </div>
-        <p class="hint" id="time-hint"></p>
+        <details class="time-meta">
+          <summary>时间口径说明（可选）</summary>
+          <p class="hint" id="time-hint"></p>
+        </details>
       </div>
       <div id="round-slot"></div>
       <label class="search" for="q">搜索案例
@@ -70,32 +69,34 @@
       <div class="empty" id="empty" hidden>没有符合当前筛选的案例。</div>
     </main>
 
-    <section class="panel" id="carry" aria-labelledby="carry-title">
-      <h2 id="carry-title">带走挑选</h2>
-      <p>导出当前案例的标题、类别、状态和原始来源。JSON 可在另一台浏览器导入。导入只按案例编号写入状态，不采用文件里的其他文字。挑选不会上传。</p>
-      <div class="actions">
-        <button type="button" id="export-csv">导出 CSV</button>
-        <button type="button" id="export-json">导出 JSON</button>
-        <label class="file-btn" for="import-file">导入 JSON
-          <input id="import-file" type="file" accept="application/json,.json">
-        </label>
-        <button type="button" id="clear-btn" class="quiet">清空挑选</button>
-      </div>
-      <p class="hint" id="io-msg" role="status"></p>
-    </section>
-
-    <section class="panel" id="calibration" aria-labelledby="calibration-title">
-      <h2 id="calibration-title">方向校准（可选）</h2>
-      <p>用三道偏好题快速记录这台浏览器里的筛选方向。只作为你的阅读参考，不会自动匹配案例，也不会上传。</p>
-      <div class="actions">
-        <button type="button" id="calibration-open">开始校准</button>
-        <button type="button" id="calibration-export">导出校准 JSON</button>
-        <label class="file-btn" for="calibration-import-file">导入校准 JSON
-          <input id="calibration-import-file" type="file" accept="application/json,.json">
-        </label>
-        <button type="button" id="calibration-reset" class="quiet">清空校准</button>
-      </div>
-      <p class="hint" id="calibration-summary" role="status">尚未填写。</p>
+    <section class="panel" id="secondary-tools" aria-labelledby="secondary-tools-title">
+      <h2 id="secondary-tools-title">辅助工具</h2>
+      <details id="carry">
+        <summary id="carry-title">带走挑选（导入 / 导出）</summary>
+        <p>导出当前案例的标题、类别、状态和原始来源。JSON 可在另一台浏览器导入。导入只按案例编号写入状态，不采用文件里的其他文字。挑选不会上传。</p>
+        <div class="actions">
+          <button type="button" id="export-csv">导出 CSV</button>
+          <button type="button" id="export-json">导出 JSON</button>
+          <label class="file-btn" for="import-file">导入 JSON
+            <input id="import-file" type="file" accept="application/json,.json">
+          </label>
+          <button type="button" id="clear-btn" class="quiet">清空挑选</button>
+        </div>
+        <p class="hint" id="io-msg" role="status"></p>
+      </details>
+      <details id="calibration">
+        <summary id="calibration-title">方向校准（可选）</summary>
+        <p>用三道偏好题快速记录这台浏览器里的筛选方向。只作为你的阅读参考，不会自动匹配案例，也不会上传。</p>
+        <div class="actions">
+          <button type="button" id="calibration-open">开始校准</button>
+          <button type="button" id="calibration-export">导出校准 JSON</button>
+          <label class="file-btn" for="calibration-import-file">导入校准 JSON
+            <input id="calibration-import-file" type="file" accept="application/json,.json">
+          </label>
+          <button type="button" id="calibration-reset" class="quiet">清空校准</button>
+        </div>
+        <p class="hint" id="calibration-summary" role="status">尚未填写。</p>
+      </details>
     </section>
 
     <section class="panel" id="limits" hidden>

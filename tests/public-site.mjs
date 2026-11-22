@@ -473,13 +473,18 @@ async function browserTests(origin) {
         vh: window.innerHeight,
         title: getComputedStyle(document.getElementById("book-title")).fontFamily,
         body: getComputedStyle(document.body).fontFamily,
+        bodyBg: getComputedStyle(document.body).backgroundColor,
+        bodyBgImage: getComputedStyle(document.body).backgroundImage,
+        stickyBgImage: getComputedStyle(document.getElementById("sticky")).backgroundImage,
+        cardBgImage: getComputedStyle(document.querySelector("article.card")).backgroundImage,
         font: document.fonts.check('600 32px "Source Serif 4"')
       };
     })`);
     check(barBox.h < 170 && barBox.h < barBox.vh * 0.34, "collapsed bar stays compact " + JSON.stringify(barBox));
-    check(barBox.title.includes("Source Serif 4") && barBox.title.includes("Songti SC") && barBox.title.includes("Noto Serif CJK SC"), "title stack is the self-hosted latin face then songti");
+    check(barBox.title.includes("PingFang SC") && barBox.title.includes("Noto Sans CJK SC") && !barBox.title.includes("Source Serif 4"), "title stack is minimal sans for CJK reading");
     check(barBox.body.includes("PingFang SC") && barBox.body.includes("Noto Sans CJK SC") && barBox.body.includes("Source Han Sans SC"), "body stack names phone sans faces");
-    check(barBox.font === true, "self-hosted semibold face loaded");
+    check(barBox.bodyBg === "rgb(255, 255, 255)" && barBox.bodyBgImage === "none" && barBox.stickyBgImage === "none" && barBox.cardBgImage === "none", "backgrounds are plain white without texture overlays");
+    check(barBox.font === false, "serif display face is no longer active in minimal mode");
     check(narrow.width === 360, "viewport is 360");
     check(narrow.overflow <= 1, "no page overflow at 360");
     check(narrow.filtersHidden === true && narrow.expanded === "false", "filters start collapsed on a narrow screen");
@@ -494,20 +499,17 @@ async function browserTests(origin) {
     check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("二十三例") && narrow.newWord === false, "lead explains twenty-three local cases without a fake new flag");
     const initialCalibration = await evaluate(cdp, sessionId, "document.getElementById('calibration-summary').textContent");
     check(initialCalibration === "尚未填写。", "first visit quiz summary starts unanswered");
+    const toolsCollapsed = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('#secondary-tools details')).every((node) => !node.open)");
+    check(toolsCollapsed === true, "secondary tools are collapsed by default");
     const initialOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))");
     check(initialOpacity.every((value) => value >= 0.999), "top cards are fully opaque on load " + JSON.stringify(initialOpacity));
     const addedCards = await evaluate(cdp, sessionId, `Promise.all(${JSON.stringify(ADDED)}.map(async (id) => {
       const img = document.querySelector("#card-" + id + " img");
       if (img && img.decode) { try { await img.decode(); } catch (err) {} }
-      const teaser = document.querySelector("#card-" + id + " .advice-teaser");
-      return { id, width: img ? img.naturalWidth : 0, advice: teaser ? teaser.textContent : "", title: document.querySelector("#card-" + id + " .title-link") ? document.querySelector("#card-" + id + " .title-link").textContent : "" };
+      const picker = document.querySelector("#card-" + id + " .status-select");
+      return { id, width: img ? img.naturalWidth : 0, statusValue: picker ? picker.value : "", title: document.querySelector("#card-" + id + " .title-link") ? document.querySelector("#card-" + id + " .title-link").textContent : "" };
     }))`);
-    check(addedCards.length === 3 && addedCards.every((card) => card.width > 0 && card.advice.includes("建议，非已落地") && card.title.length > 0), "new cases render a decoded still and the suggestion marker " + JSON.stringify(addedCards));
-    const teasers = await evaluate(cdp, sessionId, "Object.fromEntries([...document.querySelectorAll('article.card')].map((card) => [card.getAttribute('data-case-id'), card.querySelector('.advice-teaser') ? card.querySelector('.advice-teaser').textContent : '']))");
-    for (const id of ORIGINALS) {
-      const opening = ADVICE[id].split("。")[0];
-      check(teasers[id] && teasers[id].includes("建议，非已落地") && teasers[id].includes(opening), "card teaser keeps the suggestion opening for " + id);
-    }
+    check(addedCards.length === 3 && addedCards.every((card) => card.width > 0 && card.statusValue === "未处理" && card.title.length > 0), "new cases render a decoded still with compact status selector " + JSON.stringify(addedCards));
     const gaps = await evaluate(cdp, sessionId, `["ip-bluemoon-jingjing-2026","ip-jingpai-jiuling-2026","ip-coke-fanzhiyi-2026"].map((id) => {
       const shot = document.querySelector("#card-" + id + " .shot");
       return { id, linkOnly: shot.classList.contains("is-link-only"), failed: shot.classList.contains("is-failed"), imgs: shot.querySelectorAll("img").length, text: shot.innerText, hrefs: Array.from(shot.querySelectorAll("a")).map((node) => node.getAttribute("href")) };
@@ -525,7 +527,7 @@ async function browserTests(origin) {
     check(ipOnly.length === 10, "category filter shows the IP cases");
     await evaluate(cdp, sessionId, "document.getElementById('reset-filters').click()");
 
-    await evaluate(cdp, sessionId, "document.querySelector('#card-ip-tmall-fuli-2026 button[data-status=\"入选\"]').click(); document.querySelector('#card-brand-unilever-packaging-2026 button[data-status=\"入选\"]').click(); document.querySelector('#card-image-loreal-cisce-2026 button[data-status=\"候补\"]').click(); document.querySelector('#card-ip-coke-holidays-2025 button[data-status=\"暂不考虑\"]').click();");
+    await evaluate(cdp, sessionId, "var updates=[['ip-tmall-fuli-2026','入选'],['brand-unilever-packaging-2026','入选'],['image-loreal-cisce-2026','候补'],['ip-coke-holidays-2025','暂不考虑']]; updates.forEach(function(pair){ var sel=document.querySelector('#card-'+pair[0]+' .status-select'); sel.value=pair[1]; sel.dispatchEvent(new Event('change',{bubbles:true})); });");
     const after = await evaluate(cdp, sessionId, "Object.fromEntries(Array.from(document.querySelectorAll('[data-count-for]')).map((node) => [node.getAttribute('data-count-for'), node.textContent]))");
     check(after["入选"] === "2" && after["候补"] === "1" && after["暂不考虑"] === "1" && after["未处理"] === "19", "status counts follow the four choices");
     await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"status\"] button[data-value=\"入选\"]').click()");
@@ -536,7 +538,7 @@ async function browserTests(origin) {
     const empty = await evaluate(cdp, sessionId, "document.getElementById('empty').hidden === false && !!document.getElementById('empty-reset')");
     check(empty === true, "empty search offers a reset");
     await evaluate(cdp, sessionId, "document.getElementById('empty-reset').click()");
-    const restored = await evaluate(cdp, sessionId, "({shown: Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).length, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), query: document.getElementById('q').value})");
+    const restored = await evaluate(cdp, sessionId, "({shown: Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).length, status: document.querySelector('#card-ip-tmall-fuli-2026 .status-select').value, query: document.getElementById('q').value})");
     check(restored.shown === 23 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
 
     await evaluate(cdp, sessionId, "document.getElementById('calibration-open').click()");
@@ -574,13 +576,13 @@ async function browserTests(origin) {
     await evaluate(cdp, sessionId, "document.getElementById('cal-skip').click()");
     await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('复核摘要')");
     await evaluate(cdp, sessionId, "document.getElementById('cal-close').click()");
-    const calSummary = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, dialogOpen: document.getElementById('calibration-dialog').open, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status')})");
+    const calSummary = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, dialogOpen: document.getElementById('calibration-dialog').open, status: document.querySelector('#card-ip-tmall-fuli-2026 .status-select').value})");
     check(calSummary.dialogOpen === false && calSummary.summary.includes("已填写") && calSummary.summary.includes("Q1") && calSummary.status === "入选", "closing calibration keeps shortlist untouched and writes summary");
     const afterQuizOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))");
     check(afterQuizOpacity.every((value) => value >= 0.999), "cards remain fully opaque after closing quiz " + JSON.stringify(afterQuizOpacity));
     await evaluate(cdp, sessionId, "location.reload()");
     await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('calibration-summary')");
-    const calReload = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), keys: Object.keys(localStorage).sort()})");
+    const calReload = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-ip-tmall-fuli-2026 .status-select').value, keys: Object.keys(localStorage).sort()})");
     check(calReload.summary.includes("已填写") && calReload.status === "入选" && calReload.keys.includes("ai-brand-case-selection-v1") && calReload.keys.includes("ai-brand-case-calibration-v1"), "calibration persists independently from shortlist state");
 
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-tmall-fuli-2026 .title-link').click()");
@@ -591,7 +593,7 @@ async function browserTests(origin) {
       sections: Array.from(document.querySelectorAll('#reader h2')).map((node) => node.textContent),
       scale: document.querySelector('#reader .unverified') ? document.querySelector('#reader .unverified').textContent : '',
       frontier: document.querySelector('#reader .unrecorded') ? document.querySelector('#reader .unrecorded').textContent : '',
-      pressed: document.querySelector('#reader .stamp[aria-pressed="true"]').getAttribute('data-status'),
+      pressed: document.querySelector('#reader .status-select').value,
       source: !!document.querySelector('#reader .src-list a[href^="http"]'),
       note: document.getElementById('reader-warn').textContent,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -637,7 +639,7 @@ async function browserTests(origin) {
     await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-linkonly-360.png");
 
     await openAt(cdp, sessionId, origin + "/#case-ip-tmall-fuli-2026", 390);
-    const refreshed = await evaluate(cdp, sessionId, "({width: window.innerWidth, open: !document.getElementById('reader').hidden, status: document.querySelector('#reader .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
+    const refreshed = await evaluate(cdp, sessionId, "({width: window.innerWidth, open: !document.getElementById('reader').hidden, status: document.querySelector('#reader .status-select').value, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
     check(refreshed.width === 390 && refreshed.open === true && refreshed.status === "入选", "detail and selection survive refresh " + JSON.stringify(refreshed));
     check(refreshed.overflow <= 1, "no page overflow at 390");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
@@ -655,8 +657,8 @@ async function browserTests(origin) {
     check(failed.failed === true && failed.text.includes("图片未能显示") && failed.overflow <= 1, "a failed image keeps its frame and link");
 
     await evaluate(cdp, sessionId, "localStorage.setItem('ai-brand-case-selection-v1', JSON.stringify({'image-loreal-cisce-2026':'候补'})); location.href = location.pathname;");
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]')");
-    const migrated = await evaluate(cdp, sessionId, "document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.querySelector('#card-image-loreal-cisce-2026 .status-select')");
+    const migrated = await evaluate(cdp, sessionId, "document.querySelector('#card-image-loreal-cisce-2026 .status-select').value");
     check(migrated === "候补", "an existing plain selection map is kept after reload");
 
     await evaluate(cdp, sessionId, "document.getElementById('export-csv').click(); document.getElementById('export-json').click();");
@@ -676,7 +678,7 @@ async function browserTests(origin) {
     const found = await cdp.send("DOM.querySelector", { nodeId: docNode.root.nodeId, selector: "#import-file" }, sessionId);
     await cdp.send("DOM.setFileInputFiles", { files: [importFile], nodeId: found.nodeId }, sessionId);
     await new Promise((resolve) => setTimeout(resolve, 400));
-    const importedUi = await evaluate(cdp, sessionId, "({msg: document.getElementById('io-msg').textContent, loreal: document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status'), unilever: document.querySelector('#card-brand-unilever-packaging-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')})");
+    const importedUi = await evaluate(cdp, sessionId, "({msg: document.getElementById('io-msg').textContent, loreal: document.querySelector('#card-image-loreal-cisce-2026 .status-select').value, unilever: document.querySelector('#card-brand-unilever-packaging-2026 .status-select').value})");
     check(importedUi.msg.includes("已导入") && importedUi.loreal === "入选" && importedUi.unilever === "暂不考虑", "JSON import writes statuses for the stable ids");
     await evaluate(cdp, sessionId, "document.getElementById('calibration-export').click()");
     const calImportFile = path.join(os.tmpdir(), "selector-calibration-import.json");
@@ -688,7 +690,7 @@ async function browserTests(origin) {
     const calNode = await cdp.send("DOM.querySelector", { nodeId: docNode.root.nodeId, selector: "#calibration-import-file" }, sessionId);
     await cdp.send("DOM.setFileInputFiles", { files: [calImportFile], nodeId: calNode.nodeId }, sessionId);
     await new Promise((resolve) => setTimeout(resolve, 300));
-    const calImportedUi = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')})");
+    const calImportedUi = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-image-loreal-cisce-2026 .status-select').value})");
     check(calImportedUi.summary.includes("brand") || calImportedUi.summary.includes("品牌"), "calibration import updates local summary");
     check(calImportedUi.status === "入选", "calibration import does not alter shortlist statuses");
 
@@ -710,13 +712,42 @@ async function browserTests(origin) {
 
     await openAt(cdp, sessionId, origin + "/", 1440);
     const wide = await evaluate(cdp, sessionId, "({width: window.innerWidth, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, filters: document.getElementById('filters').hidden, resources: performance.getEntriesByType('resource').map((entry) => entry.name)})");
-    check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === false, "desktop shows filters without horizontal overflow");
+    check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === true, "desktop keeps advanced filters collapsed by default without overflow");
     check(wide.resources.every((name) => name.startsWith(origin)), "page only loads same-origin files");
+    await evaluate(cdp, sessionId, "document.getElementById('filter-toggle').click()");
+    const desktopExpanded = await evaluate(cdp, sessionId, "({hidden: document.getElementById('filters').hidden, expanded: document.getElementById('filter-toggle').getAttribute('aria-expanded'), hintVisible: !!document.querySelector('.time-meta summary')})");
+    check(desktopExpanded.hidden === false && desktopExpanded.expanded === "true" && desktopExpanded.hintVisible === true, "desktop advanced filters can be expanded and show optional time-basis details");
     const pageText = await evaluate(cdp, sessionId, "document.body.innerText");
     for (const phrase of PHRASES) {
       if (hasPrivatePhrase(pageText, phrase)) failures.push("rendered page contains a private phrase");
     }
     await shot(cdp, sessionId, "/opt/cursor/artifacts/desktop-list-top-1440-refresh.png");
+    const linkOnlyGeometry = await evaluate(cdp, sessionId, `(() => {
+      var card = document.getElementById("card-ip-bluemoon-jingjing-2026");
+      var body = card && card.querySelector(".card-body");
+      var shot = card && card.querySelector(".shot.is-link-only");
+      if (!card || !body || !shot) return null;
+      var cardRect = card.getBoundingClientRect();
+      var bodyRect = body.getBoundingClientRect();
+      var shotRect = shot.getBoundingClientRect();
+      return {
+        cardWidth: Math.round(cardRect.width),
+        bodyWidth: Math.round(bodyRect.width),
+        shotWidth: Math.round(shotRect.width),
+        leftGap: Math.round(bodyRect.left - cardRect.left),
+        rightGap: Math.round(cardRect.right - bodyRect.right)
+      };
+    })()`);
+    check(
+      !!linkOnlyGeometry &&
+      linkOnlyGeometry.bodyWidth >= Math.round(linkOnlyGeometry.cardWidth * 0.82) &&
+      linkOnlyGeometry.shotWidth >= Math.round(linkOnlyGeometry.cardWidth * 0.82) &&
+      linkOnlyGeometry.leftGap <= 20 &&
+      linkOnlyGeometry.rightGap <= 20,
+      "link-only card text and media stubs use full card width in desktop gallery " + JSON.stringify(linkOnlyGeometry)
+    );
+    await evaluate(cdp, sessionId, "var target=document.getElementById('card-ip-bluemoon-jingjing-2026'); if(target){ target.scrollIntoView({block:'center'});} ");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/desktop-linkonly-grid-1440-refresh.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
     await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.getElementById('reader-title').textContent.includes('Sephora')");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");

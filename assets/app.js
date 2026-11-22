@@ -517,11 +517,11 @@
       if (countEl) countEl.textContent = "显示 " + visible + " / " + state.cases.length;
     }
 
-    function paintPressed() {
-      doc.querySelectorAll(".stamp").forEach(function (btn) {
-        var id = btn.getAttribute("data-for");
-        var on = btn.getAttribute("data-status") === statusOf(state.map, id);
-        btn.setAttribute("aria-pressed", on ? "true" : "false");
+    function paintStatusControls() {
+      doc.querySelectorAll(".status-select").forEach(function (select) {
+        var id = select.getAttribute("data-for");
+        var value = statusOf(state.map, id);
+        if (select.value !== value) select.value = value;
       });
     }
 
@@ -551,7 +551,7 @@
           empty.appendChild(reset);
         }
       }
-      paintPressed();
+      paintStatusControls();
       refreshCounts(visible);
     }
 
@@ -724,20 +724,18 @@
       try { root.sessionStorage.setItem(SCROLL_KEY, id); } catch (err) { /* scroll still uses the hash */ }
     }
 
-    function stampBar(id) {
-      var box = el(doc, "div", { class: "stamps", role: "group", "aria-label": "挑选状态" });
+    function statusControl(id, compact) {
+      var wrap = el(doc, "label", { class: compact ? "status-picker compact" : "status-picker" });
+      wrap.appendChild(el(doc, "span", { class: "status-label" }, compact ? "状态" : "挑选状态"));
+      var select = el(doc, "select", { class: "status-select", "data-for": id, "aria-label": "挑选状态" });
       STATUSES.forEach(function (name) {
-        var btn = el(doc, "button", {
-          type: "button",
-          class: "stamp",
-          "data-status": name,
-          "data-for": id,
-          "aria-pressed": statusOf(state.map, id) === name ? "true" : "false"
-        }, name);
-        btn.addEventListener("click", function () { setStatus(id, name); });
-        box.appendChild(btn);
+        var option = el(doc, "option", { value: name }, name);
+        if (statusOf(state.map, id) === name) option.selected = true;
+        select.appendChild(option);
       });
-      return box;
+      select.addEventListener("change", function () { setStatus(id, select.value); });
+      wrap.appendChild(select);
+      return wrap;
     }
 
     function attachImage(shot, media, item) {
@@ -848,15 +846,8 @@
       heading.appendChild(el(doc, "a", { class: "title-link", href: "#case-" + item.id }, item.title));
       body.appendChild(heading);
       body.appendChild(el(doc, "p", { class: "brand" }, item.brand || ""));
-      body.appendChild(stampBar(item.id));
+      body.appendChild(statusControl(item.id, true));
       if (item.summary) body.appendChild(el(doc, "p", { class: "summary" }, item.summary));
-      if (item.advice) {
-        var teaser = el(doc, "p", { class: "advice-teaser" });
-        teaser.appendChild(el(doc, "span", { class: "advice-kicker" }, "建议，非已落地"));
-        var opening = String(item.advice).split("。")[0];
-        teaser.appendChild(doc.createTextNode(" " + opening + "。"));
-        body.appendChild(teaser);
-      }
       var source = primarySource(item);
       if (source.url) {
         var row = el(doc, "p", { class: "primary" });
@@ -933,7 +924,7 @@
       reader.appendChild(el(doc, "h1", { id: "reader-title" }, item.title));
       reader.appendChild(el(doc, "p", { class: "brand" }, (item.brand || "") + (item.source_type ? " · " + item.source_type : "")));
       var bar = el(doc, "div", { class: "reader-status" });
-      bar.appendChild(stampBar(item.id));
+      bar.appendChild(statusControl(item.id, false));
       bar.appendChild(el(doc, "p", { class: "foot-note", id: "reader-warn" }, warn && !warn.hidden ? warn.textContent : "挑选保存在这台浏览器，刷新后还在。"));
       reader.appendChild(bar);
       if (item.summary) reader.appendChild(el(doc, "p", { class: "summary" }, item.summary));
@@ -1099,12 +1090,12 @@
     function syncFilterChrome() {
       state.wide = isWide();
       if (!filters || !filterToggle) return;
-      if (state.wide) {
-        filters.hidden = false;
-        filterToggle.setAttribute("aria-expanded", "true");
-      } else if (filterToggle.getAttribute("data-user") !== "open") {
+      if (filterToggle.getAttribute("data-user") !== "open") {
         filters.hidden = true;
         filterToggle.setAttribute("aria-expanded", "false");
+      } else {
+        filters.hidden = false;
+        filterToggle.setAttribute("aria-expanded", "true");
       }
       filterToggle.textContent = filters.hidden ? "筛选" : "收起筛选";
     }
