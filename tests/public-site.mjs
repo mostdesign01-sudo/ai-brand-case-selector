@@ -492,6 +492,10 @@ async function browserTests(origin) {
     check(narrow.appendix.includes("现已作为案例收入本册") && !narrow.appendix.includes("未计入6例") && !narrow.appendix.includes("不计入6例"), "appendix includes the former exclusions");
     check(narrow.contain === true && narrow.crop === false, "poster uses contain and a film still stays cropped");
     check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("二十三例") && narrow.newWord === false, "lead explains twenty-three local cases without a fake new flag");
+    const initialCalibration = await evaluate(cdp, sessionId, "document.getElementById('calibration-summary').textContent");
+    check(initialCalibration === "尚未填写。", "first visit quiz summary starts unanswered");
+    const initialOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))");
+    check(initialOpacity.every((value) => value >= 0.999), "top cards are fully opaque on load " + JSON.stringify(initialOpacity));
     const addedCards = await evaluate(cdp, sessionId, `Promise.all(${JSON.stringify(ADDED)}.map(async (id) => {
       const img = document.querySelector("#card-" + id + " img");
       if (img && img.decode) { try { await img.decode(); } catch (err) {} }
@@ -542,6 +546,9 @@ async function browserTests(origin) {
     await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"goals\"][data-option=\"ip-vivid\"]').click(); document.querySelector('#cal-content input[data-question=\"goals\"][data-option=\"capability-trust\"]').click();");
     await evaluate(cdp, sessionId, "document.getElementById('cal-next').click()");
     await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 2 题')");
+    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/mobile-quiz-question-390-refresh.png");
+    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 360, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
     await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"ip-experience\"][data-option=\"respond-memory\"]').click()");
     await evaluate(cdp, sessionId, "document.getElementById('cal-back').click()");
     await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 1 题')");
@@ -559,9 +566,6 @@ async function browserTests(origin) {
     await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('复核摘要')");
     const calReview = await evaluate(cdp, sessionId, "({skipHidden: document.getElementById('cal-skip').hidden, rows: document.querySelectorAll('.cal-review-item').length, text: document.getElementById('cal-content').innerText})");
     check(calReview.skipHidden === true && calReview.rows === 3 && calReview.text.includes("编辑本题"), "review page is editable");
-    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-quiz-390.png");
-    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 360, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
     await evaluate(cdp, sessionId, "document.querySelector('[data-edit-calibration=\"2\"]').click()");
     await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 3 题')");
     await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"exclude-forms\"][data-option=\"exclude-none\"]').click()");
@@ -572,6 +576,8 @@ async function browserTests(origin) {
     await evaluate(cdp, sessionId, "document.getElementById('cal-close').click()");
     const calSummary = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, dialogOpen: document.getElementById('calibration-dialog').open, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status')})");
     check(calSummary.dialogOpen === false && calSummary.summary.includes("已填写") && calSummary.summary.includes("Q1") && calSummary.status === "入选", "closing calibration keeps shortlist untouched and writes summary");
+    const afterQuizOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))");
+    check(afterQuizOpacity.every((value) => value >= 0.999), "cards remain fully opaque after closing quiz " + JSON.stringify(afterQuizOpacity));
     await evaluate(cdp, sessionId, "location.reload()");
     await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('calibration-summary')");
     const calReload = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), keys: Object.keys(localStorage).sort()})");
@@ -641,7 +647,7 @@ async function browserTests(origin) {
     await new Promise((resolve) => setTimeout(resolve, 50));
     const back = await evaluate(cdp, sessionId, "({hash: location.hash, top: document.getElementById('card-ip-tmall-fuli-2026').getBoundingClientRect().top, scroll: window.scrollY, visible: document.getElementById('card-ip-tmall-fuli-2026').hidden === false})");
     check(back.hash.indexOf("#card-ip-tmall-fuli-2026") === 0 && back.visible === true && back.top > -40 && back.top < 220, "return lands on the same case " + JSON.stringify(back));
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-390.png");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/mobile-list-mid-390-refresh.png");
 
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-coke-holidays-2025 img').src = 'assets/missing-file.jpg'");
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -686,6 +692,22 @@ async function browserTests(origin) {
     check(calImportedUi.summary.includes("brand") || calImportedUi.summary.includes("品牌"), "calibration import updates local summary");
     check(calImportedUi.status === "入选", "calibration import does not alter shortlist statuses");
 
+    await evaluate(cdp, sessionId, "localStorage.removeItem('ai-brand-case-selection-v1'); localStorage.removeItem('ai-brand-case-calibration-v1'); sessionStorage.removeItem('ai-brand-case-return-v1');");
+    await cdp.send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] }, sessionId);
+    await openAt(cdp, sessionId, origin + "/", 390);
+    const reduced = await evaluate(cdp, sessionId, `({
+      summary: document.getElementById('calibration-summary').textContent,
+      opacities: Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))
+    })`);
+    check(reduced.summary === "尚未填写。", "fresh reduced-motion visit still starts with unanswered quiz");
+    check(reduced.opacities.every((value) => value >= 0.999), "cards stay fully opaque under reduced-motion " + JSON.stringify(reduced.opacities));
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/mobile-list-top-390-refresh.png");
+    await evaluate(cdp, sessionId, "window.scrollTo(0, Math.floor(document.body.scrollHeight * 0.35))");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/mobile-list-mid-scroll-390-refresh.png");
+    const midOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((card) => { var box = card.getBoundingClientRect(); return !card.hidden && box.bottom > 0 && box.top < innerHeight; }).map((card) => Number(getComputedStyle(card).opacity))");
+    check(midOpacity.length > 0 && midOpacity.every((value) => value >= 0.999), "mid-scroll visible cards stay fully opaque " + JSON.stringify(midOpacity));
+    await cdp.send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "no-preference" }] }, sessionId);
+
     await openAt(cdp, sessionId, origin + "/", 1440);
     const wide = await evaluate(cdp, sessionId, "({width: window.innerWidth, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, filters: document.getElementById('filters').hidden, resources: performance.getEntriesByType('resource').map((entry) => entry.name)})");
     check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === false, "desktop shows filters without horizontal overflow");
@@ -694,7 +716,7 @@ async function browserTests(origin) {
     for (const phrase of PHRASES) {
       if (hasPrivatePhrase(pageText, phrase)) failures.push("rendered page contains a private phrase");
     }
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-1440.png");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/desktop-list-top-1440-refresh.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
     await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.getElementById('reader-title').textContent.includes('Sephora')");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
