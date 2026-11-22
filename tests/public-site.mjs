@@ -1,5 +1,6 @@
 import { createRequire } from "node:module";
 import { spawn, spawnSync } from "node:child_process";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import http from "node:http";
 import os from "node:os";
@@ -46,7 +47,13 @@ const PHRASES = [
   ["/ho", "me/"].join(""),
   ["/cursor/", "stores"].join(""),
   ["private-book", "let"].join(""),
-  ["private-out", "put"].join("")
+  ["private-out", "put"].join(""),
+  ["project", "_support"].join(""),
+  ["de", "wu", "_form"].join(""),
+  ["special-", "ip"].join(""),
+  ["special-", "brand"].join(""),
+  ["special-", "image"].join(""),
+  ["special-", "companion"].join("")
 ];
 
 function textFiles(dir) {
@@ -99,31 +106,93 @@ const ADDED = [
   "brand-zalando-aicontent-2026",
   "image-florasis-sensory-2026"
 ];
-const ALL_IDS = ORIGINALS.concat(ADDITIONS, ADDED);
-const RECENT_IDS = [
+const DAILY = [
+  "ip-mixue-xuewang-2026",
+  "ip-kpn-louis-2025",
+  "ip-donutking-buddy-2026",
+  "brand-bosideng-bsdai-2026",
+  "brand-asos-fermat-2026",
+  "image-jd-liquor-auth-2026",
+  "image-entrupy-mobile-2026",
+  "image-moncler-outerwear-guide-2026",
+  "image-asos-stylist-2026"
+];
+const ALL_IDS = ORIGINALS.concat(ADDITIONS, ADDED, DAILY);
+const DEFAULT_RECENT_IDS = [
   "brand-anta-ai365-2026",
+  "brand-bosideng-bsdai-2026",
   "brand-loreal-creaitech-2026",
   "brand-puma-aicreator-2026",
   "brand-unilever-packaging-2026",
+  "image-asos-stylist-2026",
   "image-florasis-sensory-2026",
+  "image-jd-liquor-auth-2026",
   "image-kerastase-kscan-2026",
   "image-loreal-cisce-2026",
   "image-lv-comelz-2026",
+  "image-moncler-outerwear-guide-2026",
   "ip-bluemoon-jingjing-2026",
   "ip-coke-fanzhiyi-2026",
+  "ip-donutking-buddy-2026",
   "ip-fanta-haunted-2026",
   "ip-jingpai-jiuling-2026",
+  "ip-mixue-xuewang-2026",
   "ip-tmall-fuli-2026",
   "ip-unisport-zoai-2026"
 ];
+const RECENT_IDS = DEFAULT_RECENT_IDS.filter((id) => id !== "image-asos-stylist-2026");
 const NINETY_IDS = [
   "brand-puma-aicreator-2026",
   "image-florasis-sensory-2026",
+  "image-jd-liquor-auth-2026",
+  "image-moncler-outerwear-guide-2026",
   "ip-bluemoon-jingjing-2026",
   "ip-fanta-haunted-2026",
   "ip-jingpai-jiuling-2026",
+  "ip-mixue-xuewang-2026",
   "ip-tmall-fuli-2026"
 ];
+const ORDER_IP = [
+  "ip-mixue-xuewang-2026",
+  "ip-meitu-mcd-ppg-2025",
+  "ip-tmall-fuli-2026",
+  "ip-coke-fanzhiyi-2026",
+  "ip-bluemoon-jingjing-2026",
+  "ip-jingpai-jiuling-2026",
+  "ip-donutking-buddy-2026",
+  "ip-kpn-louis-2025",
+  "ip-coke-holidays-2025",
+  "ip-adidas-backyard-2026",
+  "ip-fanta-haunted-2026",
+  "ip-unisport-zoai-2026",
+  "ip-mikkeller-switchhit-2026"
+];
+const ORDER_BRAND = [
+  "brand-coke-fizzion-2025",
+  "brand-unilever-packaging-2026",
+  "brand-puma-aicreator-2026",
+  "brand-zalando-aicontent-2026",
+  "brand-loreal-creaitech-2026",
+  "brand-anta-ai365-2026",
+  "brand-bosideng-bsdai-2026",
+  "brand-asos-fermat-2026"
+];
+const ORDER_IMAGE = [
+  "image-zhuanzhuan-aiauth-2026",
+  "image-jd-liquor-auth-2026",
+  "image-therealreal-auth-2025",
+  "image-entrupy-mobile-2026",
+  "image-lv-comelz-2026",
+  "image-loreal-cisce-2026",
+  "image-kerastase-kscan-2026",
+  "image-moncler-outerwear-guide-2026",
+  "image-florasis-sensory-2026",
+  "image-asos-stylist-2026",
+  "image-sephora-chatgpt-2026"
+];
+const ORDER_ALL = ORDER_IP.concat(ORDER_BRAND, ORDER_IMAGE);
+const FERMAT_URL = "https://www.asosplc.com/news-and-media/latest-news/asos-partners-with-fermat-to-upskill-all-designers-in-generative-ai/";
+const FERMAT_DEAD = ["asos-collaborates-with-google-", "cloud-and-fermat"].join("");
 const LINK_ONLY = [
   "ip-bluemoon-jingjing-2026",
   "ip-jingpai-jiuling-2026",
@@ -157,10 +226,13 @@ function scanAndLogic() {
       if (hasPrivatePhrase(text, phrase)) failures.push(rel + " contains a private phrase");
     }
   }
-  check(JSON.stringify(ids) === JSON.stringify(ALL_IDS), "ids keep the original order and append the three new cases");
-  check(new Set(ids).size === 23 && ids.length === 23, "twenty-three unique ids");
-  for (const id of ADDED) check(ids.includes(id), "new case is present " + id);
+  check(JSON.stringify(ids) === JSON.stringify(ALL_IDS), "ids keep the original order and append the nine daily cases");
+  check(new Set(ids).size === 32 && ids.length === 32, "thirty-two unique ids");
+  for (const id of DAILY) check(ids.includes(id), "new case is present " + id);
   check(data.cases.slice(0, 20).every((item) => item.verified_on !== "2026-11-22"), "original cases keep their verification dates");
+  check(data.cases.slice(23).every((item) => item.verified_on === "2026-11-22"), "daily cases are verified on 2026-11-22");
+  const preserved = crypto.createHash("sha256").update(data.cases.slice(0, 23).map((item) => [item.id, item.window, item.window_note, item.verified_on || ""].join("\u001f")).join("\u001e")).digest("hex");
+  check(preserved === "7209e4cc3d083e106e2ab185b4668fee5a27b0bf241224a04a86921ab33e3613", "original twenty-three keep id, window, window note, and verification date");
   const addedById = Object.fromEntries(data.cases.slice(20).map((item) => [item.id, item]));
   check(addedById["brand-puma-aicreator-2026"].date_iso === "2026-08-27" && addedById["brand-puma-aicreator-2026"].category === "brand" && addedById["brand-puma-aicreator-2026"].confidence === "high", "puma case keeps the verified facts");
   check(addedById["brand-zalando-aicontent-2026"].date_iso === "2026-05-06" && addedById["brand-zalando-aicontent-2026"].category === "brand" && addedById["brand-zalando-aicontent-2026"].confidence === "high", "zalando case keeps the verified facts");
@@ -171,20 +243,34 @@ function scanAndLogic() {
     else check(typeof item.advice === "string" && item.advice.includes("建议，非已落地"), "added suggestion keeps the public marker for " + item.id);
   }
   check(!Object.prototype.hasOwnProperty.call(data, "directions"), "no proposal block in public evidence");
-  const expectedCounts = { ip: 10, brand: 6, image: 7 };
+  const expectedCounts = { ip: 13, brand: 8, image: 11 };
   for (const category of ["ip", "brand", "image"]) {
     check(data.cases.filter((item) => item.category === category).length === expectedCounts[category], expectedCounts[category] + " cases in " + category);
   }
   const recent = data.cases.filter((item) => api.isRecent(item.date_iso)).map((item) => item.id).sort();
-  check(JSON.stringify(recent) === JSON.stringify(RECENT_IDS), "recent marker matches the default six-month window");
+  check(JSON.stringify(recent) === JSON.stringify(DEFAULT_RECENT_IDS), "recent marker matches the default six-month window");
   const basis = api.basisOf(data);
   check(basis.six_months_from === "2026-05-21" && basis.filter_six_months_from === "2026-05-21" && basis.twelve_months_from === "2025-11-21" && basis.filter_twelve_months_from === "2025-11-21" && basis.ninety_days_from === "2026-08-23", "site filters use the 2026-11-21 basis");
   check(api.inWindow("2026-05-21", "6m", basis) === true && api.inWindow("2026-05-20", "6m", basis) === false, "site six-month boundary is 2026-05-21");
   const siteRecent = data.cases.filter((item) => api.isRecent(item.date_iso, basis)).map((item) => item.id).sort();
-  check(JSON.stringify(siteRecent) === JSON.stringify(RECENT_IDS), "site recent marker matches the current twenty-three");
-  check(data.verified_on === "2026-11-22" && data.selected_count === 23, "site count and date are updated");
-  check(data.lead.includes("二十三例") && data.lead.includes("挑选只保存在这台浏览器"), "lead names twenty-three cases");
-  check(!data.scope_note.includes("只收6例") && data.scope_note.includes("23例") && data.scope_note.includes("2026-11-22"), "scope describes the twenty-three case set");
+  check(JSON.stringify(siteRecent) === JSON.stringify(RECENT_IDS), "site recent marker matches the locked 2026-11-21 window");
+  check(data.verified_on === "2026-11-22" && data.selected_count === 32, "site count and date are updated");
+  check(data.lead.includes("三十二例") && data.lead.includes("挑选只保存在这台浏览器"), "lead names thirty-two cases");
+  check(!data.scope_note.includes("只收6例") && data.scope_note.includes("现收32例") && data.scope_note.includes("IP 13例、品牌 8例、形象 11例") && data.scope_note.includes("2026-11-22"), "scope describes the thirty-two case set");
+  function visibleIds(category) {
+    return api.galleryOrder(data.cases, category).filter((item) => category === "all" || item.category === category).map((item) => item.id);
+  }
+  check(JSON.stringify(visibleIds("all")) === JSON.stringify(ORDER_ALL), "all-view order groups categories and ranks inside each");
+  check(JSON.stringify(visibleIds("ip")) === JSON.stringify(ORDER_IP), "IP view orders by rank");
+  check(JSON.stringify(visibleIds("brand")) === JSON.stringify(ORDER_BRAND), "brand view orders by rank");
+  check(JSON.stringify(visibleIds("image")) === JSON.stringify(ORDER_IMAGE), "image view orders by rank");
+  const fermat = data.cases.find((item) => item.id === "brand-asos-fermat-2026");
+  const fermatLinks = JSON.stringify({ sources: fermat.sources, media: fermat.media, media_links: fermat.media_links });
+  check(fermat.sources[0].url === FERMAT_URL && fermat.media[0].original === FERMAT_URL && !fermatLinks.includes(FERMAT_DEAD) && !fermat.brand.includes("Google"), "Fermat uses the live official URL and drops the Google Cloud partnership");
+  check(fermat.summary.includes("草图") && fermat.ai_where.includes("设计运营") && fermat.scale_evidence[0].claim.includes("公司陈述"), "Fermat stays a design-operations case with company-stated savings");
+  const moncler = data.cases.find((item) => item.id === "image-moncler-outerwear-guide-2026");
+  check(moncler.summary.includes("403") && moncler.summary.includes("不以") && moncler.summary.includes("作为已再次复核的事实") && moncler.frontier_mechanism.includes("不得写成已经上线") && moncler.media[0].caption.includes("旗舰") && moncler.media[0].caption.includes("不是Outerwear Guide的产品界面"), "Moncler keeps only the re-checked Guide facts and a flagship photo");
+  check(!moncler.sources.some((src) => String(src.status).includes("200，已通读官方英文新闻稿")), "Moncler official PDF is not treated as re-read");
   const appendixText = JSON.stringify(data.appendix);
   check(!appendixText.includes("未计入6例") && !appendixText.includes("不计入6例") && !appendixText.includes("不凑进6例"), "appendix drops the six-case exclusion wording");
   check(appendixText.includes("看球搭子AI范志毅") && appendixText.includes("现已作为案例收入本册"), "fanzhiyi appendix now includes the case");
@@ -203,7 +289,13 @@ function scanAndLogic() {
     chars(0x9274, 0x522b, 0x5361),
     chars(0x7b7e, 0x6536, 0x4f53, 0x9a8c),
     ["#00D", "0DB"].join(""),
-    chars(0x4e13, 0x9879)
+    chars(0x4e13, 0x9879),
+    ["project", "_support"].join(""),
+    ["de", "wu", "_form"].join(""),
+    ["special-", "ip"].join(""),
+    ["special-", "brand"].join(""),
+    ["special-", "image"].join(""),
+    ["special-", "companion"].join("")
   ];
   let privacyHits = 0;
   for (const rel of publicText) {
@@ -246,8 +338,9 @@ function scanAndLogic() {
   const lv = data.cases.find((item) => item.id === "image-lv-comelz-2026");
   check(lv.media[0].caption.includes("不是工厂量产车间照片") && lv.summary.includes("VivaTech 2026"), "lv remains an exhibition demo");
   const csvRows = fs.readFileSync(path.join(root, "evidence.csv"), "utf8").trim().split(/\n/);
-  check(csvRows.length === 24 && csvRows[1].startsWith("ip-coke-holidays-2025,") && csvRows[20].startsWith("image-sephora-chatgpt-2026,") && csvRows[21].startsWith("brand-puma-aicreator-2026,") && csvRows[22].startsWith("brand-zalando-aicontent-2026,") && csvRows[23].startsWith("image-florasis-sensory-2026,"), "csv keeps the original rows and lists all twenty-three");
-  check(csvRows[21].includes(",increment-2026-11-22,90d,2026-11-22") && csvRows[22].includes(",increment-2026-11-22,12m,2026-11-22") && csvRows[23].includes(",increment-2026-11-22,90d,2026-11-22"), "csv rows record round, window, and verification date");
+  const dailyRows = csvRows.slice(24);
+  check(csvRows.length === 33 && csvRows[1].startsWith("ip-coke-holidays-2025,") && csvRows[20].startsWith("image-sephora-chatgpt-2026,") && csvRows[21].startsWith("brand-puma-aicreator-2026,") && csvRows[22].startsWith("brand-zalando-aicontent-2026,") && csvRows[23].startsWith("image-florasis-sensory-2026,") && JSON.stringify(dailyRows.map((row) => row.split(",")[0])) === JSON.stringify(DAILY), "csv keeps the original rows and lists all thirty-two");
+  check(csvRows[21].includes(",increment-2026-11-22,90d,2026-11-22") && csvRows[22].includes(",increment-2026-11-22,12m,2026-11-22") && csvRows[23].includes(",increment-2026-11-22,90d,2026-11-22") && dailyRows.every((row) => row.includes(",increment-2026-11-22-daily,") && row.includes(",2026-11-22,")), "csv rows record round, window, and verification date");
   const appSource = fs.readFileSync(path.join(root, "assets/app.js"), "utf8");
   const css = fs.readFileSync(path.join(root, "assets/styles.css"), "utf8");
   check(css.includes("Songti SC") && css.includes("PingFang SC") && css.includes("Noto Serif CJK SC") && css.includes("Noto Sans CJK SC") && css.includes("Source Han Serif SC") && css.includes("Source Han Sans SC"), "cjk stack names faces that exist on phones");
@@ -283,11 +376,11 @@ function scanAndLogic() {
   const saved = JSON.parse(storage.getItem(api.KEY));
   check(saved["ip-tmall-fuli-2026"] === "入选" && !saved.selections, "saved value stays a plain map");
   const exported = api.toExport(data.cases, loaded.map);
-  check(exported.schema === api.SCHEMA && exported.selections.length === 23, "JSON export keeps the v1 schema");
+  check(exported.schema === api.SCHEMA && exported.selections.length === 32, "JSON export keeps the v1 schema");
   const csv = api.toCsv(exported.selections);
   check(csv.charCodeAt(0) === 0xfeff && csv.includes("天猫") && csv.includes("候补"), "CSV export keeps title, status, and source");
   const imported = api.validateImport(JSON.stringify(exported), ids);
-  check(imported.ok && imported.selections.length === 23, "JSON export imports back");
+  check(imported.ok && imported.selections.length === 32, "JSON export imports back");
   check(api.validateImport(JSON.stringify({ schema: "other", selections: [] }), ids).ok === false, "unknown schema is rejected");
   const calStorage = memoryStorage();
   const calSeed = {
@@ -426,7 +519,7 @@ async function waitFor(cdp, sessionId, expression) {
 async function openAt(cdp, sessionId, url, width) {
   await cdp.send("Emulation.setDeviceMetricsOverride", { width, height: 900, deviceScaleFactor: 1, mobile: width < 800 }, sessionId);
   await cdp.send("Page.navigate", { url }, sessionId);
-  await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('loading').hidden");
+  await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 32 && document.getElementById('loading').hidden");
 }
 
 async function shot(cdp, sessionId, file) {
@@ -490,13 +583,13 @@ async function browserTests(origin) {
     check(narrow.filtersHidden === true && narrow.expanded === "false", "filters start collapsed on a narrow screen");
     check(JSON.stringify(narrow.recent) === JSON.stringify(RECENT_IDS), "recent marks follow the site six-month window");
     check(JSON.stringify(narrow.tight) === JSON.stringify(NINETY_IDS), "ninety-day marks follow the site date");
-    check(narrow.counts["未处理"] === "23" && narrow.counts["入选"] === "0", "status counts start untreated");
-    check(narrow.cats.ip === 10 && narrow.cats.brand === 6 && narrow.cats.image === 7, "category counts match the twenty-three cases");
-    check(narrow.count === "显示 23 / 23", "count shows twenty-three cases");
+    check(narrow.counts["未处理"] === "32" && narrow.counts["入选"] === "0", "status counts start untreated");
+    check(narrow.cats.ip === 13 && narrow.cats.brand === 8 && narrow.cats.image === 11, "category counts match the thirty-two cases");
+    check(narrow.count === "显示 32 / 32", "count shows thirty-two cases");
     check(narrow.hint.includes("2026-05-21") && narrow.hint.includes("2026-11-21"), "time hint documents the site date");
     check(narrow.appendix.includes("现已作为案例收入本册") && !narrow.appendix.includes("未计入6例") && !narrow.appendix.includes("不计入6例"), "appendix includes the former exclusions");
     check(narrow.contain === true && narrow.crop === false, "poster uses contain and a film still stays cropped");
-    check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("二十三例") && narrow.newWord === false, "lead explains twenty-three local cases without a fake new flag");
+    check(narrow.lead.includes("挑选只保存在这台浏览器") && narrow.lead.includes("三十二例") && narrow.newWord === false, "lead explains thirty-two local cases without a fake new flag");
     const initialCalibration = await evaluate(cdp, sessionId, "document.getElementById('calibration-summary').textContent");
     check(initialCalibration === "尚未填写。", "first visit quiz summary starts unanswered");
     const toolsCollapsed = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('#secondary-tools details')).every((node) => !node.open)");
@@ -510,6 +603,15 @@ async function browserTests(origin) {
       return { id, width: img ? img.naturalWidth : 0, statusValue: picker ? picker.value : "", title: document.querySelector("#card-" + id + " .title-link") ? document.querySelector("#card-" + id + " .title-link").textContent : "" };
     }))`);
     check(addedCards.length === 3 && addedCards.every((card) => card.width > 0 && card.statusValue === "未处理" && card.title.length > 0), "new cases render a decoded still with compact status selector " + JSON.stringify(addedCards));
+    const dailyCards = await evaluate(cdp, sessionId, `Promise.all(${JSON.stringify(DAILY)}.map(async (id) => {
+      const img = document.querySelector("#card-" + id + " img");
+      if (img && img.decode) { try { await img.decode(); } catch (err) {} }
+      const picker = document.querySelector("#card-" + id + " .status-select");
+      return { id, width: img ? img.naturalWidth : 0, statusValue: picker ? picker.value : "", title: document.querySelector("#card-" + id + " .title-link") ? document.querySelector("#card-" + id + " .title-link").textContent : "" };
+    }))`);
+    check(dailyCards.length === 9 && dailyCards.every((card) => card.width > 0 && card.statusValue === "未处理" && card.title.length > 0), "daily cases render a decoded still " + JSON.stringify(dailyCards));
+    const initialOrder = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).map((node) => node.getAttribute('data-case-id'))");
+    check(JSON.stringify(initialOrder) === JSON.stringify(ORDER_ALL), "all-view gallery groups IP, brand, then image by rank");
     const gaps = await evaluate(cdp, sessionId, `["ip-bluemoon-jingjing-2026","ip-jingpai-jiuling-2026","ip-coke-fanzhiyi-2026"].map((id) => {
       const shot = document.querySelector("#card-" + id + " .shot");
       return { id, linkOnly: shot.classList.contains("is-link-only"), failed: shot.classList.contains("is-failed"), imgs: shot.querySelectorAll("img").length, text: shot.innerText, hrefs: Array.from(shot.querySelectorAll("a")).map((node) => node.getAttribute("href")) };
@@ -523,13 +625,19 @@ async function browserTests(origin) {
     const opened = await evaluate(cdp, sessionId, "({hidden: document.getElementById('filters').hidden, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth})");
     check(opened.hidden === false && opened.overflow <= 1, "opened filters stay inside 360");
     await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"category\"] button[data-value=\"ip\"]').click()");
-    const ipOnly = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id')).sort()");
-    check(ipOnly.length === 10, "category filter shows the IP cases");
+    const ipOnly = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id'))");
+    check(JSON.stringify(ipOnly) === JSON.stringify(ORDER_IP), "category filter shows IP cases in rank order");
+    await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"category\"] button[data-value=\"brand\"]').click()");
+    const brandOnly = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id'))");
+    check(JSON.stringify(brandOnly) === JSON.stringify(ORDER_BRAND), "category filter shows brand cases in rank order");
+    await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"category\"] button[data-value=\"image\"]').click()");
+    const imageOnly = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id'))");
+    check(JSON.stringify(imageOnly) === JSON.stringify(ORDER_IMAGE), "category filter shows image cases in rank order");
     await evaluate(cdp, sessionId, "document.getElementById('reset-filters').click()");
 
     await evaluate(cdp, sessionId, "var updates=[['ip-tmall-fuli-2026','入选'],['brand-unilever-packaging-2026','入选'],['image-loreal-cisce-2026','候补'],['ip-coke-holidays-2025','暂不考虑']]; updates.forEach(function(pair){ var sel=document.querySelector('#card-'+pair[0]+' .status-select'); sel.value=pair[1]; sel.dispatchEvent(new Event('change',{bubbles:true})); });");
     const after = await evaluate(cdp, sessionId, "Object.fromEntries(Array.from(document.querySelectorAll('[data-count-for]')).map((node) => [node.getAttribute('data-count-for'), node.textContent]))");
-    check(after["入选"] === "2" && after["候补"] === "1" && after["暂不考虑"] === "1" && after["未处理"] === "19", "status counts follow the four choices");
+    check(after["入选"] === "2" && after["候补"] === "1" && after["暂不考虑"] === "1" && after["未处理"] === "28", "status counts follow the four choices");
     await evaluate(cdp, sessionId, "document.querySelector('[data-filter-group=\"status\"] button[data-value=\"入选\"]').click()");
     const picked = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).map((node) => node.getAttribute('data-case-id')).sort()");
     check(JSON.stringify(picked) === JSON.stringify(["brand-unilever-packaging-2026", "ip-tmall-fuli-2026"]), "入选 filter shows the two selected cases");
@@ -539,7 +647,7 @@ async function browserTests(origin) {
     check(empty === true, "empty search offers a reset");
     await evaluate(cdp, sessionId, "document.getElementById('empty-reset').click()");
     const restored = await evaluate(cdp, sessionId, "({shown: Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).length, status: document.querySelector('#card-ip-tmall-fuli-2026 .status-select').value, query: document.getElementById('q').value})");
-    check(restored.shown === 23 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
+    check(restored.shown === 32 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
 
     await evaluate(cdp, sessionId, "document.getElementById('calibration-open').click()");
     await waitFor(cdp, sessionId, "document.getElementById('calibration-dialog').open && document.querySelectorAll('#cal-content input[type=\"checkbox\"]').length > 0");
@@ -581,7 +689,7 @@ async function browserTests(origin) {
     const afterQuizOpacity = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('article.card')).slice(0, 8).map((card) => Number(getComputedStyle(card).opacity))");
     check(afterQuizOpacity.every((value) => value >= 0.999), "cards remain fully opaque after closing quiz " + JSON.stringify(afterQuizOpacity));
     await evaluate(cdp, sessionId, "location.reload()");
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('calibration-summary')");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 32 && document.getElementById('calibration-summary')");
     const calReload = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-ip-tmall-fuli-2026 .status-select').value, keys: Object.keys(localStorage).sort()})");
     check(calReload.summary.includes("已填写") && calReload.status === "入选" && calReload.keys.includes("ai-brand-case-selection-v1") && calReload.keys.includes("ai-brand-case-calibration-v1"), "calibration persists independently from shortlist state");
 
@@ -657,7 +765,7 @@ async function browserTests(origin) {
     check(failed.failed === true && failed.text.includes("图片未能显示") && failed.overflow <= 1, "a failed image keeps its frame and link");
 
     await evaluate(cdp, sessionId, "localStorage.setItem('ai-brand-case-selection-v1', JSON.stringify({'image-loreal-cisce-2026':'候补'})); location.href = location.pathname;");
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.querySelector('#card-image-loreal-cisce-2026 .status-select')");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 32 && document.querySelector('#card-image-loreal-cisce-2026 .status-select')");
     const migrated = await evaluate(cdp, sessionId, "document.querySelector('#card-image-loreal-cisce-2026 .status-select').value");
     check(migrated === "候补", "an existing plain selection map is kept after reload");
 
@@ -794,7 +902,7 @@ async function bundleFile() {
     const url = "file://" + path.join(out, "index.html");
     await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 800, deviceScaleFactor: 1, mobile: true }, sessionId);
     await cdp.send("Page.navigate", { url }, sessionId);
-    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('loading').hidden");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 32 && document.getElementById('loading').hidden");
     const offline = await evaluate(cdp, sessionId, "document.getElementById('error') ? document.getElementById('error').textContent : ''");
     check(offline === "", "bundled file opens without fetching evidence.json");
   } finally {
