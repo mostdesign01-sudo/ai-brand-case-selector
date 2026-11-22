@@ -437,6 +437,15 @@ button.quiet, .quiet { background: transparent; }
   border-top: 1px solid var(--ink);
   margin-top: 12px;
 }
+#calibration {
+  position: relative;
+  background: linear-gradient(180deg, rgba(251, 248, 242, 0.88), rgba(251, 248, 242, 0.98));
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 14px 12px 10px;
+}
+#calibration .actions { margin-top: 10px; }
+#calibration-summary { margin-top: 10px; }
 .panel h2 {
   font-size: 1.35rem;
   margin: 0 0 8px;
@@ -585,6 +594,52 @@ dialog {
 }
 dialog::backdrop { background: rgba(28, 25, 21, 0.45); }
 dialog h2 { margin-top: 0; }
+.cal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+#calibration-dialog {
+  width: min(680px, calc(100% - 24px));
+}
+#cal-content h3 {
+  margin: 8px 0 10px;
+  font-family: var(--serif);
+  font-size: 1.18rem;
+}
+.cal-options {
+  display: grid;
+  gap: 8px;
+}
+.cal-option {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  background: var(--sheet);
+  padding: 10px;
+}
+.cal-option input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+}
+.cal-review-item {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+.cal-review-q {
+  margin: 0;
+  font-family: var(--mono);
+  color: var(--muted);
+}
+.cal-review-a {
+  margin: 6px 0 8px;
+}
 
 @media (min-width: 800px) {
   .mast, .sticky, #filters, main, .panel, footer, #reader, #extra {
@@ -610,6 +665,7 @@ dialog h2 { margin-top: 0; }
   }
   .card h2 { font-size: 1.55rem; }
   .card-body { padding: 14px 16px 16px; }
+  #calibration { padding: 18px 16px 12px; }
   #reader { padding-top: 18px; }
   #reader .section {
     display: grid;

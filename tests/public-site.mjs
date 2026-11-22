@@ -255,7 +255,8 @@ function scanAndLogic() {
   check(css.includes("source-serif-4-latin-400.woff2") && css.includes("source-serif-4-latin-600.woff2"), "latin display face is referenced locally");
   check(fs.existsSync(path.join(root, "assets/fonts/source-serif-4-latin-400.woff2")) && fs.existsSync(path.join(root, "assets/fonts/source-serif-4-latin-600.woff2")), "latin display files are in the repo");
   check(css.includes("prefers-reduced-motion") && css.includes(":focus-visible") && css.includes(":focus:not(:focus-visible)"), "focus and reduced motion stay explicit");
-  check(appSource.includes('var KEY = "ai-brand-case-selection-v1"') && appSource.includes('var SCHEMA = "ai-brand-case-selection/v1"') && appSource.includes('var SCROLL_KEY = "ai-brand-case-return-v1"'), "storage keys stay literal");
+  check(appSource.includes('var KEY = "ai-brand-case-selection-v1"') && appSource.includes('var SCHEMA = "ai-brand-case-selection/v1"') && appSource.includes('var SCROLL_KEY = "ai-brand-case-return-v1"'), "selection storage keys stay literal");
+  check(appSource.includes('var CALIBRATION_KEY = "ai-brand-case-calibration-v1"') && appSource.includes('var CALIBRATION_SCHEMA = "ai-brand-case-calibration/v1"'), "calibration storage key uses an isolated schema");
   check(appSource.includes("画面载入中") && appSource.includes("图片未能显示") && appSource.includes("建议，非已落地") && appSource.includes('section("对标建议"'), "existing labels stay");
   check(api.inWindow("2026-05-19", "6m") === true && api.inWindow("2026-05-18", "6m") === false, "public six-month boundary stays 2026-05-19");
   const privateBasis = { six_months_from: "2026-05-20", twelve_months_from: "2025-11-20" };
@@ -288,6 +289,25 @@ function scanAndLogic() {
   const imported = api.validateImport(JSON.stringify(exported), ids);
   check(imported.ok && imported.selections.length === 23, "JSON export imports back");
   check(api.validateImport(JSON.stringify({ schema: "other", selections: [] }), ids).ok === false, "unknown schema is rejected");
+  const calStorage = memoryStorage();
+  const calSeed = {
+    schema: api.CALIBRATION_SCHEMA,
+    updated_at: "2026-11-22T00:00:00.000Z",
+    answers: {
+      goals: ["ip-vivid", "brand-consistent"],
+      "exclude-forms": ["exclude-none", "exclude-short-film"]
+    }
+  };
+  calStorage.setItem(api.CALIBRATION_KEY, JSON.stringify(calSeed));
+  const loadedCal = api.loadCalibration(calStorage);
+  check(loadedCal.error === false, "calibration data loads");
+  check((loadedCal.data.answers.goals || []).length === 2, "calibration keeps multi-select choices");
+  check(JSON.stringify(loadedCal.data.answers["exclude-forms"]) === JSON.stringify(["exclude-none"]), "exclusive exclusion answer trims other options");
+  check(api.saveCalibration(calStorage, loadedCal.data) === true, "calibration save succeeds");
+  const calExport = api.calibrationExportData(loadedCal.data);
+  check(calExport.schema === api.CALIBRATION_SCHEMA && calExport.answers.goals.length === 2, "calibration export uses the isolated schema");
+  check(api.validateCalibrationImport(JSON.stringify(calExport)).ok === true, "calibration export re-imports");
+  check(api.validateCalibrationImport(JSON.stringify({ schema: api.SCHEMA, answers: {} })).ok === false, "wrong schema is rejected for calibration import");
   check(api.parseCaseHash("#case-ip-tmall-fuli-2026") === "ip-tmall-fuli-2026", "detail hash round-trips");
 }
 
@@ -515,6 +535,48 @@ async function browserTests(origin) {
     const restored = await evaluate(cdp, sessionId, "({shown: Array.from(document.querySelectorAll('article.card')).filter((node) => !node.hidden).length, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), query: document.getElementById('q').value})");
     check(restored.shown === 23 && restored.status === "入选" && restored.query === "", "reset clears the search and keeps the shortlist " + JSON.stringify(restored));
 
+    await evaluate(cdp, sessionId, "document.getElementById('calibration-open').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('calibration-dialog').open && document.querySelectorAll('#cal-content input[type=\"checkbox\"]').length > 0");
+    const calStart = await evaluate(cdp, sessionId, "({progress: document.getElementById('cal-progress').textContent, backDisabled: document.getElementById('cal-back').disabled, boxes: document.querySelectorAll('#cal-content input[type=\"checkbox\"]').length})");
+    check(calStart.progress.includes("第 1 题") && calStart.backDisabled === true && calStart.boxes === 4, "calibration opens on question one");
+    await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"goals\"][data-option=\"ip-vivid\"]').click(); document.querySelector('#cal-content input[data-question=\"goals\"][data-option=\"capability-trust\"]').click();");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-next').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 2 题')");
+    await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"ip-experience\"][data-option=\"respond-memory\"]').click()");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-back').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 1 题')");
+    const calBack = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('#cal-content input[data-question=\"goals\"]')).filter((node) => node.checked).map((node) => node.getAttribute('data-option')).sort()");
+    check(JSON.stringify(calBack) === JSON.stringify(["capability-trust", "ip-vivid"]), "back navigation keeps multi-select choices");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-next').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 2 题')");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-next').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 3 题')");
+    await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"exclude-forms\"][data-option=\"exclude-none\"]').click()");
+    await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"exclude-forms\"][data-option=\"exclude-short-film\"]').click()");
+    const calExclusive = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('#cal-content input[data-question=\"exclude-forms\"]')).filter((node) => node.checked).map((node) => node.getAttribute('data-option'))");
+    check(JSON.stringify(calExclusive) === JSON.stringify(["exclude-short-film"]), "exclusive none is cleared once another exclusion is chosen");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-next').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('复核摘要')");
+    const calReview = await evaluate(cdp, sessionId, "({skipHidden: document.getElementById('cal-skip').hidden, rows: document.querySelectorAll('.cal-review-item').length, text: document.getElementById('cal-content').innerText})");
+    check(calReview.skipHidden === true && calReview.rows === 3 && calReview.text.includes("编辑本题"), "review page is editable");
+    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-quiz-390.png");
+    await cdp.send("Emulation.setDeviceMetricsOverride", { width: 360, height: 900, deviceScaleFactor: 1, mobile: true }, sessionId);
+    await evaluate(cdp, sessionId, "document.querySelector('[data-edit-calibration=\"2\"]').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('第 3 题')");
+    await evaluate(cdp, sessionId, "document.querySelector('#cal-content input[data-question=\"exclude-forms\"][data-option=\"exclude-none\"]').click()");
+    const calNone = await evaluate(cdp, sessionId, "Array.from(document.querySelectorAll('#cal-content input[data-question=\"exclude-forms\"]')).filter((node) => node.checked).map((node) => node.getAttribute('data-option'))");
+    check(JSON.stringify(calNone) === JSON.stringify(["exclude-none"]), "exclude-none is exclusive when selected");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-skip').click()");
+    await waitFor(cdp, sessionId, "document.getElementById('cal-progress').textContent.includes('复核摘要')");
+    await evaluate(cdp, sessionId, "document.getElementById('cal-close').click()");
+    const calSummary = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, dialogOpen: document.getElementById('calibration-dialog').open, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status')})");
+    check(calSummary.dialogOpen === false && calSummary.summary.includes("已填写") && calSummary.summary.includes("Q1") && calSummary.status === "入选", "closing calibration keeps shortlist untouched and writes summary");
+    await evaluate(cdp, sessionId, "location.reload()");
+    await waitFor(cdp, sessionId, "document.querySelectorAll('article.card').length === 23 && document.getElementById('calibration-summary')");
+    const calReload = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-ip-tmall-fuli-2026 .stamp[aria-pressed=\"true\"]').getAttribute('data-status'), keys: Object.keys(localStorage).sort()})");
+    check(calReload.summary.includes("已填写") && calReload.status === "入选" && calReload.keys.includes("ai-brand-case-selection-v1") && calReload.keys.includes("ai-brand-case-calibration-v1"), "calibration persists independently from shortlist state");
+
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-tmall-fuli-2026 .title-link').click()");
     await waitFor(cdp, sessionId, "document.getElementById('reader') && !document.getElementById('reader').hidden && document.getElementById('reader-title')");
     const detail = await evaluate(cdp, sessionId, `({
@@ -579,6 +641,7 @@ async function browserTests(origin) {
     await new Promise((resolve) => setTimeout(resolve, 50));
     const back = await evaluate(cdp, sessionId, "({hash: location.hash, top: document.getElementById('card-ip-tmall-fuli-2026').getBoundingClientRect().top, scroll: window.scrollY, visible: document.getElementById('card-ip-tmall-fuli-2026').hidden === false})");
     check(back.hash.indexOf("#card-ip-tmall-fuli-2026") === 0 && back.visible === true && back.top > -40 && back.top < 220, "return lands on the same case " + JSON.stringify(back));
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-390.png");
 
     await evaluate(cdp, sessionId, "document.querySelector('#card-ip-coke-holidays-2025 img').src = 'assets/missing-file.jpg'");
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -609,24 +672,37 @@ async function browserTests(origin) {
     await new Promise((resolve) => setTimeout(resolve, 400));
     const importedUi = await evaluate(cdp, sessionId, "({msg: document.getElementById('io-msg').textContent, loreal: document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status'), unilever: document.querySelector('#card-brand-unilever-packaging-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')})");
     check(importedUi.msg.includes("已导入") && importedUi.loreal === "入选" && importedUi.unilever === "暂不考虑", "JSON import writes statuses for the stable ids");
+    await evaluate(cdp, sessionId, "document.getElementById('calibration-export').click()");
+    const calImportFile = path.join(os.tmpdir(), "selector-calibration-import.json");
+    fs.writeFileSync(calImportFile, JSON.stringify({
+      schema: "ai-brand-case-calibration/v1",
+      updated_at: "2026-11-22T07:00:00.000Z",
+      answers: { goals: ["brand-consistent"], "exclude-forms": ["exclude-short-film", "exclude-prompt-tool"] }
+    }));
+    const calNode = await cdp.send("DOM.querySelector", { nodeId: docNode.root.nodeId, selector: "#calibration-import-file" }, sessionId);
+    await cdp.send("DOM.setFileInputFiles", { files: [calImportFile], nodeId: calNode.nodeId }, sessionId);
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    const calImportedUi = await evaluate(cdp, sessionId, "({summary: document.getElementById('calibration-summary').textContent, status: document.querySelector('#card-image-loreal-cisce-2026 button[aria-pressed=\"true\"]').getAttribute('data-status')})");
+    check(calImportedUi.summary.includes("brand") || calImportedUi.summary.includes("品牌"), "calibration import updates local summary");
+    check(calImportedUi.status === "入选", "calibration import does not alter shortlist statuses");
 
-    await openAt(cdp, sessionId, origin + "/", 1280);
+    await openAt(cdp, sessionId, origin + "/", 1440);
     const wide = await evaluate(cdp, sessionId, "({width: window.innerWidth, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, filters: document.getElementById('filters').hidden, resources: performance.getEntriesByType('resource').map((entry) => entry.name)})");
-    check(wide.width === 1280 && wide.overflow <= 1 && wide.filters === false, "desktop shows filters without horizontal overflow");
+    check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === false, "desktop shows filters without horizontal overflow");
     check(wide.resources.every((name) => name.startsWith(origin)), "page only loads same-origin files");
     const pageText = await evaluate(cdp, sessionId, "document.body.innerText");
     for (const phrase of PHRASES) {
       if (hasPrivatePhrase(pageText, phrase)) failures.push("rendered page contains a private phrase");
     }
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-1280.png");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-list-1440.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
     await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.getElementById('reader-title').textContent.includes('Sephora')");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-1280.png");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-1440.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-ip-jingpai-jiuling-2026" }, sessionId);
     await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.querySelector('#reader .shot.is-link-only')");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");
-    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-linkonly-1280.png");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/public-detail-linkonly-1440.png");
   } finally {
     cdp.close();
     chrome.proc.kill("SIGKILL");

@@ -12,8 +12,43 @@
   var KEY = "ai-brand-case-selection-v1";
   var SCHEMA = "ai-brand-case-selection/v1";
   var SCROLL_KEY = "ai-brand-case-return-v1";
+  var CALIBRATION_KEY = "ai-brand-case-calibration-v1";
+  var CALIBRATION_SCHEMA = "ai-brand-case-calibration/v1";
   var PUBLIC_BASIS = { six_months_from: "2026-05-19", twelve_months_from: "2025-11-19" };
   var DEFAULT_LEAD = "已核验的公开案例。先看画面和日期，再读证据，再做挑选。挑选只保存在这台浏览器。";
+  var CALIBRATION_QUESTIONS = [
+    {
+      id: "goals",
+      prompt: "这次项目最想先达成什么？",
+      options: [
+        { id: "ip-vivid", label: "做出更鲜明、让人喜欢的IP" },
+        { id: "brand-consistent", label: "建立更有辨识度且一致的品牌视觉" },
+        { id: "capability-trust", label: "让专业能力被看见且可信" },
+        { id: "explore-first", label: "先探索方向，再决定最终形态" }
+      ]
+    },
+    {
+      id: "ip-experience",
+      prompt: "如果做IP，你更想优先看到哪些体验？",
+      options: [
+        { id: "story-follow", label: "持续追角色与故事更新" },
+        { id: "emotion-actions", label: "用贴纸、动作表达情绪" },
+        { id: "respond-memory", label: "能互动并有回应或记忆感" },
+        { id: "co-create", label: "允许用户共创自己的角色内容" }
+      ]
+    },
+    {
+      id: "exclude-forms",
+      prompt: "作为年度主项目，哪些形态你想先排除？",
+      options: [
+        { id: "exclude-short-film", label: "单支广告或短片" },
+        { id: "exclude-asset-library", label: "持续贴纸/壁纸/动作素材库" },
+        { id: "exclude-chat-companion", label: "聊天或记忆陪伴型产品" },
+        { id: "exclude-prompt-tool", label: "提示词驱动的共创工具" },
+        { id: "exclude-none", label: "暂不排除任何形态", exclusive: true }
+      ]
+    }
+  ];
 
   function basisOf(data) {
     var time = (data && data.time_basis) || {};
@@ -187,6 +222,101 @@
     }
   }
 
+  function calibrationBlank() {
+    return { answers: blankMap(), updated_at: "" };
+  }
+
+  function calibrationQuestionById(id) {
+    var i;
+    for (i = 0; i < CALIBRATION_QUESTIONS.length; i += 1) {
+      if (CALIBRATION_QUESTIONS[i].id === id) return CALIBRATION_QUESTIONS[i];
+    }
+    return null;
+  }
+
+  function sanitizeCalibrationAnswers(raw) {
+    var answers = blankMap();
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return answers;
+    CALIBRATION_QUESTIONS.forEach(function (question) {
+      var value = raw[question.id];
+      if (!Array.isArray(value)) return;
+      var allow = blankMap();
+      var exclusive = "";
+      question.options.forEach(function (option) {
+        allow[option.id] = true;
+        if (option.exclusive) exclusive = option.id;
+      });
+      var list = [];
+      value.forEach(function (optionId) {
+        if (typeof optionId === "string" && allow[optionId] && list.indexOf(optionId) < 0) list.push(optionId);
+      });
+      if (exclusive && list.indexOf(exclusive) >= 0) list = [exclusive];
+      answers[question.id] = list;
+    });
+    return answers;
+  }
+
+  function loadCalibration(storage) {
+    var result = { data: calibrationBlank(), error: false };
+    try {
+      if (!storage || typeof storage.getItem !== "function") return result;
+      var raw = storage.getItem(CALIBRATION_KEY);
+      if (raw == null || raw === "") return result;
+      var data = JSON.parse(raw);
+      if (!data || typeof data !== "object" || Array.isArray(data)) {
+        result.error = true;
+        return result;
+      }
+      if (data.schema && data.schema !== CALIBRATION_SCHEMA) {
+        result.error = true;
+        return result;
+      }
+      result.data = {
+        answers: sanitizeCalibrationAnswers(data.answers),
+        updated_at: typeof data.updated_at === "string" ? data.updated_at : ""
+      };
+    } catch (err) {
+      result.error = true;
+    }
+    return result;
+  }
+
+  function calibrationExportData(data) {
+    return {
+      schema: CALIBRATION_SCHEMA,
+      updated_at: data.updated_at || "",
+      answers: sanitizeCalibrationAnswers(data.answers)
+    };
+  }
+
+  function saveCalibration(storage, data) {
+    try {
+      storage.setItem(CALIBRATION_KEY, JSON.stringify(calibrationExportData(data)));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function validateCalibrationImport(text) {
+    if (typeof text !== "string") return { ok: false, errors: ["文件不是文本"] };
+    if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
+    if (text.length > 200000) return { ok: false, errors: ["文件过大"] };
+    var data;
+    try { data = JSON.parse(text); }
+    catch (err) { return { ok: false, errors: ["不是合法的 JSON"] }; }
+    if (!data || typeof data !== "object" || Array.isArray(data)) return { ok: false, errors: ["JSON 须为对象"] };
+    if (data.schema !== CALIBRATION_SCHEMA) return { ok: false, errors: ["无法识别的校准文件"] };
+    return {
+      ok: true,
+      data: {
+        answers: sanitizeCalibrationAnswers(data.answers),
+        updated_at: typeof data.updated_at === "string" ? data.updated_at : ""
+      },
+      errors: []
+    };
+  }
+
   function validateImport(text, knownIds) {
     if (typeof text !== "string") return { ok: false, selections: [], errors: ["文件不是文本"], skipped: 0 };
     if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
@@ -314,14 +444,17 @@
     var library = doc.getElementById("library-view");
     var filters = doc.getElementById("filters");
     var filterToggle = doc.getElementById("filter-toggle");
+    var calibrationSummary = doc.getElementById("calibration-summary");
     var state = {
       cases: [],
       map: blankMap(),
+      calibration: calibrationBlank(),
       basis: PUBLIC_BASIS,
       data: null,
       openId: "",
       filters: { category: "all", window: "all", status: "all", query: "", round: "all" },
-      wide: true
+      wide: true,
+      calStep: 0
     };
 
     function showError(message) {
@@ -438,6 +571,139 @@
       else state.map[id] = name;
       persist();
       apply();
+    }
+
+    function calibrationCount() {
+      var done = 0;
+      CALIBRATION_QUESTIONS.forEach(function (question) {
+        if ((state.calibration.answers[question.id] || []).length) done += 1;
+      });
+      return done;
+    }
+
+    function calibrationSummaryText() {
+      var done = calibrationCount();
+      if (!done) return "尚未填写。";
+      var bits = [];
+      CALIBRATION_QUESTIONS.forEach(function (question) {
+        var chosen = state.calibration.answers[question.id] || [];
+        if (!chosen.length) return;
+        var labels = [];
+        chosen.forEach(function (optionId) {
+          var found = (question.options || []).find(function (opt) { return opt.id === optionId; });
+          labels.push(found ? found.label : optionId);
+        });
+        bits.push("Q" + (bits.length + 1) + "：" + labels.join("；"));
+      });
+      return "已填写 " + done + " / " + CALIBRATION_QUESTIONS.length + " 题。 " + bits.join(" ｜ ");
+    }
+
+    function paintCalibrationSummary() {
+      if (!calibrationSummary) return;
+      calibrationSummary.textContent = calibrationSummaryText();
+    }
+
+    function persistCalibration() {
+      var storage = root.localStorage;
+      if (!storage) return false;
+      state.calibration.updated_at = new Date().toISOString();
+      var ok = saveCalibration(storage, state.calibration);
+      paintCalibrationSummary();
+      return ok;
+    }
+
+    function calibrationQuestionMarkup(question) {
+      var wrap = el(doc, "div", { class: "cal-question" });
+      wrap.appendChild(el(doc, "h3", null, question.prompt));
+      var group = el(doc, "div", { class: "cal-options", role: "group", "aria-label": question.prompt });
+      var selected = state.calibration.answers[question.id] || [];
+      question.options.forEach(function (option) {
+        var row = el(doc, "label", { class: "cal-option" });
+        var input = el(doc, "input", {
+          type: "checkbox",
+          "data-question": question.id,
+          "data-option": option.id
+        });
+        if (selected.indexOf(option.id) >= 0) input.checked = true;
+        if (option.exclusive) input.setAttribute("data-exclusive", "true");
+        row.appendChild(input);
+        row.appendChild(el(doc, "span", null, option.label));
+        group.appendChild(row);
+      });
+      wrap.appendChild(group);
+      return wrap;
+    }
+
+    function calibrationReviewMarkup() {
+      var wrap = el(doc, "div", { class: "cal-review" });
+      wrap.appendChild(el(doc, "h3", null, "校准摘要（可编辑）"));
+      CALIBRATION_QUESTIONS.forEach(function (question, index) {
+        var block = el(doc, "div", { class: "cal-review-item" });
+        block.appendChild(el(doc, "p", { class: "cal-review-q" }, "Q" + (index + 1) + " · " + question.prompt));
+        var chosen = state.calibration.answers[question.id] || [];
+        var labels = [];
+        chosen.forEach(function (id) {
+          var opt = (question.options || []).find(function (entry) { return entry.id === id; });
+          if (opt) labels.push(opt.label);
+        });
+        block.appendChild(el(doc, "p", { class: "cal-review-a" }, labels.length ? labels.join("；") : "未选择"));
+        var editBtn = el(doc, "button", {
+          type: "button",
+          class: "text-btn",
+          "data-edit-calibration": String(index)
+        }, "编辑本题");
+        block.appendChild(editBtn);
+        wrap.appendChild(block);
+      });
+      return wrap;
+    }
+
+    function renderCalibrationStep() {
+      var dialog = doc.getElementById("calibration-dialog");
+      var content = doc.getElementById("cal-content");
+      var progress = doc.getElementById("cal-progress");
+      var next = doc.getElementById("cal-next");
+      var back = doc.getElementById("cal-back");
+      var skip = doc.getElementById("cal-skip");
+      if (!dialog || !content || !next || !back || !skip || !progress) return;
+      content.textContent = "";
+      var onReview = state.calStep >= CALIBRATION_QUESTIONS.length;
+      if (onReview) {
+        content.appendChild(calibrationReviewMarkup());
+        progress.textContent = "复核摘要";
+        next.textContent = "完成";
+        skip.hidden = true;
+      } else {
+        var question = CALIBRATION_QUESTIONS[state.calStep];
+        content.appendChild(calibrationQuestionMarkup(question));
+        progress.textContent = "第 " + (state.calStep + 1) + " 题 / 共 " + CALIBRATION_QUESTIONS.length + " 题";
+        next.textContent = state.calStep === CALIBRATION_QUESTIONS.length - 1 ? "查看摘要" : "下一步";
+        skip.hidden = false;
+      }
+      back.disabled = state.calStep === 0;
+    }
+
+    function toggleCalibrationOption(questionId, optionId, checked, exclusive) {
+      var question = calibrationQuestionById(questionId);
+      if (!question) return;
+      var current = (state.calibration.answers[questionId] || []).slice();
+      var next = [];
+      current.forEach(function (value) {
+        if (value !== optionId) next.push(value);
+      });
+      if (checked) {
+        if (exclusive) next = [optionId];
+        else {
+          next = next.filter(function (value) {
+            var found = question.options.find(function (opt) { return opt.id === value; });
+            return !(found && found.exclusive);
+          });
+          next.push(optionId);
+        }
+      }
+      state.calibration.answers[questionId] = next;
+      persistCalibration();
+      renderCalibrationStep();
     }
 
     function setGroup(group, value) {
@@ -865,6 +1131,51 @@
       }
       if (doc.defaultView) doc.defaultView.addEventListener("resize", syncFilterChrome);
       if (doc.defaultView) doc.defaultView.addEventListener("hashchange", syncRoute);
+      var calDialog = doc.getElementById("calibration-dialog");
+      var calOpen = doc.getElementById("calibration-open");
+      var calClose = doc.getElementById("cal-close");
+      var calBack = doc.getElementById("cal-back");
+      var calNext = doc.getElementById("cal-next");
+      var calSkip = doc.getElementById("cal-skip");
+      var calContent = doc.getElementById("cal-content");
+      if (calOpen && calDialog) calOpen.addEventListener("click", function () {
+        state.calStep = 0;
+        renderCalibrationStep();
+        calDialog.showModal();
+      });
+      if (calClose && calDialog) calClose.addEventListener("click", function () { calDialog.close(); });
+      if (calBack) calBack.addEventListener("click", function () {
+        if (state.calStep > 0) state.calStep -= 1;
+        renderCalibrationStep();
+      });
+      if (calSkip) calSkip.addEventListener("click", function () {
+        if (state.calStep < CALIBRATION_QUESTIONS.length) state.calStep += 1;
+        renderCalibrationStep();
+      });
+      if (calNext && calDialog) calNext.addEventListener("click", function () {
+        if (state.calStep >= CALIBRATION_QUESTIONS.length) {
+          calDialog.close();
+          return;
+        }
+        state.calStep += 1;
+        renderCalibrationStep();
+      });
+      if (calContent) calContent.addEventListener("change", function (event) {
+        var input = event.target;
+        if (!input || input.tagName !== "INPUT" || input.type !== "checkbox") return;
+        toggleCalibrationOption(
+          input.getAttribute("data-question"),
+          input.getAttribute("data-option"),
+          !!input.checked,
+          input.getAttribute("data-exclusive") === "true"
+        );
+      });
+      if (calContent) calContent.addEventListener("click", function (event) {
+        var editBtn = event.target.closest("[data-edit-calibration]");
+        if (!editBtn) return;
+        state.calStep = Number(editBtn.getAttribute("data-edit-calibration") || 0);
+        renderCalibrationStep();
+      });
 
       function download(filename, mime, text) {
         var blob = new Blob([text], { type: mime });
@@ -887,6 +1198,37 @@
       if (jsonBtn) jsonBtn.addEventListener("click", function () {
         download("ai-brand-selection.json", "application/json;charset=utf-8", JSON.stringify(toExport(state.cases, state.map), null, 2));
         if (ioMsg) ioMsg.textContent = "已导出 JSON。";
+      });
+      var calExport = doc.getElementById("calibration-export");
+      if (calExport) calExport.addEventListener("click", function () {
+        download("ai-brand-calibration.json", "application/json;charset=utf-8", JSON.stringify(calibrationExportData(state.calibration), null, 2));
+        paintCalibrationSummary();
+      });
+      var calImport = doc.getElementById("calibration-import-file");
+      if (calImport) calImport.addEventListener("change", function () {
+        var file = calImport.files && calImport.files[0];
+        calImport.value = "";
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onerror = function () { if (calibrationSummary) calibrationSummary.textContent = "无法读取校准文件。"; };
+        reader.onload = function () {
+          var parsed = validateCalibrationImport(String(reader.result || ""));
+          if (!parsed.ok) {
+            if (calibrationSummary) calibrationSummary.textContent = parsed.errors.join("；");
+            return;
+          }
+          state.calibration = parsed.data;
+          persistCalibration();
+          if (calDialog && calDialog.open) renderCalibrationStep();
+        };
+        reader.readAsText(file, "utf-8");
+      });
+      var calReset = doc.getElementById("calibration-reset");
+      if (calReset) calReset.addEventListener("click", function () {
+        state.calibration = calibrationBlank();
+        try { root.localStorage.removeItem(CALIBRATION_KEY); } catch (err) { /* ignore */ }
+        paintCalibrationSummary();
+        if (calDialog && calDialog.open) renderCalibrationStep();
       });
       var input = doc.getElementById("import-file");
       if (input) input.addEventListener("change", function () {
@@ -978,6 +1320,10 @@
       var loaded = loadMap(root.localStorage, data.cases.map(function (item) { return item.id; }));
       state.map = loaded.map;
       if (loaded.error) setWarn("本浏览器里的挑选记录无法读取，已按未处理显示。之后的挑选仍会尝试保存。", true);
+      var loadedCalibration = loadCalibration(root.localStorage);
+      state.calibration = loadedCalibration.data;
+      if (loadedCalibration.error && calibrationSummary) calibrationSummary.textContent = "本地校准记录无法读取，可重新填写。";
+      else paintCalibrationSummary();
       data.cases.forEach(function (item, index) { list.appendChild(renderCard(item, index)); });
       renderNotes(data);
       var extra = doc.getElementById("extra");
@@ -1029,6 +1375,13 @@
     validateImport: validateImport,
     toCsv: toCsv,
     toExport: toExport,
+    CALIBRATION_KEY: CALIBRATION_KEY,
+    CALIBRATION_SCHEMA: CALIBRATION_SCHEMA,
+    CALIBRATION_QUESTIONS: CALIBRATION_QUESTIONS,
+    loadCalibration: loadCalibration,
+    saveCalibration: saveCalibration,
+    validateCalibrationImport: validateCalibrationImport,
+    calibrationExportData: calibrationExportData,
     loadMap: loadMap,
     saveMap: saveMap,
     safeHttpUrl: safeHttpUrl,
