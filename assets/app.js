@@ -81,6 +81,30 @@
     return !!iso && iso >= basis.six_months_from;
   }
 
+  function categoryGroup(category) {
+    if (category === "ip") return 0;
+    if (category === "brand") return 1;
+    if (category === "image") return 2;
+    return 9;
+  }
+
+  function categoryRank(item) {
+    var n = Number(item && item.rank_in_category);
+    return isFinite(n) ? n : 9999;
+  }
+
+  function compareGallery(a, b, category) {
+    if (!category || category === "all") {
+      var group = categoryGroup(a && a.category) - categoryGroup(b && b.category);
+      if (group) return group;
+    }
+    return categoryRank(a) - categoryRank(b);
+  }
+
+  function galleryOrder(cases, category) {
+    return (cases || []).slice().sort(function (a, b) { return compareGallery(a, b, category); });
+  }
+
   function isNinety(iso, basis) {
     return !!(basis && basis.ninety_days_from && iso && iso >= basis.ninety_days_from);
   }
@@ -132,6 +156,9 @@
   var EVIDENCE_TYPES = {
     official_company_statement: "公司陈述，未独立核验",
     official_page: "官方页面记录",
+    official_repost: "官方转载，未打开原文",
+    press_quoted_claim: "报道转述，未独立核验",
+    company_boilerplate_not_product_usage: "公司简介，不是本工具使用量",
     agency_statement: "代理方陈述，未独立核验",
     industry_media: "行业媒体",
     vendor_statement: "供应商陈述，未独立核验",
@@ -527,6 +554,12 @@
 
     function apply() {
       readFilters();
+      if (list) {
+        galleryOrder(state.cases, state.filters.category).forEach(function (item) {
+          var card = doc.getElementById("card-" + item.id);
+          if (card) list.appendChild(card);
+        });
+      }
       var visible = 0;
       state.cases.forEach(function (item) {
         var card = doc.getElementById("card-" + item.id);
@@ -915,7 +948,7 @@
       var first = (item.media || [])[0];
       if (first && first.caption) reader.appendChild(el(doc, "p", { class: "detail-caption" }, first.caption));
       var caseIndex = 0;
-      state.cases.forEach(function (candidate, i) {
+      galleryOrder(state.cases, "all").forEach(function (candidate, i) {
         if (candidate.id === item.id) caseIndex = i;
       });
       var meta = el(doc, "p", { class: "meta" });
@@ -929,6 +962,9 @@
       reader.appendChild(bar);
       if (item.summary) reader.appendChild(el(doc, "p", { class: "summary" }, item.summary));
       if (item.window_note) reader.appendChild(el(doc, "p", { class: "time-note" }, item.window_note));
+      if (item.rank_in_category) {
+        reader.appendChild(el(doc, "p", { class: "time-note" }, "展示顺序：本类第" + item.rank_in_category + "位。" + (item.sort_reason ? item.sort_reason + " " : "") + "这是研究适合度顺序，不是挑选结论。"));
+      }
 
       var mechanism = el(doc, "div");
       mechanism.appendChild(el(doc, "p", null, item.ai_where || "材料未单列AI机制。"));
@@ -1315,7 +1351,7 @@
       state.calibration = loadedCalibration.data;
       if (loadedCalibration.error && calibrationSummary) calibrationSummary.textContent = "本地校准记录无法读取，可重新填写。";
       else paintCalibrationSummary();
-      data.cases.forEach(function (item, index) { list.appendChild(renderCard(item, index)); });
+      galleryOrder(data.cases, "all").forEach(function (item, index) { list.appendChild(renderCard(item, index)); });
       renderNotes(data);
       var extra = doc.getElementById("extra");
       if (extra && typeof ext.listExtra === "function") ext.listExtra({ doc: doc, el: el, link: link, data: data, container: extra });
@@ -1355,6 +1391,8 @@
     DEFAULT_LEAD: DEFAULT_LEAD,
     inWindow: inWindow,
     isRecent: isRecent,
+    compareGallery: compareGallery,
+    galleryOrder: galleryOrder,
     matchCase: matchCase,
     statusOf: statusOf,
     primarySource: primarySource,
