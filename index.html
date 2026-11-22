@@ -84,6 +84,20 @@
       <p class="hint" id="io-msg" role="status"></p>
     </section>
 
+    <section class="panel" id="calibration" aria-labelledby="calibration-title">
+      <h2 id="calibration-title">方向校准（可选）</h2>
+      <p>用三道偏好题快速记录这台浏览器里的筛选方向。只作为你的阅读参考，不会自动匹配案例，也不会上传。</p>
+      <div class="actions">
+        <button type="button" id="calibration-open">开始校准</button>
+        <button type="button" id="calibration-export">导出校准 JSON</button>
+        <label class="file-btn" for="calibration-import-file">导入校准 JSON
+          <input id="calibration-import-file" type="file" accept="application/json,.json">
+        </label>
+        <button type="button" id="calibration-reset" class="quiet">清空校准</button>
+      </div>
+      <p class="hint" id="calibration-summary" role="status">尚未填写。</p>
+    </section>
+
     <section class="panel" id="limits" hidden>
       <h2 id="lim-title">核验说明</h2>
       <div id="lim-list"></div>
@@ -102,6 +116,20 @@
     <div class="actions">
       <button type="button" id="clear-cancel" class="quiet">取消</button>
       <button type="button" id="clear-confirm">清空</button>
+    </div>
+  </dialog>
+
+  <dialog id="calibration-dialog" aria-labelledby="cal-title">
+    <div class="cal-head">
+      <h2 id="cal-title">方向校准</h2>
+      <button type="button" id="cal-close" class="quiet">关闭</button>
+    </div>
+    <p class="hint" id="cal-progress">第 1 题 / 共 3 题</p>
+    <div id="cal-content"></div>
+    <div class="actions">
+      <button type="button" id="cal-back" class="quiet">上一步</button>
+      <button type="button" id="cal-skip" class="quiet">跳过本题</button>
+      <button type="button" id="cal-next">下一步</button>
     </div>
   </dialog>
 
