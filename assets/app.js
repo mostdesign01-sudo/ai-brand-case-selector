@@ -1090,12 +1090,12 @@
     function syncFilterChrome() {
       state.wide = isWide();
       if (!filters || !filterToggle) return;
-      if (state.wide) {
-        filters.hidden = false;
-        filterToggle.setAttribute("aria-expanded", "true");
-      } else if (filterToggle.getAttribute("data-user") !== "open") {
+      if (filterToggle.getAttribute("data-user") !== "open") {
         filters.hidden = true;
         filterToggle.setAttribute("aria-expanded", "false");
+      } else {
+        filters.hidden = false;
+        filterToggle.setAttribute("aria-expanded", "true");
       }
       filterToggle.textContent = filters.hidden ? "筛选" : "收起筛选";
     }

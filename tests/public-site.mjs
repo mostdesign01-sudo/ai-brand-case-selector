@@ -712,13 +712,42 @@ async function browserTests(origin) {
 
     await openAt(cdp, sessionId, origin + "/", 1440);
     const wide = await evaluate(cdp, sessionId, "({width: window.innerWidth, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, filters: document.getElementById('filters').hidden, resources: performance.getEntriesByType('resource').map((entry) => entry.name)})");
-    check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === false, "desktop shows filters without horizontal overflow");
+    check(wide.width === 1440 && wide.overflow <= 1 && wide.filters === true, "desktop keeps advanced filters collapsed by default without overflow");
     check(wide.resources.every((name) => name.startsWith(origin)), "page only loads same-origin files");
+    await evaluate(cdp, sessionId, "document.getElementById('filter-toggle').click()");
+    const desktopExpanded = await evaluate(cdp, sessionId, "({hidden: document.getElementById('filters').hidden, expanded: document.getElementById('filter-toggle').getAttribute('aria-expanded'), hintVisible: !!document.querySelector('.time-meta summary')})");
+    check(desktopExpanded.hidden === false && desktopExpanded.expanded === "true" && desktopExpanded.hintVisible === true, "desktop advanced filters can be expanded and show optional time-basis details");
     const pageText = await evaluate(cdp, sessionId, "document.body.innerText");
     for (const phrase of PHRASES) {
       if (hasPrivatePhrase(pageText, phrase)) failures.push("rendered page contains a private phrase");
     }
     await shot(cdp, sessionId, "/opt/cursor/artifacts/desktop-list-top-1440-refresh.png");
+    const linkOnlyGeometry = await evaluate(cdp, sessionId, `(() => {
+      var card = document.getElementById("card-ip-bluemoon-jingjing-2026");
+      var body = card && card.querySelector(".card-body");
+      var shot = card && card.querySelector(".shot.is-link-only");
+      if (!card || !body || !shot) return null;
+      var cardRect = card.getBoundingClientRect();
+      var bodyRect = body.getBoundingClientRect();
+      var shotRect = shot.getBoundingClientRect();
+      return {
+        cardWidth: Math.round(cardRect.width),
+        bodyWidth: Math.round(bodyRect.width),
+        shotWidth: Math.round(shotRect.width),
+        leftGap: Math.round(bodyRect.left - cardRect.left),
+        rightGap: Math.round(cardRect.right - bodyRect.right)
+      };
+    })()`);
+    check(
+      !!linkOnlyGeometry &&
+      linkOnlyGeometry.bodyWidth >= Math.round(linkOnlyGeometry.cardWidth * 0.82) &&
+      linkOnlyGeometry.shotWidth >= Math.round(linkOnlyGeometry.cardWidth * 0.82) &&
+      linkOnlyGeometry.leftGap <= 20 &&
+      linkOnlyGeometry.rightGap <= 20,
+      "link-only card text and media stubs use full card width in desktop gallery " + JSON.stringify(linkOnlyGeometry)
+    );
+    await evaluate(cdp, sessionId, "var target=document.getElementById('card-ip-bluemoon-jingjing-2026'); if(target){ target.scrollIntoView({block:'center'});} ");
+    await shot(cdp, sessionId, "/opt/cursor/artifacts/desktop-linkonly-grid-1440-refresh.png");
     await cdp.send("Page.navigate", { url: origin + "/#case-image-sephora-chatgpt-2026" }, sessionId);
     await waitFor(cdp, sessionId, "document.getElementById('reader-title') && document.getElementById('reader-title').textContent.includes('Sephora')");
     await evaluate(cdp, sessionId, "window.scrollTo(0, 0)");

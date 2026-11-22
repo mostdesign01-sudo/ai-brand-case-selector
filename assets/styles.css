@@ -856,6 +856,13 @@ h1, .card h2, #reader h1, .panel h2, dialog h2, .section h2, .shot-fallback p {
   color: var(--ink);
   margin: 0;
 }
+.card:has(.shot.is-link-only) {
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+.card:has(.shot.is-link-only) .card-body {
+  width: 100%;
+}
 
 .card-body {
   padding: 10px 12px 12px;
@@ -940,6 +947,19 @@ h1, .card h2, #reader h1, .panel h2, dialog h2, .section h2, .shot-fallback p {
 #secondary-tools summary {
   font-weight: 600;
   color: var(--ink);
+}
+.time-meta {
+  margin-top: 6px;
+}
+.time-meta summary {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.time-meta .hint {
+  margin-top: 4px;
 }
 
 .panel {
